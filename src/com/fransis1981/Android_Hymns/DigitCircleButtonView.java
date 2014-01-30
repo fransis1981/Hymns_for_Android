@@ -1,5 +1,5 @@
 package com.fransis1981.Android_Hymns;
-                     //SOLO PER VERIFICARE I COMMIT DI GIST
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
