@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="circleButton_outerLine">#c823ffa1</color>
+    <color name="testo_strofe_color">#ff000d7c</color>
 </resources>
