@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:text="Hello World, MyActivity"
+            android:id="@+id/mytxt"/>
+    <TextView
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/largetxt"/>
+    <view android:layout_width="wrap_content"
+          android:layout_height="66dp"
+          class="com.fransis1981.Android_Hymns.DigitCircleButtonView" android:id="@+id/view"
+          android:text="1" android:singleLine="false"/>
+</LinearLayout>
+
