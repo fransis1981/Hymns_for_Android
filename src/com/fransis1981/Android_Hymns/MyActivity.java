@@ -22,7 +22,7 @@ public class MyActivity extends Activity {
         assets = getAssets();
         Element innario;
         try {
-            Log.w(MyConstants.LogTag_STR, "First application starting....");
+            Log.i(MyConstants.LogTag_STR, "First application starting....");
             doc = DataUtil.load(assets.open("MODELLO_XML_DEFINIZIONI.xml"), "UTF-8", "");
             setContentView(R.layout.main);
 

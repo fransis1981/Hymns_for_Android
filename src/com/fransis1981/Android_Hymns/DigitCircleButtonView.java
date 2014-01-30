@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.Button;
 
 /**
@@ -15,25 +16,33 @@ public class DigitCircleButtonView extends Button {
     private Paint buttonPaint;
     private Paint textPaint;
 
+    int radius;
     // Color used to paint this button
     private int lineColor;
 
     //Shared init method for all constructors.
     private void init(int color) {
+        Log.v(MyConstants.LogTag_STR, "Init() for a circle button...");
         if (!isInEditMode()) {
-            buttonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            buttonPaint.setColor(HymnsApplication.myResources.getColor(R.color.circleButton_outerLine));
-            buttonPaint.setStyle(Paint.Style.STROKE);
-            buttonPaint.setStrokeWidth(2);      //TODO: externalize as dimension the stroke width
+            try {
+                buttonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                buttonPaint.setColor(HymnsApplication.myResources.getColor(R.color.circleButton_outerLine));
+                buttonPaint.setStyle(Paint.Style.STROKE);
+                buttonPaint.setStrokeWidth(2);      //TODO: externalize as dimension the stroke width
 
-            textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            textPaint.setColor(HymnsApplication.myResources.getColor(android.R.color.darker_gray));
-            textPaint.setStrokeWidth(2);
-            textPaint.setStyle(Paint.Style.STROKE);
-            textPaint.setTextAlign(Paint.Align.CENTER);
-            textPaint.setTextSize(18);          //TODO: externalize as dimension the text size
+                radius = Math.min(getMeasuredHeight(), getMeasuredWidth())/2;
 
-            lineColor = color;
+                textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                textPaint.setColor(HymnsApplication.myResources.getColor(android.R.color.darker_gray));
+                textPaint.setStrokeWidth(2);
+                textPaint.setStyle(Paint.Style.STROKE);
+                textPaint.setTextAlign(Paint.Align.CENTER);
+                textPaint.setTextSize(18);          //TODO: externalize as dimension the text size
+
+                lineColor = color;
+            } catch (Exception e) {
+                Log.e(MyConstants.LogTag_STR, e.getMessage());
+            }
         }
      }
 
@@ -59,17 +68,12 @@ public class DigitCircleButtonView extends Button {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (isInEditMode()) {
-            buttonPaint = new Paint(); //buttonPaint.setColor(HymnsApplication.myResources.getColor(android.R.color.white));
-            textPaint = new Paint(); //textPaint.setColor(HymnsApplication.myResources.getColor(android.R.color.white));
-        }
-        String ttt = isInEditMode()?"0":"2";
 
-        int center = Math.min(getMeasuredHeight(),getMeasuredWidth())/2;
-
-        canvas.drawARGB(255, 0, 0, 0);
-        canvas.drawCircle(center, center, center - 3, buttonPaint);
-        if (ttt.length() > 0) canvas.drawText(ttt, center, center+9, textPaint);    //TODO: externalize half the text
-        //super.onDraw(canvas);
+        if (isInEditMode()) { super.onDraw(canvas); }
+        else {
+           canvas.drawARGB(0, 0, 0, 0);
+           canvas.drawCircle(radius, radius, radius - 3, buttonPaint);
+           if (getText().length() > 0) canvas.drawText(getText().toString(), radius, radius, textPaint);    //TODO: externalize half the text
+       }
     }
 }
