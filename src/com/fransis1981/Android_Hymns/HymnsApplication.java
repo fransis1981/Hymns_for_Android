@@ -23,4 +23,8 @@ public class HymnsApplication extends Application {
         myResources = getResources();
     }
 
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+    }
 }
