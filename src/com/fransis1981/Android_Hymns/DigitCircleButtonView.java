@@ -3,8 +3,11 @@ package com.fransis1981.Android_Hymns;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 
 /**
@@ -13,16 +16,18 @@ import android.widget.Button;
  * (similar to numeric keypad on iOS7 unlock screen).
  */
 public class DigitCircleButtonView extends Button {
-    private Paint buttonPaint;
-    private Paint textPaint;
+   private Paint buttonPaint;
+   private Paint textPaint;
+   private Rect txtBounds = new Rect();         //Helper object for centering text; preallocated for efficiency.
 
-    int radius;
-    // Color used to paint this button
-    private int lineColor;
+   int buttonX, buttonY, radius;
+   boolean isPressed = false;
+
+   // Color used to paint this button
+   private int lineColor;
 
     //Shared init method for all constructors.
     private void init(int color) {
-        Log.v(MyConstants.LogTag_STR, "Init() for a circle button...");
         if (!isInEditMode()) {
             try {
                 buttonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -30,21 +35,28 @@ public class DigitCircleButtonView extends Button {
                 buttonPaint.setStyle(Paint.Style.STROKE);
                 buttonPaint.setStrokeWidth(2);      //TODO: externalize as dimension the stroke width
 
-                radius = Math.min(getMeasuredHeight(), getMeasuredWidth())/2;
-
                 textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
                 textPaint.setColor(HymnsApplication.myResources.getColor(android.R.color.darker_gray));
                 textPaint.setStrokeWidth(2);
                 textPaint.setStyle(Paint.Style.STROKE);
                 textPaint.setTextAlign(Paint.Align.CENTER);
-                textPaint.setTextSize(18);          //TODO: externalize as dimension the text size
 
                 lineColor = color;
+
+               setOnTouchListener(new OnTouchListener() {
+                  @Override
+                  public boolean onTouch(View v, MotionEvent event) {
+                     if (event.getActionMasked() == MotionEvent.ACTION_DOWN) { isPressed = true; }
+                     else if (event.getActionMasked() == MotionEvent.ACTION_UP) { isPressed = false; }
+                     invalidate();
+                     return false;
+                  }
+               });
             } catch (Exception e) {
                 Log.e(MyConstants.LogTag_STR, e.getMessage());
             }
         }
-     }
+    }
 
     public DigitCircleButtonView(Context context, int color) {
         super(context);
@@ -62,18 +74,27 @@ public class DigitCircleButtonView extends Button {
     }
 
     public DigitCircleButtonView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(android.R.color.white);
+       super(context, attrs);
+       init(android.R.color.white);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-        if (isInEditMode()) { super.onDraw(canvas); }
-        else {
-           canvas.drawARGB(0, 0, 0, 0);
-           canvas.drawCircle(radius, radius, radius - 3, buttonPaint);
-           if (getText().length() > 0) canvas.drawText(getText().toString(), radius, radius, textPaint);    //TODO: externalize half the text
-       }
+        if (isInEditMode()) {
+            super.onDraw(canvas);
+        } else {
+           buttonX = getMeasuredWidth() / 2;
+           buttonY = getMeasuredHeight() / 2;
+           radius = (Math.min(buttonX, buttonY)) - 3;   //TODO: externalize as dimension the text size
+           setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
+           canvas.drawCircle(buttonX, buttonY, radius, buttonPaint);
+           textPaint.setTextSize(radius);          //TODO: externalize as dimension the text size
+           if (getText().length() > 0) {
+               textPaint.getTextBounds(getText().toString(), 0, 1, txtBounds);
+               canvas.drawText(getText().toString(), buttonX, buttonY - txtBounds.centerY(), textPaint);
+           }
+           if (isPressed) Log.i("HYMNS", "BUTTON PRESSED!!!!!!!!!");
+        }
     }
 }
