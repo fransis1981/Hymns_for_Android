@@ -63,12 +63,4 @@ public class NumKeyPadView extends TableLayout {
 
    }
 
-
-  /* @Override
-   protected void onDraw(Canvas canvas) {
-      int rowHeight = getMeasuredHeight() / 2;
-      ((TableRow) getChildAt(0)).setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, rowHeight));
-      ((TableRow) getChildAt(1)).setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, rowHeight));
-      super.onDraw(canvas);
-   }*/
 }
