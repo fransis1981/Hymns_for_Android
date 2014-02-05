@@ -49,7 +49,7 @@ public class DigitCircleButtonView extends Button {
                      if (event.getActionMasked() == MotionEvent.ACTION_DOWN) { isPressed = true; }
                      else if (event.getActionMasked() == MotionEvent.ACTION_UP) { isPressed = false; }
                      invalidate();
-                     return false;
+                     return false;           //IMPORTANT: Returns false so that we may continue further event processing
                   }
                });
             } catch (Exception e) {
@@ -57,6 +57,8 @@ public class DigitCircleButtonView extends Button {
             }
         }
     }
+
+
 
     public DigitCircleButtonView(Context context, int color) {
         super(context);
@@ -84,6 +86,8 @@ public class DigitCircleButtonView extends Button {
         if (isInEditMode()) {
             super.onDraw(canvas);
         } else {
+           // Just for Debug
+           canvas.drawRect(0,0, getMeasuredWidth(), getMeasuredHeight(), textPaint);
            buttonX = getMeasuredWidth() / 2;
            buttonY = getMeasuredHeight() / 2;
            radius = (Math.min(buttonX, buttonY)) - 3;   //TODO: externalize as dimension the text size
@@ -97,4 +101,22 @@ public class DigitCircleButtonView extends Button {
            if (isPressed) Log.i("HYMNS", "BUTTON PRESSED!!!!!!!!!");
         }
     }
+
+   @Override
+   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+      //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+      //Decoding width and height
+      int modeX = MeasureSpec.getMode(widthMeasureSpec);
+      int willX = MeasureSpec.getSize(widthMeasureSpec);
+      int modeY = MeasureSpec.getMode(heightMeasureSpec);
+      int willY = MeasureSpec.getSize(heightMeasureSpec);
+
+      //Willing to make the maximum possible square (some redundant assignments better than comparison and jump).
+      int defaultX = 150, defaultY = 150;       //TODO: default values; to externalize into XML such resource
+      if (modeX == MeasureSpec.UNSPECIFIED) willX = defaultX;
+      if (modeY == MeasureSpec.UNSPECIFIED) willY = defaultY;
+      if (willX < willY) { willY = willX; }
+      else { willX = willY; }
+      setMeasuredDimension(willX, willY);
+   }
 }

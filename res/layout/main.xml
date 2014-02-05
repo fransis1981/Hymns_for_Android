@@ -16,7 +16,7 @@
             android:text="Large Text"
             android:id="@+id/largetxt"/>
     <view android:layout_width="248dp"
-          android:layout_height="290dp"
+          android:layout_height="248dp"
           class="com.fransis1981.Android_Hymns.NumKeyPadView" android:id="@+id/view"/>
 </LinearLayout>
 

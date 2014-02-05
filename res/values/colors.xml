@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="circleButton_outerLine">#c823ffa1</color>
+    <color name="circleButton_outerLine">#ff23ffa1</color>
     <color name="testo_strofe_color">#ff000d7c</color>
+
+    <color name="keypad_soft_bg">#1043fea7</color>
+    <color name="keypad_outline_color">#907793fe</color>
 </resources>
