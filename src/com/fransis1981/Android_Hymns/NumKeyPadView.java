@@ -48,6 +48,7 @@ public class NumKeyPadView extends TableLayout {
          numkeys[7] = (DigitCircleButtonView) findViewById(R.id.keypad_num7);
          numkeys[8] = (DigitCircleButtonView) findViewById(R.id.keypad_num8);
          numkeys[9] = (DigitCircleButtonView) findViewById(R.id.keypad_num9);
+         numkeys[0] = (DigitCircleButtonView) findViewById(R.id.keypad_num0);
 
          //Number keys events
          numkeys[1].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("1");}});
@@ -59,6 +60,7 @@ public class NumKeyPadView extends TableLayout {
          numkeys[7].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("7");}});
          numkeys[8].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("8");}});
          numkeys[9].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("9");}});
+         numkeys[0].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("0");}});
 
          //Hooking up the functionality.... ?
          //TODO: we might introduce a parameter for having this view optionally have a box or a series of button

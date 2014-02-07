@@ -86,8 +86,7 @@ public class DigitCircleButtonView extends Button {
         if (isInEditMode()) {
             super.onDraw(canvas);
         } else {
-           // Just for Debug
-           canvas.drawRect(0,0, getMeasuredWidth(), getMeasuredHeight(), textPaint);
+           // Just for Debug: canvas.drawRect(0,0, getMeasuredWidth(), getMeasuredHeight(), textPaint);
            buttonX = getMeasuredWidth() / 2;
            buttonY = getMeasuredHeight() / 2;
            radius = (Math.min(buttonX, buttonY)) - 3;   //TODO: externalize as dimension the text size
