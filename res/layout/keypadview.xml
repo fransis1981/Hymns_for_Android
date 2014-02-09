@@ -28,7 +28,7 @@
         <view android:layout_width="0dp"
               android:layout_height="110dp"
               class="com.fransis1981.Android_Hymns.DigitCircleButtonView" android:id="@+id/keypad_num4"
-              android:layout_column="0" android:text="7" android:layout_weight="0.32"/>
+              android:layout_column="0" android:text="4" android:layout_weight="0.32"/>
         <view android:layout_width="0dp"
               android:layout_height="110dp"
               class="com.fransis1981.Android_Hymns.DigitCircleButtonView" android:id="@+id/keypad_num5"
@@ -58,18 +58,18 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp" android:layout_weight="0.5">
         <ImageButton android:layout_width="0dp"
-                     android:layout_height="110dp"
+                     android:layout_height="wrap_content"
                      android:src="@drawable/keypad_cancel_64" android:id="@+id/keypad_cancel"
                      android:layout_column="0" android:layout_weight="0.3"
-                     android:background="@android:color/transparent"/>
+                     android:background="@android:color/transparent" android:layout_gravity="center"/>
         <view android:layout_width="0dp"
               android:layout_height="110dp"
               class="com.fransis1981.Android_Hymns.DigitCircleButtonView" android:id="@+id/keypad_num0"
               android:layout_column="1" android:text="0" android:layout_weight="0.32"/>
         <ImageButton android:layout_width="0dp"
-                     android:layout_height="110dp"
-                     android:src="@drawable/keypad_ok_64" android:id="@+id/keypad_cancel"
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/keypad_ok_64" android:id="@+id/keypad_ok"
                      android:layout_column="2" android:layout_weight="0.30"
-                     android:background="@android:color/transparent"/>
+                     android:background="@android:color/transparent" android:layout_gravity="center|bottom"/>
     </TableRow>
 </TableLayout>

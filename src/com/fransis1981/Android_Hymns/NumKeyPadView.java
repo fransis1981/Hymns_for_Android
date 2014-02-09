@@ -5,7 +5,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 
 /**
@@ -14,28 +17,37 @@ import android.widget.TableLayout;
  */
 public class NumKeyPadView extends TableLayout {
    DigitCircleButtonView numkeys[] = new DigitCircleButtonView[10];
+   ImageButton okButton, cancelButton;
+   Animation okSprite, cancelSprite;
 
    String composedNumber = "";
 
    public NumKeyPadView(Context context) {
       super(context);
-      init();
+      init(context);
    }
 
    public NumKeyPadView(Context context, AttributeSet attrs) {
       super(context, attrs);
-      init();
+      init(context);
    }
 
    //Method for managing composed number when a new digit is composed
    void newComposedDigit(String digit) {
       composedNumber += digit;
 
+      //************ DEBUG
+      if (composedNumber.length() == 3) {
+         okButton.startAnimation(okSprite);
+         composedNumber = "";
+      }
+      //************ DEBUG - END
+
       Log.i(MyConstants.LogTag_STR, "Current composed number: " + composedNumber);
    }
 
    //Centralized init method called by the constructors.
-   void init() {
+   void init(Context context) {
       if (!isInEditMode()) {
          LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
          li.inflate(R.layout.keypadview, this, true);
@@ -49,6 +61,10 @@ public class NumKeyPadView extends TableLayout {
          numkeys[8] = (DigitCircleButtonView) findViewById(R.id.keypad_num8);
          numkeys[9] = (DigitCircleButtonView) findViewById(R.id.keypad_num9);
          numkeys[0] = (DigitCircleButtonView) findViewById(R.id.keypad_num0);
+         okButton = (ImageButton) findViewById(R.id.keypad_ok);
+         cancelButton = (ImageButton) findViewById(R.id.keypad_cancel);
+         okSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_ok_sprite);
+         cancelSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_cancel_sprite);
 
          //Number keys events
          numkeys[1].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("1");}});
@@ -59,8 +75,22 @@ public class NumKeyPadView extends TableLayout {
          numkeys[6].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("6");}});
          numkeys[7].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("7");}});
          numkeys[8].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("8");}});
-         numkeys[9].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("9");}});
-         numkeys[0].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("0");}});
+         numkeys[9].setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+               newComposedDigit("9");
+            }
+         });
+         numkeys[0].setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+               newComposedDigit("0");
+            }
+         });
+
+         cancelButton.setOnClickListener(new ImageButton.OnClickListener() {
+            public void onClick(View v) {
+               cancelButton.startAnimation(cancelSprite);
+            }
+         });
 
          //Hooking up the functionality.... ?
          //TODO: we might introduce a parameter for having this view optionally have a box or a series of button

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Milliseconds to wait after composing a number before automatically accepting that number -->
+    <integer name="autoConfirmTimeout">2500</integer>
+</resources>
