@@ -31,6 +31,8 @@ public class MyActivity extends Activity {
             TextView tw = (TextView) findViewById(R.id.mytxt);
             tw.append("\n" + innario.attr("Titolo"));
             tw.append("\nNumero totale di inni:" + innario.attr("Numero_Inni"));
+           TextView large = (TextView) findViewById(R.id.largetxt);
+           large.setTypeface(HymnsApplication.fontTitolo1);
         } catch (Exception e) {
             Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW....");
             e.printStackTrace();
