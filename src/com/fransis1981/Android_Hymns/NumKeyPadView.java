@@ -66,6 +66,9 @@ public class NumKeyPadView extends TableLayout {
          okSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_ok_sprite);
          cancelSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_cancel_sprite);
 
+         //spinner = (ImageView) findViewById(R.id.imageView);
+         //spinner.setImageLevel(currentLevel);
+
          //Number keys events
          numkeys[1].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("1");}});
          numkeys[2].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("2");}});

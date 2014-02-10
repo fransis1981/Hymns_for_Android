@@ -16,7 +16,22 @@
             android:text="Large Text"
             android:id="@+id/largetxt" style="@style/strofaText_Style"/>
     <view android:layout_width="267dp"
-          android:layout_height="248dp"
-          class="com.fransis1981.Android_Hymns.NumKeyPadView" android:id="@+id/view" android:layout_weight="0.38"/>
+          android:layout_height="331dp"
+          class="com.fransis1981.Android_Hymns.NumKeyPadView" android:id="@+id/view"
+          android:layout_gravity="center_horizontal"/>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+        <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imgvw_spinner1" android:layout_gravity="right|center_vertical"
+                android:src="@drawable/spinner_part1"/>
+        <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imgvw_spinner2" android:layout_gravity="right|center_vertical"
+                android:src="@drawable/spinner_part2"/>
+    </FrameLayout>
 </LinearLayout>
 
