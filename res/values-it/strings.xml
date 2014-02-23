@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="keypad_cancel_str">Cancella</string>
+    <string name="mnu_options_str">Preferenze...</string>
 </resources>

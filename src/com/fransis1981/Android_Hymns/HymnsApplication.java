@@ -22,7 +22,7 @@ public class HymnsApplication extends Application {
    private static ImageView availableSpinner;
 
 
-    public static HymnsApplication getInstance() {
+   public static HymnsApplication getInstance() {
         return singleton;
     }
 
@@ -30,7 +30,7 @@ public class HymnsApplication extends Application {
       availableSpinner = _spinner;
    }
 
-   public static void updateSpinnerLevel(int _level) {
+   public static void setSpinnerLevel(int _level) {
       availableSpinner.setImageLevel(currentSpinnerLevel = _level);
    }
 
