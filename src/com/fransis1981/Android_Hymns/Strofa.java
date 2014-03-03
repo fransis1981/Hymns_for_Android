@@ -30,7 +30,7 @@ public class Strofa {
       }
 
       parentInno = _parent;
-      isChorus = Boolean.parseBoolean(_tagStrofa.attr(MyConstants.STROFA_ISCHORUS_ATTR));
+      isChorus = (Integer.parseInt(_tagStrofa.attr(MyConstants.STROFA_ISCHORUS_ATTR))) != 0;
       indiceStrofa = Short.parseShort(_tagStrofa.attr(MyConstants.STROFA_NUMERO_ATTR));
       contenuto = _tagStrofa.text();
       label = isChorus?HymnsApplication.myResources.getString(R.string.coro_label):(++_lastNumericLabel).toString();

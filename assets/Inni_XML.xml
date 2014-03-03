@@ -1,0 +1,881 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Innari>
+	<Innario Titolo="Inni e Salmi Spirituali" ID_Innario="1" Numero_Inni="312" >
+		<Inno Titolo="La Corda un dì si Spezzerà" Numero="112" Numero_Strofe="8" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+La corda un dì si spezzerà - E più in quel dì non canterò
+Ma qual risveglio il mio sarà - Quando col Re mi troverò.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+E a faccia a faccia lo vedrò,
+E questa storia echeggerò,
+Che per l'immensa eternità
+Per la sua grazia mi salvò.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Questo mortale un dì cadrà, - Quando sarà no'l posso dir,
+Ed il Signore mi dirà: - Ben fatto servo mio fedel.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+E a faccia a faccia lo vedrò,
+E questa storia echeggerò,
+Che per l'immensa eternità
+Per la sua grazia mi salvò.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Un giorno il sol tramonterà, - E l'alma mia andrà nel ciel,
+Ed il Signore mi dirà: - Ben fatto servo mio fedel.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+E a faccia a faccia lo vedrò,
+E questa storia echeggerò,
+Che per l'immensa eternità
+Per la sua grazia mi salvò.
+			</Strofa>
+			<Strofa Num_Strofa="7" IS_Chorus="0" >
+Fino a quel giorno attenderò - Con la mia lampa ardente ognor;
+Quando la porta aprir vedrò, - Col mio celeste sposo andrò.
+			</Strofa>
+			<Strofa Num_Strofa="8" IS_Chorus="-1" >
+E a faccia a faccia lo vedrò,
+E questa storia echeggerò,
+Che per l'immensa eternità
+Per la sua grazia mi salvò.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Mentre Rugge la Tempesta" Numero="113" Numero_Strofe="4" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Mentre rugge la tempesta - Ed avvolgere mi vuol,
+Mio Gesù, deh! Asilo appresta, - L'alma a Te dirige il vol.
+Dalle scampo, dalle luce - Fin che il turbo spirerà,
+Sul sentier che al ciel conduce - Tosto lieta si porrà.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Affannosa ora si avvia - Verso Te cercando amor,
+Derelitta l'alma mia - Non lasciare, o Salvator.
+Alla mano tua si affida - Che i caduti rilevò;
+Se lo Spirto tuo la guida - Che mai più turbar la può?
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Senza limite sorpassi - I desiri del mio cuor:
+Sani infermi, afforza i lassi, - Sei di morte vincitor.
+Tu pietoso Padre, e Dio, - Sei di gran benignità;
+Col tuo sangue, O Gesù mio, - Deh! Mi lava a purità.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="0" >
+Da covrir le mie peccata - Tanta grazia trovo in Te,
+Rendi Tu fortificata - Sempre meglio la mia fè.
+Tu sorgente della vita, - Dammi a berne a sazietà;
+Fin che l'alma sia salita - A perfetta santità.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Vieni, Fratello, Vieni a Gesù" Numero="114" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Vieni, fratello, vieni a Gesù, - Suo dolce appello non odi tu?
+Odi Sua voce, vieni alla croce, - Affranto peccator!
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Eterno alloro t'offre l'Agnel,
+Qual gran tesoro là su nel ciel, (bis)
+Nel regno del Signor.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Dolce un appello fu mai così? - A no, si bello nessun l'udì!
+Vieni, t'affretta! Gesù t'aspetta - All'ombra del suo amor.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Eterno alloro t'offre l'Agnel,
+Qual gran tesoro là su nel ciel, (bis)
+Nel regno del Signor.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+In cuor pentito del tuo peccar, - Vieni all'invito, non ricusar.
+Se di riposo, sei tu bramoso, - T'accosta e dagli il cuor!
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Eterno alloro t'offre l'Agnel,
+Qual gran tesoro là su nel ciel, (bis)
+Nel regno del Signor.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Gloria nei Cieli Altissimi" Numero="115" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Gloria nei cieli altissimi, - Osanna al Dio vivente,
+Al forte Onnipotente, - Del mondo il Creator.
+Sia gloria al Verbo, al Capo - E Compitor di fede!
+Ha vita sol chi crede - Nel nome del Signor.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Il Forte l'Ammirabile - Per noi dal ciel discese,
+Umil per noi si rese, - Morte per noi soffrì.
+Il sangue suo ci lava - Dai falli e ci dà vita;
+Ogni alma a Cristo unita - Voce di grazia udì.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+In questo mar di lagrime - E' l'Arca di salvezza,
+E' Rocca, ed è Fortezza, - Rifugio al peccator.
+Ei riportò per noi - Sul mondo la vittoria:
+Cantiam cantiamo gloria - Al nome del Signor.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Vieni, Vieni a Me" Numero="116" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Tra le parole, o dolce - Parola di Gesù!
+Verace sei Tu sola. - Lume del cuor sei Tu!
+Se gemo o se m'allegro - Nel dubbio o nel terror,
+A sé Gesù m'appella, - Sento sua voce al cuor:
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Vieni, vieni a Me, - Vieni, vieni a Me;
+Franto e travagliato, - Vien, sì vieni a Me!
+Vieni, vieni a Me, - Vieni, vieni a Me;
+Franto e travagliato, - Vien, sì vieni a Me!
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Perché lontan ne vai? - Amico Egli è fedel!
+Alla sua ma t'affida, - Che adduce insino al ciel.
+Sei tu vile e abbietto - E senza pace in cuor?
+Vieni! Gesù ti vuole, - Ti chiama con amor!
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Vieni, vieni a Me, - Vieni, vieni a Me;
+Franto e travagliato, - Vien, sì vieni a Me!
+Vieni, vieni a Me, - Vieni, vieni a Me;
+Franto e travagliato, - Vien, sì vieni a Me!
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Sempre più m'avvicina, - O Salvatore, a Te;
+Rinnova, dolce al cuore, - L'invito: "Vieni a Me!"
+E stretto alla tua mano, - Ovunque teco andrò,
+Ancor l'istesso invito - Ovunque sentirò!
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Vieni, vieni a Me, - Vieni, vieni a Me;
+Franto e travagliato, - Vien, sì vieni a Me!
+Vieni, vieni a Me, - Vieni, vieni a Me;
+Franto e travagliato, - Vien, sì vieni a Me!
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Santo, Santo, Santo" Numero="117" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Santo, Santo, Santo, - Signore Iddio potente,
+A Te, l'Onnipossente, - Mio canto s'alzerà!
+O Santo, Santo, Santo! - Immenso sei, pietoso,
+O Trino e misterioso! - Beata Trinità!
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Santo, Santo, Santo, - T'adorano i redenti,
+Corone d'oro offrenti - Dal cielo infino al mar!
+Cherubi e Serafini - Di gloria sfolgoranti
+Si prostrano adoranti, - Tua lode a celebrar!
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Santo, Santo, Santo, - In tenebre glorioso,
+Il Tuo splendore ascoso - Giammai possiam veder!
+Tu solo santo sei, - Iddio d'amor superno,
+Sei puro, sempiterno, - Immenso è 'l tuo poter!
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Chiunque Vuole, Venga" Numero="118" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Chiunque vuole, venga a Gesù - L'acqua e 'l pan di vita ci vuol dar quaggiù;
+Le mani Ei stende, e grida ognor vieppiù: - Chiunque vuole, venga.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Chiunque vuole, Chiunque vuole,
+E' l'invito fatto al genere uman;
+Gesù chiama, oh! Che non chiami invan;
+Chiunque vuole, venga.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Chiunque vien pace troverà, - Gesù che lo chiama ne ha gran pietà;
+Stretto nel suo cuore Ei lo accoglierà. - Chiunque vuole, venga.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Chiunque vuole, Chiunque vuole,
+E' l'invito fatto al genere uman;
+Gesù chiama, oh! Che non chiami invan;
+Chiunque vuole, venga.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Chiunque crede giammai morrà, - Vita eterna in dono il Signor gli dà;
+Questa è la promessa che Gesù ci fa! - Chiunque vuole, venga.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Chiunque vuole, Chiunque vuole,
+E' l'invito fatto al genere uman;
+Gesù chiama, oh! Che non chiami invan;
+Chiunque vuole, venga.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Coraggio, Eletta Schiera" Numero="119" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Coraggio, eletta schiera,- Coraggio per Gesù:
+L'invitta sua bandiera - Non cada in servitù.
+Avanti, su sorgete - Al grido del Vangel;
+Valente il braccio avrete - Se gli dà forza il ciel.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Fratelli, all'armi, all'armi! - La tromba già squillò;
+Nell'aspra lotta starmi - In prima riga io vo'.
+Avanti! Ciascun figlio - Oggi combatterà:
+Dove sarà il periglio, - Grande il valor sarà.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Fratelli, all'armi, all'armi! - Al bellico fragor
+Succederanno i carmi - Sacrati al vincitor.
+Il vincitore in premio - Vita immortal si avrà,
+E al fianco al Re di gloria - Per sempre regnerà.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Obbedir solo a Te" Numero="120" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+O Signor de' Signor, - Mio fedel Salvator,
+Voglio sempre a Te solo obbedir.
+Non v'è scampo per me, - O Signor Re de' re,
+Se obbedire rifiuto al suo dir.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+O Re de' re, Obbedir solo a Te,
+Obbedire a Te solo - V'è gran premio per me.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+La mia fede in Te ognor - Rendi forte, o Signor,
+Voglio sempre a Te solo obbedir.
+Nella patria del ciel, Se a Te sono fedel,
+In eterno sarà il mio gioir.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+O Re de' re, Obbedir solo a Te,
+Obbedire a Te solo - V'è gran premio per me.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Dietro a Te camminar, - O Signor, mi puoi far,
+Voglio sempre a Te solo obbedir.
+Prendi in mano il mio cuor, - O fedel buon Pastor,
+Giorno e notte ti voglio seguir.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+O Re de' re, Obbedir solo a Te,
+Obbedire a Te solo - V'è gran premio per me.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Lieti Andiamo Avanti" Numero="121" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Lieti andiamo avanti uniti al Salvator,
+Tutti d'un sol cuore, stretti nel Suo amor;
+Egli è nostra speme, nostra ilarità, - E nessun ci abbatterà.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Gesù sarà nostro conduttor,
+Ci condurrà senza alcun timor;
+Impallidir nulla ci farà
+Per lasciar la nostra eredità.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+O fratelli, avanti senza alcun timor,
+Fuggirà da noi l'astuto tentator;
+Cristo, nostro Duce, prode ognor sarà, - E per noi combatterà.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Gesù sarà nostro conduttor,
+Ci condurrà senza alcun timor;
+Impallidir nulla ci farà
+Per lasciar la nostra eredità.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Forza, sempre avanti, fermi nel Vangel,
+Cristo porterà ciascun di noi nel ciel;
+Sua parola incora meno a non venir - Il nemico a perseguir.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Gesù sarà nostro conduttor,
+Ci condurrà senza alcun timor;
+Impallidir nulla ci farà
+Per lasciar la nostra eredità.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Vieni le Grazie a Spargere" Numero="122" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Veni le grazie a spargere - Sopra i devoti tuoi,
+Vieni a regnar su noi, - O Spirto Creator!
+Deh! Scendi ed empi ogni anima, - Empila di Te stesso,
+Ed in un santo amplesso - Abbraccia mente e cor… (bis)
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Fa' che l'amor del prossimo - Da quel di Dio provenga,
+E l'un dall'altro ottenga - Reciproca virtù.
+E dell'affetto duplice - La Chiesa tua si pasca;
+Fa' ch'Ella in noi rinasca, - Fa' ch'Ella sia qual fu… (bis)
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Santo divino Spirito, - Uno col Padre e il Figlio,
+Propizio volgi il ciglio - Al popol tuo fedel.
+Ond'ei, che or lieto cantico - A Te dal cor disserra,
+Poi venga dalla terra - Ad adorarti in ciel… (bis)
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Quando il Signor mi Chiamerà" Numero="123" Numero_Strofe="8" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Quando il Signor mi chiamerà - Eterno ben per me sarà,
+Allor nel ciel m'involerò, - E con Gesù sempre sarò.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Quando nel ciel giunto sarò,
+Inni di gloria canterò;
+Quel di Mosè, quel dell'Agnel,
+In dolce suon con Israel.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Quando Gesù vedrò apparir, - Chi immaginar potrà il gioir?
+Allor sarò, se vò il Vangel - Seguire ognor, raccolto in ciel.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Quando nel ciel giunto sarò,
+Inni di gloria canterò;
+Quel di Mosè, quel dell'Agnel,
+In dolce suon con Israel.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Quando partir dovrò da qui, - Per me sarà felice il dì;
+Col mio Gesù per sempre andrò, - E nel suo tron mi sederò.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Quando nel ciel giunto sarò,
+Inni di gloria canterò;
+Quel di Mosè, quel dell'Agnel,
+In dolce suon con Israel.
+			</Strofa>
+			<Strofa Num_Strofa="7" IS_Chorus="0" >
+Quando s'udrà gridar nel ciel: - Lo Sposo vien, viene l'Agnel,
+Se dormo, allor mi sveglierò, - Ed a incontrar l'Agnello andrò.
+			</Strofa>
+			<Strofa Num_Strofa="8" IS_Chorus="-1" >
+Quando nel ciel giunto sarò,
+Inni di gloria canterò;
+Quel di Mosè, quel dell'Agnel,
+In dolce suon con Israel.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Ho bisogno di Te" Numero="124" Numero_Strofe="8" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Ognor di Te bisogno, - O Padre di pietà.
+La voce tua dolcissima - Pace al mio cuor darà.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Di Te, di Te bisogno, - Urgentemente ognor;
+A' piedi tuoi cadente - Rinforzami Signor.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Ognor di Te bisogno, - Tienti ben stretto a me;
+Porgimi l'arme, e Satana - Mi cadrà steso al piè.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Di Te, di Te bisogno, - Urgentemente ognor;
+A' piedi tuoi cadente - Rinforzami Signor.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Ognor di Te bisogno, - Nel gaudio e nel dolor;
+Vien tosto e meco fermati, - Spirto consigliator.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Di Te, di Te bisogno, - Urgentemente ognor;
+A' piedi tuoi cadente - Rinforzami Signor.
+			</Strofa>
+			<Strofa Num_Strofa="7" IS_Chorus="0" >
+Ognor di Te bisogno, - Spirami il tuo voler;
+Ricco tesor di grazie, - Riponi in mio poter.
+			</Strofa>
+			<Strofa Num_Strofa="8" IS_Chorus="-1" >
+Di Te, di Te bisogno, - Urgentemente ognor;
+A' piedi tuoi cadente - Rinforzami Signor.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Altro Bene non so Trovar" Numero="125" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+E che altro cercar di più io andrò?
+Ben miglior di Gesù non troverò;
+In Lui solo mi sento a confidar,
+E col cuor Lui sempre amar.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Altro bene non so trovar, - Altro bene non vo' cercar;
+Nel mio cuor v'è Gesù - E in Lui sol vo' confidar.
+E che altro mi può saziar - Qui nel mondo ingannator?
+Sol Gesù, Gesù, sol Gesù, Gesù - Mio Re, mio eternal tesor.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Ogni cosa nel modo è vanità,
+Tutto in terra a suo tempo fine avrà;
+Durerà in eterno sol chi al ciel
+Guarda e pensa al divo Agnel.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Altro bene non so trovar, - Altro bene non vo' cercar;
+Nel mio cuor v'è Gesù - E in Lui sol vo' confidar.
+E che altro mi può saziar - Qui nel mondo ingannator?
+Sol Gesù, Gesù, sol Gesù, Gesù - Mio Re, mio eternal tesor.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Sulla terra non cerco alcun tesor;
+La mia vita nascosta è col Signor:
+A me basta la bella eredità
+Su nel cielo a eternità.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Altro bene non so trovar, - Altro bene non vo' cercar;
+Nel mio cuor v'è Gesù - E in Lui sol vo' confidar.
+E che altro mi può saziar - Qui nel mondo ingannator?
+Sol Gesù, Gesù, sol Gesù, Gesù - Mio Re, mio eternal tesor.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Innondar mi Sento il Cuore" Numero="126" Numero_Strofe="4" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Innondar mi sento il cuore, - Sotto al sangue di Gesù,
+Di soave e dolce amore, - E di celestial virtù.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Sotto al sangue l'alma mia - Si riveste di candor,
+E s'attiene nella via - Che conduce al ciel d'amor.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Il mio cuore ognor desira - La presenza del Signor,
+Di Gesù che a sé m'attira - E m'irradia di splendor.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="0" >
+Gesù è quel che mi conduce - Per lo Spirito divin
+Sempre avanti nella luce - Fino al giorno della fin.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="O Buon Gesù, Tu sei il mio Ben" Numero="127" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+O buon Gesù, Tu sei il mio ben, - Guidami Tu come convien;
+Dentro al mio cuor, per la Virtù, - A Tuo desir opera Tu.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+O buon Gesù, Tu sei il mio ben,
+Guidami Tu come convien;
+Dentro al mio cuor, per la Virtù,
+A Tuo desir opera Tu!
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+O Re de' re, in verità - Tu sei per me tutto bontà:
+Ti seguirò ognor per fè; - O buon Gesù, dimora in me.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+O buon Gesù, Tu sei il mio ben,
+Guidami Tu come convien;
+Dentro al mio cuor, per la Virtù,
+A Tuo desir opera Tu!
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Tutto il Vangel, tutto'l tuo amor, - O Dio del ciel desio nel cuor:
+Ognor sarò a Te fedel; - O buon Gesù, portami in ciel.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+O buon Gesù, Tu sei il mio ben,
+Guidami Tu come convien;
+Dentro al mio cuor, per la Virtù,
+A Tuo desir opera Tu!
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Peccatore, Iddio t'invita" Numero="128" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Peccatore Iddio t'invita - Al banchetto del perdon!
+Ei vuol darti nuova vita - Del suo amor vuol farti don.
+Alle nozze del gran Re, - Or v'è posto anche per Te!
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Ogni cosa è apparecchiata, - A Te nulla resta a far,
+Sol che accetti l'ambasciata - Che Gesù ti vuol salvar.
+Alle nozze del gran Re, - Or v'è posto anche per Te!
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Non sia inciampo il tuo peccato, - Chi t'invita ha gran pietà;
+Scordar vuole il tuo passato, - Perdonarti ogni empietà.
+Alle nozze del gran Re, - Or v'è posto anche per Te!
+			</Strofa>
+		</Inno>
+		<Inno Titolo="La Patria Celeste" Numero="129" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+V'è una patria più bella del sole,
+E da lungi la veggo per fè,
+Ivi il Padre mi aspetta e mi vuole,
+Ivi un luogo Ei prepara per me.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Là fra breve noi sarem,
+Ivi tutti scontrarci potrem…
+Là fra breve noi sarem,
+Ivi tutti scontrarci potrem…
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Gl'inni santi dei cuori redenti
+Canteremo alle porte del ciel;
+Non più pianti né cure rodenti,
+Ivi Cristo vedrem senza vel
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Là fra breve noi sarem,
+Ivi tutti scontrarci potrem…
+Là fra breve noi sarem,
+Ivi tutti scontrarci potrem…
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Ivi al Padre Celeste, al Signore
+Un tributo di lodi offrirem,
+Pel suo dono ineffabil d'amore,
+Per la vita che insieme godrem
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Là fra breve noi sarem,
+Ivi tutti scontrarci potrem…
+Là fra breve noi sarem,
+Ivi tutti scontrarci potrem…
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Ecco, dal Cielo Ei Vien" Numero="130" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Lo Sposo siamo pronti ad incontrar, - Ecco, dal cielo Ei vien:
+La lampa ardente sia nel nostro cuor, - Vogliam seguirlo appien.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Oh! Che gioia è preparata in ciel,
+Pei redenti del Signor Gesù:
+Se vegliando Ei ci troverà, - In ciel ci porterà.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Riceveremo la corona in ciel, - Se da Cristo seguitiam;
+Fratelli, camminiamo nel Vangel, - Da prodi combattiam.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Oh! Che gioia è preparata in ciel,
+Pei redenti del Signor Gesù:
+Se vegliando Ei ci troverà, - In ciel ci porterà.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Nella Città del ciel ci troverem - Col nostro Redentor;
+Una corona intorno a Lui sarem - Di gloria e di splendor.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Oh! Che gioia è preparata in ciel,
+Pei redenti del Signor Gesù:
+Se vegliando Ei ci troverà, - In ciel ci porterà.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Del Calvario sulla Vetta" Numero="101" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Del calvario sulla vetta,  - Cristo vittima s'offrì;
+L'opra Sua fu perfetta, - Sulla croce egli morì.
+Sulla croce, sulla croce, - Il Signor morì per me. (bis)
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+A Dio vittima gradita, - Pura e santa fu Gesù;
+La sua morte ci diè vita, - Ci affrancò la sua Virtù.
+Sulla croce, sulla croce - Il Signor morì per me. (bis)
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Peccatore, se alla croce - Guardi or con vera fé,
+Di Gesù la morte atroce - Sarà vita ancor per te.
+Sulla croce, sulla croce - Il Signor per noi morì. (bis)
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Vo' Cantar del Salvatore" Numero="102" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Vo' cantar del Salvatore, - Dell'amor del Re dei Re,
+Dalla croce il gran dolore, - Che soffrive là per me.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Canterò al Redentore:
+Col suo sangue mi lavò,
+Sulla croce con amore
+Il gran debito pagò.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Vi dirò la storia santa, - Di Gesù e del suo amor;
+Carità, ogni speranza, - Ei donò a peccator.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Canterò al Redentore:
+Col suo sangue mi lavò,
+Sulla croce con amore
+Il gran debito pagò.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Vo' lodarti, o Redentore, - Col mio cuor Ti voglio amar;
+Tu di grazia largitore, - La vittoria ci vuoi dar.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="0" >
+Canterò al Redentore:
+Col suo sangue mi lavò,
+Sulla croce con amore
+Il gran debito pagò.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Col Tuo Spirito" Numero="103" Numero_Strofe="8" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Col Tuo Spirito battezza - Gli aspettanti, o Salvator;
+Mentre qui uniti insieme - Ti preghiamo con fervor.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Col Tuo Spirito, o Signor
+Deh! Battezza gli aspettanti;
+E consola tutti quanti,
+O Divino Redentor.
+Manda, manda, lo Spirto Consolator.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Deh Tu manda agli aspettanti - Il Tuo Spirito, o Signor.
+Come noi vuoi consolarli - Col Divin Consolator.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Col Tuo Spirito, o Signor
+Deh! Battezza gli aspettanti;
+E consola tutti quanti,
+O Divino Redentor.
+Manda, manda, lo Spirto Consolator.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Il Tuo Spirito, o Signore, - Parli lingue strane in lor;
+Esso il Nome Tuo Glorioso - Loderà in tutte l'or.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Col Tuo Spirito, o Signor
+Deh! Battezza gli aspettanti;
+E consola tutti quanti,
+O Divino Redentor.
+Manda, manda, lo Spirto Consolator.
+			</Strofa>
+			<Strofa Num_Strofa="7" IS_Chorus="0" >
+Il Tuo Spirito, o Signore, - Guida in ogni verità;
+Finche vieni in quel giorno - A prender Tua eredità.
+			</Strofa>
+			<Strofa Num_Strofa="8" IS_Chorus="-1" >
+Col Tuo Spirito, o Signor
+Deh! Battezza gli aspettanti;
+E consola tutti quanti,
+O Divino Redentor.
+Manda, manda, lo Spirto Consolator.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="La Gioia de'  Santi" Numero="104" Numero_Strofe="8" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+La gioia dei santi è l'amor di Gesù;
+Grand'è quell'amore, e sarà qual fù.
+La fonte di Vita che lava l'error,
+E' il sangue di Cristo che puro fa il cuor.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Del grande amor cantiam, l'amore di Gesù,
+Amor possente per salvar quaggiù.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Oh! Mira "Ecco l'uomo" languente egli è;
+Ei gronda di sangue, straziato è per me.
+Gli sputano in faccia, oh grande orror !
+Ha cinto il suo capo di spine il Signor.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Del grande amor cantiam, l'amore di Gesù,
+Amor possente per salvar quaggiù.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Con chiodi forate ha le mani ed i piè,
+Confitto in sul legno, ahi! Pende per me!
+Trafitto ha il costato con lancia crudel,
+Spettacol d'amor è alla terra ed al ciel.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Del grande amor cantiam, l'amore di Gesù,
+Amor possente per salvar quaggiù.
+			</Strofa>
+			<Strofa Num_Strofa="7" IS_Chorus="0" >
+In croce Ei compì la grand'opra d'amor,
+Qual Agno innocente pe' falli Egli muor !
+In Lui confidiam, confidiamo col cuor,
+Che forte è l'amore del gran Salvator.
+			</Strofa>
+			<Strofa Num_Strofa="8" IS_Chorus="-1" >
+Del grande amor cantiam, l'amore di Gesù,
+Amor possente per salvar quaggiù.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Cantiam di Dio la Gloria" Numero="105" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Cantiam di Dio la gloria, - Cantiam di Dio l'amore,
+Rendiamo grazie e onore - A Lui che ci salvò.
+Ei riportò vittoria, - Ei vinse infernoe morte,
+Ei vinse l'uomo forte, - Le spoglie gli predò.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Apparve in terra adorno - Di grazia e di dolcezza;
+Perdono, amor, salvezza, - Al peccator donò.
+Al cielo Ei fè ritorno, - E salva ed intrecede;
+Egli avvocato siede - Per quei che tanto amò.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Ci allieta la speranza - Che presto il rivedremo,
+Che presto in ciel saremo, - Che presto Ei tornerà.
+La notte ormai s'avanza, - Già sorge il nuovo albore:
+Fra breve il Redentore - Dal cielo scenderà.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Oh, che Amor Gesù ci porta!" Numero="106" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Oh che amor Gesù ci porta! - Nostri falli Ei vuol lavar;
+Oh qual grazia andare a Dio, - Ogni cosa a raccontar!
+Se la pace qui perdiamo, - E crudele è il penar,
+Su, fratelli, andiamo a Dio - Ogni cosa a raccontar.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Oh qual prove e tentazioni - L'alme nostre han da lottar!
+Su, fratelli, andiamo a Dio, - La bufera Ei può calmar.
+Chi d'amici è si fedele, - E nel duolo sollevar ?
+Su, fratelli, andiamo a Dio - Ogni cosa a raccontar.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Siam noi frali e languenti ? - E' penoso a noi il viaggiar ?
+Sempre vince chi va a Dio - Ogni cosa a raccontar.
+Se gli amici ci han lasciati, - Soli noi dobbiam vogar;
+Su, fratelli, andiamo a Dio - Ogni cosa a raccontar.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="L'Affetto dell'Alme Redenti" Numero="107" Numero_Strofe="3" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+O Signor che doni ai cuori - Della Vita i bei desiri,
+Fa ch ognora il mio sospiri, - Di restare a Te fedel;
+Poi che in Te v'è la Parola - Che dà vita al peccatore,
+Che ravviva, che consola, - E che guida l'uomo al ciel.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Fa che il "tema" del tuo Nome - Mi protegga dall'errore,
+E Tu, infonda in me il valore - D'un fedele servitor.
+Ed allor potrò seguire - Del tuo Figlio le pedate,
+E nel Nome Suo ubbidire - A Te sol, mio Creator.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Trovo pace nel compire - Il dover che Tu m'affidi;
+E se l'alma mia Tu guidi, - Teco sempre resterò,
+Finchè il Salvator pietoso - Venga, e dica all'alma mia:
+Vieni, ed entra nel riposo - Che il mio sangue ti acquistò.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Qual grande Tesoro!" Numero="108" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Venite, gl'inni del cuor - Alziamo al Re dei Re;
+Lodiamo il santo d'Israel, - Cantiam sue lodi in coro
+Mentr'egli inonda l'anima, - Di fè, speranza e amor.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Qual grande tesoro Ci ha l'Evangel donato!
+Con cuor festante e grato, - Diam gloria al Redentor.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Iddio, chi sente in cuor - Possiede il Sommo Ben;
+E' figlio dell'Altissimo, - Degno d'eterno alloro,
+Chi guarda all'Invisibile - E vive del suo amor.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Qual grande tesoro Ci ha l'Evangel donato!
+Con cuor festante e grato, - Diam gloria al Redentor.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+La pura gioia del cuor - Vien tutta da Gesù:
+Celeste è la letizia, - Dolcissimo il ristoro
+Che in Cristo sente l'anima, - S'è piena del suo amor.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Qual grande tesoro Ci ha l'Evangel donato!
+Con cuor festante e grato, - Diam gloria al Redentor.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Ei ci Lavò, Ei ci Lavò" Numero="109" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Sulla croce il Santo Agnello - Cruda morte Egli gustò
+Per noi tutti, e nel suo amore - A Dio Padre ci comprò.
+Col suo sangue ci ha lavati - D'ogni fallo e iniquità;
+Ora siamo riscattati - Per l'eternità.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+Ei ci lavò, Ei ci lavò,
+Col suo prezioso sangue Gesù Salvator.
+Ei ci lavò, Ei ci lavò,
+Col suo prezioso sangue Gesù Salvator.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+In virtù del sangue d'Esso - Noi abbiam la libertà
+Di entrar nel luogo Santo - Ove il padre nostro sta.
+Questo è il sangue che pronunzia - L'infinito e immenso amor
+Di Gesù che al mondo annunzia - Vita eterna ognor.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+Ei ci lavò, Ei ci lavò,
+Col suo prezioso sangue Gesù Salvator.
+Ei ci lavò, Ei ci lavò,
+Col suo prezioso sangue Gesù Salvator.
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Noi da Lui siam Suggellati - Per l'eterna eredità;
+Sempre avanti camminiamo - E vivremo a eternità.
+Chi nel cuor Gesù possiede - A Dio Padre fatto è
+In eterno santo erede, - Sacerdote e re.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+Ei ci lavò, Ei ci lavò,
+Col suo prezioso sangue Gesù Salvator.
+Ei ci lavò, Ei ci lavò,
+Col suo prezioso sangue Gesù Salvator.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Deh! T'Affretta, O Peccator" Numero="110" Numero_Strofe="4" Categoria="0" >
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+Deh! T'Affretta, o peccator, - Oggi a Dio tu puoi venir;
+Ei ti chiama con amor, - Tu domanipuoi morir.
+			</Strofa>
+			<Strofa Num_Strofa="2" IS_Chorus="0" >
+Deh! T'Affretta, o peccator, - Non tardar nel tuo pentir;
+Or ti chiama il Salvator, - Tu domani puoi morir.
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Deh! T'Affretta, o peccator, - Lascia il mondo e il suo gioir;
+Corri a Dio perdonator, - Tu domani puoi morir.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="0" >
+Deh! T'Affretta, o peccator, - Se a Dio ti vuoi offrir;
+Lascia il dubbio e l'error, - Tu domani puoi morir.
+			</Strofa>
+		</Inno>
+		<Inno Titolo="Speranza D'Israele" Numero="111" Numero_Strofe="6" Categoria="0" >
+			<Strofa Num_Strofa="2" IS_Chorus="-1" >
+O Speranza d'Israele, - Io Te solo sto aspettar
+Amo esserti fedele, - Amo a casa ritornar
+			</Strofa>
+			<Strofa Num_Strofa="3" IS_Chorus="0" >
+Questo mondo non presenta - Che cordoglio e gran dolor;
+Esso l'alma mi tormenta… - Voglio te, Padre d'amor !
+Nella terra del tormento - Non v'è luogo più per me;
+A te in fede mi presento, - Amo, o Dio, venir con Te.
+			</Strofa>
+			<Strofa Num_Strofa="4" IS_Chorus="-1" >
+O Speranza d'Israele, - Io Te solo sto aspettar
+Amo esserti fedele, - Amo a casa ritornar
+			</Strofa>
+			<Strofa Num_Strofa="5" IS_Chorus="0" >
+Amo il cielo desiato, - Amo Te, Padre d'amor;
+Amo Cristo in cile beato, - Amo il buon consolator.
+Con lo Spirito e la Sposa, - Dico: "Vien, Signor Gesù",
+Rendi l'alma mia gloriosa, - Santa e piena di Virtù.
+			</Strofa>
+			<Strofa Num_Strofa="6" IS_Chorus="-1" >
+O Speranza d'Israele, - Io Te solo sto aspettar
+Amo esserti fedele, - Amo a casa ritornar
+			</Strofa>
+			<Strofa Num_Strofa="1" IS_Chorus="0" >
+O Speranza d'Israele, - Io Te solo sto aspettar,
+Amo esserti fedele, - Amo a casa ritornar.
+Spero tosto che finita - Sia ogni prova di quaggiù;
+Sto aspettando eterna vita - Su nel ciel con te, Gesù.
+			</Strofa>
+		</Inno>
+	</Innario>
+</Innari>

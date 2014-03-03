@@ -16,6 +16,11 @@ import android.widget.TableLayout;
  * Compund control to implement a numerical keypad.
  */
 public class NumKeyPadView extends TableLayout {
+   public interface OnNumberConfirmedListener {
+      public void onNumberConfirmed(int number);      //Evento generato in corrispondenza di un numero confermato.
+   }
+   OnNumberConfirmedListener mOnNumberConfirmedListener;
+
    DigitCircleButtonView numkeys[] = new DigitCircleButtonView[10];
    ImageButton okButton, cancelButton;
    Animation okSprite, cancelSprite;
@@ -34,12 +39,12 @@ public class NumKeyPadView extends TableLayout {
 
    //Method for managing composed number when a new digit is composed
    void newComposedDigit(String digit) {
+      if (composedNumber.length() == 3) composedNumber = "";
       composedNumber += digit;
 
       //************ DEBUG
       if (composedNumber.length() == 3) {
          okButton.startAnimation(okSprite);
-         composedNumber = "";
       }
       //************ DEBUG - END
 
@@ -47,7 +52,7 @@ public class NumKeyPadView extends TableLayout {
    }
 
    //Centralized init method called by the constructors.
-   void init(Context context) {
+   void init(final Context context) {
       if (!isInEditMode()) {
          LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
          li.inflate(R.layout.keypadview, this, true);
@@ -66,11 +71,28 @@ public class NumKeyPadView extends TableLayout {
          okSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_ok_sprite);
          cancelSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_cancel_sprite);
 
+         okSprite.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+               if (mOnNumberConfirmedListener != null)
+                  mOnNumberConfirmedListener.onNumberConfirmed(Integer.parseInt(composedNumber));
+            }
+         });
+
          //spinner = (ImageView) findViewById(R.id.imageView);
          //spinner.setImageLevel(currentLevel);
 
          //Number keys events
-         numkeys[1].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("1");}});
+         numkeys[1].setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+               newComposedDigit("1");
+            }
+         });
          numkeys[2].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("2");}});
          numkeys[3].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("3");}});
          numkeys[4].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("4");}});
@@ -102,6 +124,10 @@ public class NumKeyPadView extends TableLayout {
          ///////addView(<view to add>, new LinearLayout.LayoutParams( , ));
       }
 
+   }
+
+   public void setOnNumberConfirmedListener(OnNumberConfirmedListener listener) {
+      mOnNumberConfirmedListener = listener;
    }
 
 }

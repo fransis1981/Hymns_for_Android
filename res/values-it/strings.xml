@@ -2,4 +2,5 @@
 <resources>
     <string name="keypad_cancel_str">Cancella</string>
     <string name="mnu_options_str">Preferenze...</string>
+    <string name="coro_label">CORO</string>
 </resources>

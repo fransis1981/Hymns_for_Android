@@ -82,7 +82,12 @@ public class Inno {
       for (Element strofa: _tagInno.children()) {
          newstrofa = new Strofa(strofa, numStrofe, this);               //HERE: side-effect on parameter numStrofe
          if (newstrofa.IsChorus()) numCori++;
+         else numStrofe++;
          strofe_cori.add(newstrofa);
       }
+   }
+
+   public ArrayList<Strofa> getListStrofe() {
+      return strofe_cori;
    }
 }

@@ -97,7 +97,9 @@ public class DigitCircleButtonView extends Button {
                textPaint.getTextBounds(getText().toString(), 0, 1, txtBounds);
                canvas.drawText(getText().toString(), buttonX, buttonY - txtBounds.centerY(), textPaint);
            }
-           if (isPressed) Log.i("HYMNS", "BUTTON PRESSED!!!!!!!!!");
+           if (isPressed) {
+              //TODO: draw pressed status
+           }
         }
     }
 

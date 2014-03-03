@@ -6,18 +6,12 @@
               android:background="#50259595" android:weightSum="1">
     <TextView
             android:layout_width="fill_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="Hello World, MyActivity"
             android:id="@+id/mytxt"/>
-    <TextView
-            android:layout_width="147dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/largetxt" style="@style/strofaText_Style"/>
     <view android:layout_width="267dp"
           android:layout_height="331dp"
-          class="com.fransis1981.Android_Hymns.NumKeyPadView" android:id="@+id/view"
+          class="com.fransis1981.Android_Hymns.NumKeyPadView" android:id="@+id/main_keypad"
           android:layout_gravity="center_horizontal"/>
     <FrameLayout
             android:layout_width="100dp"

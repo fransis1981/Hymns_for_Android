@@ -29,16 +29,18 @@ public class Innario {
          throw new Exception("Costruttore Innario invocato su un tag di tipo non valido. [" + _tagInnario.tagName() + "]");
       }
 
-      titolo = _tagInnario.attr(MyConstants.TAG_INNARIO_STR);
+      titolo = _tagInnario.attr(MyConstants.INNARIO_TITOLO_ATTR);
       numeroInni = Integer.parseInt(_tagInnario.attr(MyConstants.INNARIO_NUM_INNI_ATTR));
 
       inni = new SparseArray<Inno>(numeroInni);
       for (Element inno: _tagInnario.children()) {
          inni.append(Integer.parseInt(inno.attr(MyConstants.INNO_NUMERO_ATTR)), new Inno(inno, this));
       }
-
    }
 
+   public Inno getInno(int number) {
+      return inni.get(number);
+   }
 
    //toString returns the title
    @Override
