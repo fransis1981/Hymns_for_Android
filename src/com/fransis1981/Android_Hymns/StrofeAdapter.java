@@ -1,6 +1,7 @@
 package com.fransis1981.Android_Hymns;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,19 @@ public class StrofeAdapter extends ArrayAdapter<Strofa> {
          strofaTemplate = li.inflate(R.layout.strofa_item, null, true);
          vh.label_strofa = (TextView) strofaTemplate.findViewById(R.id.strofa_label);
          vh.content_strofa = (TextView) strofaTemplate.findViewById(R.id.strofa_content);
+         vh.content_strofa.setTypeface(HymnsApplication.fontContenutoStrofa);
          strofaTemplate.setTag(vh);
       }
 
-      //Populating texts
+      //Populating texts and customizing font properties
       Strofa ss = _strofe.get(position);
       vh.label_strofa.setText(ss.getLabel());
+      if (!ss.IsChorus()) {
+         vh.label_strofa.setTypeface(HymnsApplication.fontLabelStrofa, Typeface.BOLD);
+      }
+      else {
+         vh.label_strofa.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+      }
       vh.content_strofa.setText(ss.getContenuto());
       return strofaTemplate;
    }

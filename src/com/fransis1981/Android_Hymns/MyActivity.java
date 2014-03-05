@@ -38,7 +38,7 @@ public class MyActivity extends Activity {
               @Override
               public void onNumberConfirmed(int number) {
                  Bundle newextra = new Bundle();
-                 newextra.putInt(MyConstants.NUMERO_INNO_BUNDLE, number);
+                 newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, number);
                  singleHymn_intent.replaceExtras(newextra);
                  startActivity(singleHymn_intent);
               }

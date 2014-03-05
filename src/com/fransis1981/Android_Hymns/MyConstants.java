@@ -22,7 +22,4 @@ public final class MyConstants {
    public static final String TAG_STROFA_STR = "strofa";
    public static final String STROFA_NUMERO_ATTR = "num_strofa";     //Numero cumulativo di strofe e cori
    public static final String STROFA_ISCHORUS_ATTR = "is_chorus";
-
-   //Names used for bundle extras exchange
-   public static final String NUMERO_INNO_BUNDLE = "NumeroInno";
 }

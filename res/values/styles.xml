@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="HymnTitle_style">
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">#ff0070da</item>
     </style>
     <style name="strofaLabel_Style">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">#ffefe300</item>
         <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingRight">15dp</item>
+        <item name="android:gravity">top</item>
+    </style>
+    <style name="strofaContentl_Style">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">#ffefeac9</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
         <item name="android:gravity">top</item>
     </style>
 </resources>

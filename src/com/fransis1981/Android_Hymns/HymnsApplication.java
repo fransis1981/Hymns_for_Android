@@ -20,8 +20,10 @@ public class HymnsApplication extends Application {
 
    //Providing at application level a one-time instantiation of the Resources table (for efficiency).
    public static Resources myResources;
-   public static Typeface fontTitolo1;
    public static AssetManager assets;
+   public static Typeface fontTitolo1;
+   public static Typeface fontLabelStrofa;
+   public static Typeface fontContenutoStrofa;
 
    public static ArrayList<Innario> innari;
 
@@ -47,7 +49,11 @@ public class HymnsApplication extends Application {
        singleton = this;
        assets = getAssets();
        myResources = getResources();
-       fontTitolo1 = Typeface.createFromAsset(assets , "partridg_TITOLO1.ttf");
+       fontTitolo1 = Typeface.createFromAsset(assets , "Century_modern_italic2.ttf");
+       //fontTitolo1 = Typeface.createFromAsset(assets , "partridg_TITOLO1.ttf");
+       fontLabelStrofa = Typeface.createFromAsset(assets, "WetinCaroWant.ttf");
+       //fontContenutoStrofa = Typeface.createFromAsset(assets, "Century_modern_italic2.ttf");
+       fontContenutoStrofa = Typeface.createFromAsset(assets, "Caudex_Italic.ttf");
 
        innari = new ArrayList<Innario>();
        caricaInnari(false);

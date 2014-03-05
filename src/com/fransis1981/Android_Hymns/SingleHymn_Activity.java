@@ -9,16 +9,26 @@ import android.widget.TextView;
  * Created by Fransis on 27/02/14 15.08.
  */
 public class SingleHymn_Activity extends ListActivity {
+   public static final String NUMERO_INNO_BUNDLEARG = "NumeroInno";
 
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       requestWindowFeature(Window.FEATURE_NO_TITLE);
       setContentView(R.layout.single_hymn_view);
 
-      TextView title = (TextView) findViewById(R.id.hymn_title);
-      //ListView strofe_list = (ListView) findViewById(R.id.strofe_listview);
-      title.setTypeface(HymnsApplication.fontTitolo1);
+      Bundle extras = getIntent().getExtras();
+      int hymnNumber = extras.getInt(NUMERO_INNO_BUNDLEARG);
+      Inno hymnToDisplay =  HymnsApplication.innari.get(0).getInno(hymnNumber);
 
-      setListAdapter(new StrofeAdapter(this, HymnsApplication.innari.get(0).getInno(121).getListStrofe()));
+      //TODO: implementare la logica dell'innario attivo.
+      //TODO: implementare la gestione di un numero inno inesistente.
+
+      TextView title = (TextView) findViewById(R.id.hymn_title);
+      title.setTypeface(HymnsApplication.fontTitolo1);
+      title.setText(hymnToDisplay.getTitolo());
+
+      //TODO: aggiungere nel titolo dell'activity la casella con il numero e la stella per il preferito.
+
+      setListAdapter(new StrofeAdapter(this, hymnToDisplay.getListStrofe()));
    }
 }

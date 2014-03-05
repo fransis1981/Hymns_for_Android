@@ -14,5 +14,5 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/strofa_content"/>
+            android:id="@+id/strofa_content" style="@style/strofaContentl_Style"/>
 </LinearLayout>

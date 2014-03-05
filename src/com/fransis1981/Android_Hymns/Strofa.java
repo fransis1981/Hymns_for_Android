@@ -1,5 +1,6 @@
 package com.fransis1981.Android_Hymns;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 /**
@@ -32,7 +33,8 @@ public class Strofa {
       parentInno = _parent;
       isChorus = (Integer.parseInt(_tagStrofa.attr(MyConstants.STROFA_ISCHORUS_ATTR))) != 0;
       indiceStrofa = Short.parseShort(_tagStrofa.attr(MyConstants.STROFA_NUMERO_ATTR));
-      contenuto = _tagStrofa.text();
+      contenuto = Jsoup.parse( _tagStrofa.html().replaceAll("(?i)<br[^>]*>[\\s]*", "br2n")).text();
+      contenuto = contenuto.replaceAll("br2n", "\n");
       label = isChorus?HymnsApplication.myResources.getString(R.string.coro_label):(++_lastNumericLabel).toString();
    }
 }

@@ -22,6 +22,7 @@
     <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@android:id/list" android:layout_gravity="center_horizontal"/>
+            android:id="@android:id/list" android:layout_gravity="center_horizontal" android:paddingTop="5dp"
+            android:divider="@drawable/strofe_divider" android:dividerHeight="1dp"/>
 
     </LinearLayout>
