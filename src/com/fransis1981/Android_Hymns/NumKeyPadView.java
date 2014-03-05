@@ -117,6 +117,12 @@ public class NumKeyPadView extends TableLayout {
             }
          });
 
+         okButton.setOnClickListener(new ImageButton.OnClickListener() {
+            public void onClick(View v) {
+               okButton.clearAnimation();
+            }
+         });
+
          //Hooking up the functionality.... ?
          //TODO: we might introduce a parameter for having this view optionally have a box or a series of button
          //TODO: with hints of available hymns for the composed number.

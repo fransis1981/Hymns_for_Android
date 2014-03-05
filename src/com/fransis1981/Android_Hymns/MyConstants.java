@@ -22,4 +22,10 @@ public final class MyConstants {
    public static final String TAG_STROFA_STR = "strofa";
    public static final String STROFA_NUMERO_ATTR = "num_strofa";     //Numero cumulativo di strofe e cori
    public static final String STROFA_ISCHORUS_ATTR = "is_chorus";
+
+   //Titoli dei tab nella pagina principale
+   public static final String TAB_MAIN_KEYPAD = "Tastierino";
+   public static final String TAB_MAIN_HYMNSLIST = "Elenco";
+   public static final String TAB_MAIN_RECENT = "Recenti";
+   public static final String TAB_MAIN_STARRED = "Preferiti";
 }

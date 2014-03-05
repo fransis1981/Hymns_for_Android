@@ -9,6 +9,7 @@
     />
     <application android:label="@string/app_name" android:icon="@drawable/main_icon" android:name="HymnsApplication"
             android:allowBackup="true">
+
         <activity android:name="MyActivity"
                   android:label="@string/app_name">
             <intent-filter>
@@ -16,6 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SingleHymn_Activity" android:label="Cantico Singolo"/>
+
+        <activity android:name=".SingleHymn_Activity" android:label="Cantico Singolo">
+            <intent-filter>
+                <action android:name="com.fransis1981.action.SINGLEHYMNSHOW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

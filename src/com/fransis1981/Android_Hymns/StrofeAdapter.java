@@ -35,7 +35,7 @@ public class StrofeAdapter extends ArrayAdapter<Strofa> {
 
       strofaTemplate = convertView;
       if (convertView != null) {
-         //Per questa particolare posizione nella ListView on oggetto holder è stato già allocato
+         //Per questa particolare posizione nella ListView un oggetto holder è stato già allocato
          vh = (ViewHolder) convertView.getTag();
       }
       else {

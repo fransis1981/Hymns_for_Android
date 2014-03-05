@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="HymnTitle_style">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">#ff0070da</item>
     </style>

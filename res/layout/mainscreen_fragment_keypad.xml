@@ -8,6 +8,6 @@
     <view android:layout_width="fill_parent"
           android:layout_height="fill_parent"
           class="com.fransis1981.Android_Hymns.NumKeyPadView" android:id="@+id/main_keypad"
-          android:layout_gravity="center_horizontal"/>
+          android:layout_gravity="center_horizontal" android:padding="@dimen/keypad_ExternalPadding"/>
 
 </LinearLayout>
