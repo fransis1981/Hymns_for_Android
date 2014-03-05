@@ -9,10 +9,35 @@
             android:layout_height="wrap_content"
             android:text="Hello World, MyActivity"
             android:id="@+id/mytxt"/>
-    <view android:layout_width="267dp"
-          android:layout_height="331dp"
-          class="com.fransis1981.Android_Hymns.NumKeyPadView" android:id="@+id/main_keypad"
-          android:layout_gravity="center_horizontal"/>
+
+
+    <TabHost
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" android:id="@android:id/tabhost">
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+            </TabWidget>
+            <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                <android.support.v4.view.ViewPager
+                        android:id="@+id/main_viewpager"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        />
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
     <FrameLayout
             android:layout_width="100dp"
             android:layout_height="fill_parent" android:layout_gravity="right">
