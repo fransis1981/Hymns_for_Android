@@ -2,7 +2,6 @@ package com.fransis1981.Android_Hymns;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -42,13 +41,9 @@ public class NumKeyPadView extends TableLayout {
       if (composedNumber.length() == 3) composedNumber = "";
       composedNumber += digit;
 
-      //************ DEBUG
       if (composedNumber.length() == 3) {
          okButton.startAnimation(okSprite);
       }
-      //************ DEBUG - END
-
-      Log.i(MyConstants.LogTag_STR, "Current composed number: " + composedNumber);
    }
 
    //Centralized init method called by the constructors.

@@ -55,8 +55,8 @@ public class MyActivity extends FragmentActivity
            mTabHost.setup();
            addTabToTabHost(MyConstants.TAB_MAIN_KEYPAD, HymnsApplication.myResources.getDrawable(android.R.drawable.ic_dialog_dialer));
            addTabToTabHost(MyConstants.TAB_MAIN_HYMNSLIST, null);
-           //addTabToTabHost(MyConstants.TAB_MAIN_RECENT);
-           //addTabToTabHost(MyConstants.TAB_MAIN_STARRED);
+           addTabToTabHost(MyConstants.TAB_MAIN_RECENT, null);
+           addTabToTabHost(MyConstants.TAB_MAIN_STARRED, null);
            mTabHost.setOnTabChangedListener(this);
 
            //Treating ViewPager and related adapter

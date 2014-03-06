@@ -18,11 +18,13 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
       super(fm);
       _fragment_keypad = new Fragment_Keypad();
       _fragment_hymnslist = new Fragment_HymnsList();
+      _fragment_recent = new Fragment_RecentsList();
+      _fragment_starred = new Fragment_StarredList();
    }
 
    @Override
    public int getCount() {
-      return 2;
+      return 4;
          //Si prevede di avere i seguenti tabs:
          //    - keypad
          //    - lista degli inni
@@ -46,6 +48,8 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
       switch (i) {
          case 0: return _fragment_keypad;
          case 1: return _fragment_hymnslist;
+         case 2: return _fragment_recent;
+         case 3: return _fragment_starred;
          default: return null;
       }
    }
