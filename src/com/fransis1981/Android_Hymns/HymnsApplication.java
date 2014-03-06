@@ -26,6 +26,7 @@ public class HymnsApplication extends Application {
    public static Typeface fontContenutoStrofa;
 
    public static ArrayList<Innario> innari;
+   public static Innario currentInnario;
 
    private static int currentSpinnerLevel = 0;
    private static ImageView availableSpinner;
@@ -57,6 +58,8 @@ public class HymnsApplication extends Application {
 
        innari = new ArrayList<Innario>();
        caricaInnari(false);
+
+       currentInnario = innari.get(0);
     }
 
     @Override

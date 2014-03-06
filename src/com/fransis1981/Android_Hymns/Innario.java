@@ -10,6 +10,7 @@ public class Innario {
    private String titolo;
    private int numeroInni;
    private SparseArray<Inno> inni;
+   private DialerList mDialerList;
 
    public String getTitolo() {
       return titolo;
@@ -25,6 +26,8 @@ public class Innario {
 
    //This constructor initializes the Innarioo with the XML tag elemnt extracted from the XML hymns definition
    public Innario(Element _tagInnario) throws Exception {
+      mDialerList = new DialerList();
+
       if (!(_tagInnario.tagName().equals(MyConstants.TAG_INNARIO_STR))) {
          throw new Exception("Costruttore Innario invocato su un tag di tipo non valido. [" + _tagInnario.tagName() + "]");
       }
@@ -34,12 +37,19 @@ public class Innario {
 
       inni = new SparseArray<Inno>(numeroInni);
       for (Element inno: _tagInnario.children()) {
-         inni.append(Integer.parseInt(inno.attr(MyConstants.INNO_NUMERO_ATTR)), new Inno(inno, this));
+         Inno iii = new Inno(inno, this);
+         inni.append(Integer.parseInt(inno.attr(MyConstants.INNO_NUMERO_ATTR)), iii);
+         mDialerList.addAvailableNumber(iii.getNumero());
       }
+
    }
 
    public Inno getInno(int number) {
       return inni.get(number);
+   }
+
+   public DialerList getDialerList() {
+      return mDialerList;
    }
 
    //toString returns the title
