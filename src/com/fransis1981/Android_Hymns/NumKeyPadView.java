@@ -156,6 +156,9 @@ public class NumKeyPadView extends TableLayout {
    A list of 10 booleans (one for each digit); when TRUE, the corresponding digit is disable in the keypad.
     */
    public void setObscureList(boolean[] _list) {
-
+      for (int i = 0; i < 10; i++) {
+         numkeys[i].setEnabled(_list[i]);
+         numkeys[i].invalidate();
+      }
    }
 }

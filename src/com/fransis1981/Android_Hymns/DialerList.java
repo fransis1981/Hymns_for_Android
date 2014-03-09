@@ -60,7 +60,7 @@ public class DialerList {
    public boolean[] getObscureList() {
       boolean[] ret = new boolean[10];
       for (int i = 0; i < 10; i++)
-         ret[i] = (numberPresence[i] == null);
+         ret[i] = (numberPresence[i] != null);
       return ret;
    }
 }

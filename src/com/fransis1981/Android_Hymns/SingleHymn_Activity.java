@@ -18,7 +18,7 @@ public class SingleHymn_Activity extends ListActivity {
 
       Bundle extras = getIntent().getExtras();
       int hymnNumber = extras.getInt(NUMERO_INNO_BUNDLEARG);
-      Inno hymnToDisplay =  HymnsApplication.innari.get(0).getInno(hymnNumber);
+      Inno hymnToDisplay =  HymnsApplication.getCurrentInnario().getInno(hymnNumber);
 
       //TODO: implementare la logica dell'innario attivo.
       //TODO: implementare la gestione di un numero inno inesistente.

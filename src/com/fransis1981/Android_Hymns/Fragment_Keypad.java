@@ -17,6 +17,8 @@ public class Fragment_Keypad extends Fragment {
    private NumKeyPadView keypad;
    private DialerList mCurrentDialerList;
 
+   private int mLastValidComposedNumber;
+
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.mainscreen_fragment_keypad, container, false);
@@ -38,21 +40,22 @@ public class Fragment_Keypad extends Fragment {
                case 4: case 5: case 6:
                case 7: case 8: case 9:
                   txtComposedNumber.setText(curr + String.valueOf(number));
-                  //TODO: programmare l'impostazione del obscurelist
+                  keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getSubDialerList(number)).getObscureList());
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();
                   break;
 
                case NumKeyPadView.KEYPAD_CANCEL:
                   txtComposedNumber.setText(curr.subSequence(0, curr.length() - 1));
+                  keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getParentDialerList()).getObscureList());
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();
                   break;
 
                case NumKeyPadView.KEYPAD_OK:
                   Bundle newextra = new Bundle();
-                  newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, number);
+                  newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
                   singleHymn_intent.replaceExtras(newextra);
                   startActivity(singleHymn_intent);
-
+                  resetComposedNumber();
             }
          }
       });
@@ -65,12 +68,21 @@ public class Fragment_Keypad extends Fragment {
    private boolean isComposedNumberValid() {
       CharSequence curr = txtComposedNumber.getText();
       if (curr.length() == 0) return false;
-      return HymnsApplication.getCurrentInnario().hasHymn(Integer.parseInt(curr.toString()));
+      int ttt = Integer.parseInt(curr.toString());
+      if (HymnsApplication.getCurrentInnario().hasHymn(ttt)) {
+         mLastValidComposedNumber = ttt;
+         return true;
+      }
+      else return false;
    }
 
    public void resetComposedNumber() {
       txtComposedNumber.setText("");
       mCurrentDialerList = HymnsApplication.getCurrentInnario().getDialerList();
       keypad.setObscureList(mCurrentDialerList.getObscureList());
+   }
+
+   public void resetOnCurrentInnario() {
+      resetComposedNumber();
    }
 }

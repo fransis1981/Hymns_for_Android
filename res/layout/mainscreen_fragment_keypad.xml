@@ -9,7 +9,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/txt_composed_number" android:layout_gravity="center_horizontal"
-            style="@style/composedNumberBox_Style" android:textAlignment="center"/>
+            style="@style/composedNumberBox_Style" android:gravity="center"/>
     <view android:layout_width="fill_parent"
           android:layout_height="fill_parent"
           class="com.fransis1981.Android_Hymns.NumKeyPadView"
