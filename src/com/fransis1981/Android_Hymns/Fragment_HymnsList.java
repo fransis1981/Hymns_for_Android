@@ -15,4 +15,8 @@ public class Fragment_HymnsList extends Fragment {
       View rooView = inflater.inflate(R.layout.mainscreen_fragment_hymnslist, container, false);
       return rooView;
    }
+
+   public void resetOnCurrentInnario() {
+
+   }
 }

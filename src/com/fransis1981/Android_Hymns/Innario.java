@@ -52,6 +52,10 @@ public class Innario {
       return mDialerList;
    }
 
+   public boolean hasHymn(int number) {
+      return inni.indexOfKey(number) >= 0;
+   }
+
    //toString returns the title
    @Override
    public String toString() {

@@ -15,4 +15,8 @@ public class Fragment_StarredList extends Fragment {
       View rooView = inflater.inflate(R.layout.mainscreen_fragment_starredlist, container, false);
       return rooView;
    }
+
+   public void resetOnCurrentInnario() {
+
+   }
 }

@@ -15,4 +15,8 @@ public class Fragment_RecentsList extends Fragment {
       View rooView = inflater.inflate(R.layout.mainscreen_fragment_recentslist, container, false);
       return rooView;
    }
+
+   public void resetOnCurrentInnario() {
+
+   }
 }

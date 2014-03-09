@@ -6,31 +6,71 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * Created by Fransis on 05/03/14 11.05.
  */
 public class Fragment_Keypad extends Fragment {
    private Intent singleHymn_intent;
-
+   private TextView txtComposedNumber;
+   private NumKeyPadView keypad;
+   private DialerList mCurrentDialerList;
 
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.mainscreen_fragment_keypad, container, false);
       singleHymn_intent = new  Intent("com.fransis1981.action.SINGLEHYMNSHOW");
 
+      //Getting and keeping to the text view showing the composed number
+      txtComposedNumber = (TextView) rootView.findViewById(R.id.txt_composed_number);
+      txtComposedNumber.setText("");
+
       //Getting a reference to the keypad and setting the listenr for number confirmed
-      NumKeyPadView keypad = (NumKeyPadView) rootView.findViewById(R.id.main_keypad);
-      keypad.setOnNumberConfirmedListener(new NumKeyPadView.OnNumberConfirmedListener() {
+      keypad = (NumKeyPadView) rootView.findViewById(R.id.main_keypad);
+      keypad.setOnKeyPressedListener(new NumKeyPadView.OnKeyPressedListener() {
          @Override
-         public void onNumberConfirmed(int number) {
-            Bundle newextra = new Bundle();
-            newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, number);
-            singleHymn_intent.replaceExtras(newextra);
-            startActivity(singleHymn_intent);
+         public void onKeyPressed(int number) {
+            CharSequence curr = txtComposedNumber.getText();
+            switch (number) {
+               case 0:
+               case 1: case 2: case 3:
+               case 4: case 5: case 6:
+               case 7: case 8: case 9:
+                  txtComposedNumber.setText(curr + String.valueOf(number));
+                  //TODO: programmare l'impostazione del obscurelist
+                  if (isComposedNumberValid()) keypad.startOkButtonTimeout();
+                  break;
+
+               case NumKeyPadView.KEYPAD_CANCEL:
+                  txtComposedNumber.setText(curr.subSequence(0, curr.length() - 1));
+                  if (isComposedNumberValid()) keypad.startOkButtonTimeout();
+                  break;
+
+               case NumKeyPadView.KEYPAD_OK:
+                  Bundle newextra = new Bundle();
+                  newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, number);
+                  singleHymn_intent.replaceExtras(newextra);
+                  startActivity(singleHymn_intent);
+
+            }
          }
       });
 
+      resetComposedNumber();
+
       return rootView;
+   }
+
+   private boolean isComposedNumberValid() {
+      CharSequence curr = txtComposedNumber.getText();
+      if (curr.length() == 0) return false;
+      return HymnsApplication.getCurrentInnario().hasHymn(Integer.parseInt(curr.toString()));
+   }
+
+   public void resetComposedNumber() {
+      txtComposedNumber.setText("");
+      mCurrentDialerList = HymnsApplication.getCurrentInnario().getDialerList();
+      keypad.setObscureList(mCurrentDialerList.getObscureList());
    }
 }

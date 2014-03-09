@@ -21,4 +21,15 @@
         <item name="android:paddingBottom">3dp</item>
         <item name="android:gravity">top</item>
     </style>
+    <style name="composedNumberBox_Style">
+        <item name="android:layout_height">30sp</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:textColor">#fffffff9</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:background">@drawable/composed_number_box_bg</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
 </resources>

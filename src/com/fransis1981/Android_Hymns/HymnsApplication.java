@@ -26,7 +26,17 @@ public class HymnsApplication extends Application {
    public static Typeface fontContenutoStrofa;
 
    public static ArrayList<Innario> innari;
-   public static Innario currentInnario;
+   private static Innario currentInnario;
+
+   //Definizione evento per gestire il cambiamento di innario corrente
+   public interface OnCurrentInnarioChangedListener {
+      public void onCurrentInnarioChanged();
+   }
+   private static OnCurrentInnarioChangedListener mOnCurrentInnarioChangedListener;
+   public static void setOnCurrentInnarioChangedListener(OnCurrentInnarioChangedListener listener) {
+      mOnCurrentInnarioChangedListener = listener;
+   }
+
 
    private static int currentSpinnerLevel = 0;
    private static ImageView availableSpinner;
@@ -62,10 +72,30 @@ public class HymnsApplication extends Application {
        currentInnario = innari.get(0);
     }
 
+   public static Innario getCurrentInnario() {
+      return currentInnario;
+   }
+
+   public static void setCurrentInnario(String _titolo) {
+      if (currentInnario.getTitolo().equals(_titolo)) return;
+      currentInnario = getInnarioByTitle(_titolo);
+      mOnCurrentInnarioChangedListener.onCurrentInnarioChanged();
+   }
+
     @Override
     public void onTerminate() {
         super.onTerminate();
     }
+
+   /*
+    * Questo metodo restituisce l'oggetto Innario opportuno conoscendone il titolo.
+    */
+   private static Innario getInnarioByTitle(String _title) {
+      for (Innario i: innari) {
+         if (i.getTitolo().equals(_title)) return i;
+      }
+      return null;
+   }
 
    /*
     * Questo metodo popola l'array globale degli innari;

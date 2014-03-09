@@ -15,16 +15,24 @@ import android.widget.TableLayout;
  * Compund control to implement a numerical keypad.
  */
 public class NumKeyPadView extends TableLayout {
-   public interface OnNumberConfirmedListener {
-      public void onNumberConfirmed(int number);      //Evento generato in corrispondenza di un numero confermato.
+   public interface OnKeyPressedListener {
+      public void onKeyPressed(int number);      //Evento generato in corrispondenza di un numero confermato.
    }
-   OnNumberConfirmedListener mOnNumberConfirmedListener;
+   OnKeyPressedListener mOnKeyPressedListener;
+   public void setOnKeyPressedListener(OnKeyPressedListener listener) {
+      mOnKeyPressedListener = listener;
+   }
+
+   public static final int KEYPAD_OK = -1;
+   public static final int KEYPAD_CANCEL = -2;
+
 
    DigitCircleButtonView numkeys[] = new DigitCircleButtonView[10];
-   ImageButton okButton, cancelButton;
+   ImageButton okButton, cancelButton;   //ok button is a ghost one, actual event is reased upon timeout or forced confirmation.
    Animation okSprite, cancelSprite;
 
-   String composedNumber = "";
+   int mLastPressed;
+   boolean mAnimationStarted;
 
    public NumKeyPadView(Context context) {
       super(context);
@@ -37,13 +45,12 @@ public class NumKeyPadView extends TableLayout {
    }
 
    //Method for managing composed number when a new digit is composed
-   void newComposedDigit(String digit) {
-      if (composedNumber.length() == 3) composedNumber = "";
-      composedNumber += digit;
+   void raiseKeyPressedEvent(int button) {
+      mLastPressed = button;
+      okButton.clearAnimation();
 
-      if (composedNumber.length() == 3) {
-         okButton.startAnimation(okSprite);
-      }
+      if (mOnKeyPressedListener != null)
+         mOnKeyPressedListener.onKeyPressed(button);
    }
 
    //Centralized init method called by the constructors.
@@ -61,21 +68,23 @@ public class NumKeyPadView extends TableLayout {
          numkeys[8] = (DigitCircleButtonView) findViewById(R.id.keypad_num8);
          numkeys[9] = (DigitCircleButtonView) findViewById(R.id.keypad_num9);
          numkeys[0] = (DigitCircleButtonView) findViewById(R.id.keypad_num0);
+
          okButton = (ImageButton) findViewById(R.id.keypad_ok);
          cancelButton = (ImageButton) findViewById(R.id.keypad_cancel);
+
          okSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_ok_sprite);
          cancelSprite = AnimationUtils.loadAnimation(context, R.anim.keypad_cancel_sprite);
 
          okSprite.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {}
+            public void onAnimationStart(Animation animation) { mAnimationStarted = true; }
             @Override
             public void onAnimationRepeat(Animation animation) {}
 
             @Override
             public void onAnimationEnd(Animation animation) {
-               if (mOnNumberConfirmedListener != null)
-                  mOnNumberConfirmedListener.onNumberConfirmed(Integer.parseInt(composedNumber));
+               mAnimationStarted = false;
+               if (mLastPressed == KEYPAD_OK) raiseKeyPressedEvent(KEYPAD_OK);
             }
          });
 
@@ -85,36 +94,44 @@ public class NumKeyPadView extends TableLayout {
          //Number keys events
          numkeys[1].setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-               newComposedDigit("1");
+               raiseKeyPressedEvent(1);
             }
          });
-         numkeys[2].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("2");}});
-         numkeys[3].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("3");}});
-         numkeys[4].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("4");}});
-         numkeys[5].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("5");}});
-         numkeys[6].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("6");}});
-         numkeys[7].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("7");}});
-         numkeys[8].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {newComposedDigit("8");}});
+         numkeys[2].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {
+            raiseKeyPressedEvent(2);}});
+         numkeys[3].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {
+            raiseKeyPressedEvent(3);}});
+         numkeys[4].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {
+            raiseKeyPressedEvent(4);}});
+         numkeys[5].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {
+            raiseKeyPressedEvent(5);}});
+         numkeys[6].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {
+            raiseKeyPressedEvent(6);}});
+         numkeys[7].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {
+            raiseKeyPressedEvent(7);}});
+         numkeys[8].setOnClickListener(new Button.OnClickListener() {public void onClick(View v) {
+            raiseKeyPressedEvent(8);}});
          numkeys[9].setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-               newComposedDigit("9");
+               raiseKeyPressedEvent(9);
             }
          });
          numkeys[0].setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-               newComposedDigit("0");
+               raiseKeyPressedEvent(0);
             }
          });
 
          cancelButton.setOnClickListener(new ImageButton.OnClickListener() {
             public void onClick(View v) {
                cancelButton.startAnimation(cancelSprite);
+               raiseKeyPressedEvent(KEYPAD_CANCEL);
             }
          });
 
          okButton.setOnClickListener(new ImageButton.OnClickListener() {
             public void onClick(View v) {
-               okButton.clearAnimation();
+               if (mAnimationStarted) okButton.clearAnimation();
             }
          });
 
@@ -123,12 +140,22 @@ public class NumKeyPadView extends TableLayout {
          //TODO: with hints of available hymns for the composed number.
 
          ///////addView(<view to add>, new LinearLayout.LayoutParams( , ));
+         mLastPressed = KEYPAD_CANCEL;
+         mAnimationStarted = false;
       }
 
    }
 
-   public void setOnNumberConfirmedListener(OnNumberConfirmedListener listener) {
-      mOnNumberConfirmedListener = listener;
+   //When the container checks that a proper hymn number has been reached, it may call this method to start the timeout
+   public void startOkButtonTimeout() {
+      mLastPressed = KEYPAD_OK;
+      okButton.startAnimation(okSprite);
    }
 
+   /*
+   A list of 10 booleans (one for each digit); when TRUE, the corresponding digit is disable in the keypad.
+    */
+   public void setObscureList(boolean[] _list) {
+
+   }
 }

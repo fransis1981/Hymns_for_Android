@@ -9,17 +9,27 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class MainScreenPagerAdapter extends FragmentPagerAdapter {
    //Preallocating main fragments, each having its own layout and features
-   Fragment _fragment_keypad;
-   Fragment _fragment_hymnslist;
-   Fragment _fragment_recent;
-   Fragment _fragment_starred;
+   Fragment_Keypad _fragment_keypad;
+   Fragment_HymnsList _fragment_hymnslist;
+   Fragment_RecentsList _fragment_recent;
+   Fragment_StarredList _fragment_starred;
 
    public MainScreenPagerAdapter(FragmentManager fm) {
       super(fm);
       _fragment_keypad = new Fragment_Keypad();
-      _fragment_hymnslist = new Fragment_HymnsList();
-      _fragment_recent = new Fragment_RecentsList();
-      _fragment_starred = new Fragment_StarredList();
+      //_fragment_hymnslist = new Fragment_HymnsList();
+      //_fragment_recent = new Fragment_RecentsList();
+      //_fragment_starred = new Fragment_StarredList();
+
+      HymnsApplication.setOnCurrentInnarioChangedListener(new HymnsApplication.OnCurrentInnarioChangedListener() {
+         @Override
+         public void onCurrentInnarioChanged() {
+            _fragment_keypad.resetOnCurrentInnario();
+            _fragment_hymnslist.resetOnCurrentInnario();
+            _fragment_recent.resetOnCurrentInnario();
+            _fragment_starred.resetOnCurrentInnario();
+         }
+      });
    }
 
    @Override
@@ -46,10 +56,10 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
    @Override
    public Fragment getItem(int i) {
       switch (i) {
-         case 0: return _fragment_keypad;
-         case 1: return _fragment_hymnslist;
-         case 2: return _fragment_recent;
-         case 3: return _fragment_starred;
+         case 0: return (_fragment_keypad == null)?_fragment_keypad = new Fragment_Keypad():_fragment_keypad;
+         case 1: return (_fragment_hymnslist == null)?_fragment_hymnslist = new Fragment_HymnsList():_fragment_hymnslist;
+         case 2: return (_fragment_recent == null)?_fragment_recent = new Fragment_RecentsList():_fragment_recent;
+         case 3: return (_fragment_starred == null)?_fragment_starred = new Fragment_StarredList():_fragment_starred;
          default: return null;
       }
    }
