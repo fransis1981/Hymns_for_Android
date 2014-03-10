@@ -3,8 +3,15 @@
     <style name="HymnTitle_style">
         <item name="android:textSize">26sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">#ff0070da</item>
+        <item name="android:textColor">#ffdada0a</item>
     </style>
+    <style name="HymnTitleNumber_style">
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffc7c7c7</item>
+    </style>
+
     <style name="strofaLabel_Style">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#ffefe300</item>
@@ -17,7 +24,7 @@
         <item name="android:textColor">#ffefeac9</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">2dp</item>
-        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">3dp</item>
         <item name="android:gravity">top</item>
     </style>
@@ -29,7 +36,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:typeface">monospace</item>
         <item name="android:background">@drawable/composed_number_box_bg</item>
-        <item name="android:padding">3dp</item>
-        <item name="android:layout_margin">3dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_margin">0dp</item>
     </style>
 </resources>

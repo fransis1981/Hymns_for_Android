@@ -3,6 +3,7 @@
     <color name="circleButton_outerLine">#ff23ffa1</color>
     <color name="circleButton_bgPressed">#fff4f2f3</color>
     <color name="testo_strofe_color">#ff000d7c</color>
+    <color name="strofe_gold_decor">#ffd9aa52</color>
 
     <color name="keypad_soft_bg">#1043fea7</color>
     <color name="keypad_outline_color">#907793fe</color>

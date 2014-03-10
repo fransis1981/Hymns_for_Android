@@ -24,7 +24,7 @@ public class Fragment_Keypad extends Fragment {
       View rootView = inflater.inflate(R.layout.mainscreen_fragment_keypad, container, false);
       singleHymn_intent = new  Intent("com.fransis1981.action.SINGLEHYMNSHOW");
 
-      //Getting and keeping to the text view showing the composed number
+      //Getting and keeping the text view showing the composed number
       txtComposedNumber = (TextView) rootView.findViewById(R.id.txt_composed_number);
       txtComposedNumber.setText("");
 
@@ -45,6 +45,7 @@ public class Fragment_Keypad extends Fragment {
                   break;
 
                case NumKeyPadView.KEYPAD_CANCEL:
+                  if (curr.length() == 0) break;
                   txtComposedNumber.setText(curr.subSequence(0, curr.length() - 1));
                   keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getParentDialerList()).getObscureList());
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();

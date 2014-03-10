@@ -2,7 +2,9 @@ package com.fransis1981.Android_Hymns;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
@@ -18,16 +20,26 @@ public class SingleHymn_Activity extends ListActivity {
 
       Bundle extras = getIntent().getExtras();
       int hymnNumber = extras.getInt(NUMERO_INNO_BUNDLEARG);
-      Inno hymnToDisplay =  HymnsApplication.getCurrentInnario().getInno(hymnNumber);
+      final Inno hymnToDisplay =  HymnsApplication.getCurrentInnario().getInno(hymnNumber);
 
-      //TODO: implementare la logica dell'innario attivo.
-      //TODO: implementare la gestione di un numero inno inesistente.
+      //Treating hymn number
+      TextView txt_number = (TextView) findViewById(R.id.singleHymn_number);
+      txt_number.setText(String.valueOf(hymnNumber) + ".");
 
+      //Treating hymn title
       TextView title = (TextView) findViewById(R.id.hymn_title);
       title.setTypeface(HymnsApplication.fontTitolo1);
       title.setText(hymnToDisplay.getTitolo());
 
-      //TODO: aggiungere nel titolo dell'activity la casella con il numero e la stella per il preferito.
+      //Treating star check box
+      final CheckBox chk_starred = (CheckBox) findViewById(R.id.singleHymn_starcheck);
+      chk_starred.setChecked(hymnToDisplay.isStarred());
+      chk_starred.setOnClickListener(new CheckBox.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            hymnToDisplay.setStarred(chk_starred.isChecked());
+         }
+      });
 
       setListAdapter(new StrofeAdapter(this, hymnToDisplay.getListStrofe()));
    }

@@ -38,14 +38,5 @@
         </LinearLayout>
     </TabHost>
 
-    <FrameLayout
-            android:layout_width="100dp"
-            android:layout_height="fill_parent" android:layout_gravity="right">
-        <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/imgvw_spinner" android:layout_gravity="right|center_vertical"
-                android:src="@drawable/spinner"/>
-    </FrameLayout>
 </LinearLayout>
 

@@ -45,7 +45,7 @@ public class Inno {
       public int compare(Inno lhs, Inno rhs) {
          return ((Integer) lhs.numero).compareTo((Integer) rhs.numero);
       }
-   };
+   }
 
    private Innario parentInnario;
    private int numero;
@@ -54,6 +54,7 @@ public class Inno {
    private int numCori;                    //Numero di strofe definite come cori
    private Categoria categoria;
    private ArrayList<Strofa> strofe_cori;      //Lista ordinata delle strofe e dei cori
+   private boolean mStarred;
 
    public String getTitolo() {
       return titolo;
@@ -90,4 +91,20 @@ public class Inno {
    public ArrayList<Strofa> getListStrofe() {
       return strofe_cori;
    }
+
+   public Inno setStarred(boolean starred) {
+      if (mStarred != starred) {
+         if (starred) {
+            HymnsApplication.getStarManager().addStarred(this);
+         }
+         else {
+            HymnsApplication.getStarManager().removeStarred(this);
+         }
+         mStarred = starred;
+      }
+      return this;                //Implementing chaining
+   }
+
+   public boolean isStarred() { return mStarred; }
+
 }

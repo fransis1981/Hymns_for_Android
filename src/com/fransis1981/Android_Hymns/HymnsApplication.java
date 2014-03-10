@@ -38,6 +38,8 @@ public class HymnsApplication extends Application {
    }
 
 
+   private static StarManager starManager;
+
    private static int currentSpinnerLevel = 0;
    private static ImageView availableSpinner;
 
@@ -70,6 +72,8 @@ public class HymnsApplication extends Application {
        caricaInnari(false);
 
        currentInnario = innari.get(0);
+
+       starManager = new StarManager();
     }
 
    public static Innario getCurrentInnario() {
@@ -120,4 +124,6 @@ public class HymnsApplication extends Application {
          e.printStackTrace();
       }
    }
+
+   public static StarManager getStarManager() { return starManager; }
 }

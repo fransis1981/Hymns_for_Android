@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TabHost;
 
 
@@ -64,11 +63,6 @@ public class MyActivity extends FragmentActivity
            mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
            mViewPager.setAdapter(mPagerAdapter);
            mViewPager.setOnPageChangeListener(this);
-
-           ImageView spinner1 = (ImageView) findViewById(R.id.imgvw_spinner);
-           HymnsApplication.setAvailableSpinner(spinner1);
-           HymnsApplication.setSpinnerLevel(2500);
-
 
         } catch (Exception e) {
             Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW...." + e.getMessage());
