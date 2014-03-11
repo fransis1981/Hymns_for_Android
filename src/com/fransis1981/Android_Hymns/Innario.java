@@ -12,6 +12,46 @@ public class Innario {
    private SparseArray<Inno> inni;
    private DialerList mDialerList;
 
+   private void init() {
+      mDialerList = new DialerList();
+      inni = new SparseArray<Inno>(numeroInni);
+   }
+
+   //This constructor initializes the Innarioo with the XML tag elemnt extracted from the XML hymns definition
+   public Innario(Element _tagInnario) throws Exception {
+      init();
+
+      if (!(_tagInnario.tagName().equals(MyConstants.TAG_INNARIO_STR))) {
+         throw new Exception("Costruttore Innario invocato su un tag di tipo non valido. [" + _tagInnario.tagName() + "]");
+      }
+
+      titolo = _tagInnario.attr(MyConstants.INNARIO_TITOLO_ATTR);
+      numeroInni = Integer.parseInt(_tagInnario.attr(MyConstants.INNARIO_NUM_INNI_ATTR));
+
+      for (Element inno: _tagInnario.children()) {
+         Inno iii = new Inno(inno, this);
+         inni.append(iii.getNumero(), iii);
+         mDialerList.addAvailableNumber(iii.getNumero());
+      }
+
+   }
+
+   //This constructor prepares an empty innario (populate using addInno() method).
+   public Innario() {
+      init();
+   }
+
+   /*
+    * This chainable method allows to add an already existing inno object to a given innario.
+    * That inno (being already created) has the parent pointer correctly populated with its actual container.
+    * This method is useful for building category innario preserving proper inno/innario relationship.
+    */
+   public Innario addInno(Inno _inno) {
+      inni.append(_inno.getNumero(), _inno);
+      mDialerList.addAvailableNumber(_inno.getNumero());
+      return this;
+   }
+
    public String getTitolo() {
       return titolo;
    }
@@ -22,26 +62,6 @@ public class Innario {
 
    public int getNumeroInni() {
       return numeroInni;
-   }
-
-   //This constructor initializes the Innarioo with the XML tag elemnt extracted from the XML hymns definition
-   public Innario(Element _tagInnario) throws Exception {
-      mDialerList = new DialerList();
-
-      if (!(_tagInnario.tagName().equals(MyConstants.TAG_INNARIO_STR))) {
-         throw new Exception("Costruttore Innario invocato su un tag di tipo non valido. [" + _tagInnario.tagName() + "]");
-      }
-
-      titolo = _tagInnario.attr(MyConstants.INNARIO_TITOLO_ATTR);
-      numeroInni = Integer.parseInt(_tagInnario.attr(MyConstants.INNARIO_NUM_INNI_ATTR));
-
-      inni = new SparseArray<Inno>(numeroInni);
-      for (Element inno: _tagInnario.children()) {
-         Inno iii = new Inno(inno, this);
-         inni.append(Integer.parseInt(inno.attr(MyConstants.INNO_NUMERO_ATTR)), iii);
-         mDialerList.addAvailableNumber(iii.getNumero());
-      }
-
    }
 
    public Inno getInno(int number) {
