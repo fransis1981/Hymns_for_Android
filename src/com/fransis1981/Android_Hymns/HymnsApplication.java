@@ -11,6 +11,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by francesco.vitullo on 27/01/14.
@@ -26,6 +27,7 @@ public class HymnsApplication extends Application {
    public static Typeface fontContenutoStrofa;
 
    public static ArrayList<Innario> innari;
+   public static HashMap<Inno.Categoria, Innario> categoricalInnari;    //One separate Innario for each category.
    private static Innario currentInnario;
 
    //Definizione evento per gestire il cambiamento di innario corrente
@@ -68,25 +70,39 @@ public class HymnsApplication extends Application {
        //fontContenutoStrofa = Typeface.createFromAsset(assets, "Century_modern_italic2.ttf");
        fontContenutoStrofa = Typeface.createFromAsset(assets, "Caudex_Italic.ttf");
 
+       //Si prepara la struttura per gli innari di categoria
+       categoricalInnari = new HashMap<Inno.Categoria, Innario>();
+
+       //Qui si caricano gli innari veri e propri (da SD oppure file XML)
        innari = new ArrayList<Innario>();
        caricaInnari(false);
 
-       currentInnario = innari.get(0);
+       //Si imposta l'innario corrente al primo innario disponibile
+       setCurrentInnario(innari.get(0));
 
+       //Si crea il gestore dei preferiti (starred)
        starManager = new StarManager();
     }
+
+   public static void setCurrentInnario(Innario _innario) {
+      if (currentInnario == _innario) return;
+      currentInnario = _innario;
+      if (mOnCurrentInnarioChangedListener != null)
+         mOnCurrentInnarioChangedListener.onCurrentInnarioChanged();
+   }
+   public static void setCurrentInnario(String _titolo) {
+      setCurrentInnario(getInnarioByTitle(_titolo));
+   }
+   public static void setCurrentInnario(Inno.Categoria _categoria) {
+      if (_categoria == Inno.Categoria.NESSUNA) setCurrentInnario(innari.get(0));
+      else setCurrentInnario(categoricalInnari.get(_categoria));
+   }
 
    public static Innario getCurrentInnario() {
       return currentInnario;
    }
 
-   public static void setCurrentInnario(String _titolo) {
-      if (currentInnario.getTitolo().equals(_titolo)) return;
-      currentInnario = getInnarioByTitle(_titolo);
-      mOnCurrentInnarioChangedListener.onCurrentInnarioChanged();
-   }
-
-    @Override
+   @Override
     public void onTerminate() {
         super.onTerminate();
     }
@@ -124,6 +140,26 @@ public class HymnsApplication extends Application {
          e.printStackTrace();
       }
    }
+
+   /*
+    * This is a convenience method to get an ArrayList of titles for use with spinner's adapter.
+    */
+   public static ArrayList<String> getInnariTitles() {
+      ArrayList<String> ret = new ArrayList<String>();
+      for (Innario i: innari)
+         ret.add(i.toString());
+      return ret;
+   }
+
+   /*
+    * This method adds a hymn in the proper categorized Innario.
+    */
+   public static void addCategoricalInno(Inno _inno) {
+      if (!categoricalInnari.containsKey(_inno.getCategoria()))
+         categoricalInnari.put(_inno.getCategoria(), new Innario());
+      categoricalInnari.get(_inno.getCategoria()).addInno(_inno);
+   }
+
 
    public static StarManager getStarManager() { return starManager; }
 }

@@ -1,7 +1,5 @@
 package com.fransis1981.Android_Hymns;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -33,12 +31,12 @@ public class StarManager {
    //Already passing in the pointer to the starred hymn.
    public void addStarred(Inno inno) {
       mStarredList.add(inno);
-      Log.i(MyConstants.LogTag_STR, "Added new starred hymn ... " + inno.getNumero());
+      //Log.i(MyConstants.LogTag_STR, "Added new starred hymn ... " + inno.getNumero());
    }
 
    public void removeStarred(Inno inno) {
       mStarredList.remove(inno);
-      Log.i(MyConstants.LogTag_STR, "!!Removed previously starred hymn ... " + inno.getNumero());
+      //Log.i(MyConstants.LogTag_STR, "!!Removed previously starred hymn ... " + inno.getNumero());
    }
 
    public ArrayList<Inno> getStarredList() { return mStarredList; }

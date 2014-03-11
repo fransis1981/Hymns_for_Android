@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TabHost;
 
 
@@ -40,6 +42,8 @@ public class MyActivity extends FragmentActivity
    ViewPager mViewPager;
    TabHost mTabHost;
 
+   Spinner mSpinnerInnari, mSpinnerCategoria;
+
 
     /** Called when the activity is first created.  */
     @Override
@@ -48,6 +52,13 @@ public class MyActivity extends FragmentActivity
 
         try {
            setContentView(R.layout.main);
+
+           //Treating spinner innari
+           mSpinnerInnari = (Spinner) findViewById(R.id.spinner_innari);
+           ArrayAdapter<String> spin_innariAdapter =
+                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, HymnsApplication.getInnariTitles());
+           spin_innariAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+           mSpinnerInnari.setAdapter(spin_innariAdapter);
 
            //Treating tabs
            mTabHost = (TabHost) findViewById(android.R.id.tabhost);

@@ -32,6 +32,11 @@ public class Innario {
          Inno iii = new Inno(inno, this);
          inni.append(iii.getNumero(), iii);
          mDialerList.addAvailableNumber(iii.getNumero());
+
+         //Se l'inno appartiene ad una categoria, lo si sistema nell'opportuna struttura dati
+         if (iii.getCategoria() != Inno.Categoria.NESSUNA) {
+            HymnsApplication.addCategoricalInno(iii);
+         }
       }
 
    }

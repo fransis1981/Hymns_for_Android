@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Inni e Salmi Spirituali</string>
     <string name="coro_label">CORO</string>
+    <string name="label_innari">Innari:</string>
+    <string name="label_categoria">Categoria:</string>
 </resources>
