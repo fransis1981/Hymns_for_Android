@@ -38,6 +38,12 @@ public class Inno {
             default: return NESSUNA;
          }
       }
+      public static ArrayList<String> getCategoriesStringList() {
+         ArrayList<String> ret = new ArrayList<String>();
+         for (Categoria val: values())
+            ret.add(val.toString());
+         return ret;
+      }
    }
 
    public static class InnoComparator implements Comparator<Inno> {

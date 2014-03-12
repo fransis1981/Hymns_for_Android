@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -55,10 +56,28 @@ public class MyActivity extends FragmentActivity
 
            //Treating spinner innari
            mSpinnerInnari = (Spinner) findViewById(R.id.spinner_innari);
-           ArrayAdapter<String> spin_innariAdapter =
+           final ArrayAdapter<String> spin_innariAdapter =
                  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, HymnsApplication.getInnariTitles());
            spin_innariAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
            mSpinnerInnari.setAdapter(spin_innariAdapter);
+           mSpinnerInnari.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 HymnsApplication.setCurrentInnario((String) parent.getItemAtPosition(position));
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> parent) {
+
+              }
+           });
+
+           //Treating spinner categoria
+           mSpinnerCategoria = (Spinner) findViewById(R.id.spinner_categoria);
+           final ArrayAdapter<String> spin_catAdapter =
+                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Inno.Categoria.getCategoriesStringList());
+           spin_catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+           mSpinnerCategoria.setAdapter(spin_catAdapter);
 
            //Treating tabs
            mTabHost = (TabHost) findViewById(android.R.id.tabhost);
