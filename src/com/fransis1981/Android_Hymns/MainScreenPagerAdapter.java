@@ -24,10 +24,10 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
       HymnsApplication.setOnCurrentInnarioChangedListener(new HymnsApplication.OnCurrentInnarioChangedListener() {
          @Override
          public void onCurrentInnarioChanged() {
-            _fragment_keypad.resetOnCurrentInnario();
-            _fragment_hymnslist.resetOnCurrentInnario();
-            _fragment_recent.resetOnCurrentInnario();
-            _fragment_starred.resetOnCurrentInnario();
+            if (_fragment_keypad != null) _fragment_keypad.resetOnCurrentInnario();
+            if (_fragment_hymnslist != null) _fragment_hymnslist.resetOnCurrentInnario();
+            if (_fragment_recent != null) _fragment_recent.resetOnCurrentInnario();
+            if (_fragment_starred != null) _fragment_starred.resetOnCurrentInnario();
          }
       });
    }

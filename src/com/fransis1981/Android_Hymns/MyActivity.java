@@ -9,10 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TabHost;
+import android.widget.*;
 
 
 public class MyActivity extends FragmentActivity
@@ -37,8 +34,11 @@ public class MyActivity extends FragmentActivity
 
    //Using symbolic constants for menu items, as by convention.
    private static final int MENU_PREFERENCES = Menu.FIRST;
+
+   //Constants for bundle arguments
    private static final String TAB_BUNDLESTATE = "SelectedTab";
 
+   Context _context;
    MainScreenPagerAdapter mPagerAdapter;
    ViewPager mViewPager;
    TabHost mTabHost;
@@ -53,31 +53,65 @@ public class MyActivity extends FragmentActivity
 
         try {
            setContentView(R.layout.main);
+           _context = this;
+
+           final TextView lblCategorie = (TextView) findViewById(R.id.lbl_categoria);
+           final TextView lblInnari = (TextView) findViewById(R.id.lbl_innari);
 
            //Treating spinner innari
            mSpinnerInnari = (Spinner) findViewById(R.id.spinner_innari);
            final ArrayAdapter<String> spin_innariAdapter =
-                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, HymnsApplication.getInnariTitles());
+                 new ArrayAdapter<String>(this, R.layout.mainspinners_item, HymnsApplication.getInnariTitles());
            spin_innariAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
            mSpinnerInnari.setAdapter(spin_innariAdapter);
-           mSpinnerInnari.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 HymnsApplication.setCurrentInnario((String) parent.getItemAtPosition(position));
-              }
-
-              @Override
-              public void onNothingSelected(AdapterView<?> parent) {
-
-              }
-           });
 
            //Treating spinner categoria
            mSpinnerCategoria = (Spinner) findViewById(R.id.spinner_categoria);
            final ArrayAdapter<String> spin_catAdapter =
-                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Inno.Categoria.getCategoriesStringList());
+                 new ArrayAdapter<String>(this, R.layout.mainspinners_item, Inno.Categoria.getCategoriesStringList());
            spin_catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
            mSpinnerCategoria.setAdapter(spin_catAdapter);
+
+           //Managing selection events on spinners
+           mSpinnerInnari.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 String selected_str = (String) parent.getItemAtPosition(position);
+                 if (selected_str.length() > 0) {
+                    spin_innariAdapter.remove("");
+                    spin_innariAdapter.notifyDataSetChanged();
+                    mSpinnerCategoria.setSelection(0);
+                    HymnsApplication.setCurrentInnario(selected_str);
+                    lblInnari.setTextAppearance(_context, R.style.spinners_labels_style_inverse);
+                    lblInnari.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.white));
+                    lblCategorie.setTextAppearance(_context, R.style.spinners_labels_style_direct);
+                    lblCategorie.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
+                 }
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> parent) {}
+           });
+
+           mSpinnerCategoria.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 Inno.Categoria cat = Inno.Categoria.parseString((String) mSpinnerCategoria.getItemAtPosition(position));
+                 if (position != 0) {
+                    HymnsApplication.setCurrentInnario(cat);
+                    spin_innariAdapter.insert("", 0);
+                    spin_innariAdapter.notifyDataSetChanged();
+                    mSpinnerInnari.setSelection(0);
+                    lblCategorie.setTextAppearance(_context, R.style.spinners_labels_style_inverse);
+                    lblCategorie.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.white));
+                    lblInnari.setTextAppearance(_context, R.style.spinners_labels_style_direct);
+                    lblInnari.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
+                 }
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> parent) {}
+           });
 
            //Treating tabs
            mTabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -93,6 +127,8 @@ public class MyActivity extends FragmentActivity
            mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
            mViewPager.setAdapter(mPagerAdapter);
            mViewPager.setOnPageChangeListener(this);
+
+           mSpinnerInnari.setSelection(0);
 
         } catch (Exception e) {
             Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW...." + e.getMessage());

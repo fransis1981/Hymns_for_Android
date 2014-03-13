@@ -72,6 +72,8 @@ public class HymnsApplication extends Application {
 
        //Si prepara la struttura per gli innari di categoria
        categoricalInnari = new HashMap<Inno.Categoria, Innario>();
+       for (Inno.Categoria cat: Inno.Categoria.values())
+          categoricalInnari.put(cat, new Innario());
 
        //Qui si caricano gli innari veri e propri (da SD oppure file XML)
        innari = new ArrayList<Innario>();
@@ -143,9 +145,11 @@ public class HymnsApplication extends Application {
 
    /*
     * This is a convenience method to get an ArrayList of titles for use with spinner's adapter.
+    * REMOVED:In first position an empty string is put to allow an empty item in the spinner when no innario is selected.
     */
    public static ArrayList<String> getInnariTitles() {
       ArrayList<String> ret = new ArrayList<String>();
+      //ret.add("");
       for (Innario i: innari)
          ret.add(i.toString());
       return ret;
@@ -155,8 +159,6 @@ public class HymnsApplication extends Application {
     * This method adds a hymn in the proper categorized Innario.
     */
    public static void addCategoricalInno(Inno _inno) {
-      if (!categoricalInnari.containsKey(_inno.getCategoria()))
-         categoricalInnari.put(_inno.getCategoria(), new Innario());
       categoricalInnari.get(_inno.getCategoria()).addInno(_inno);
    }
 

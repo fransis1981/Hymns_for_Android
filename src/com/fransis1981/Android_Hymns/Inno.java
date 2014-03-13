@@ -44,6 +44,12 @@ public class Inno {
             ret.add(val.toString());
          return ret;
       }
+
+      //Cannot simply use valueOf because of the SANTA CENA enum which cointains a white space
+      public static Categoria parseString(String str) {
+         if (str.equals(SANTACENA.toString())) return SANTACENA;
+         return valueOf(str);
+      }
    }
 
    public static class InnoComparator implements Comparator<Inno> {

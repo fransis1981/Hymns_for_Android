@@ -8,33 +8,37 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" >
+              android:layout_height="wrap_content" android:layout_marginBottom="2dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_innari"
-                android:id="@+id/lbl_innari"/>
+                android:id="@+id/lbl_innari"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                style="@style/spinners_labels_style_direct" android:layout_marginRight="2dp"/>
         <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_innari"
-                />
+                style="@style/main_spinners_style"/>
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="horizontal"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content" >
+                  android:layout_height="wrap_content" android:layout_marginBottom="2dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_categoria"
-                android:id="@+id/lbl_categoria"/>
+                android:id="@+id/lbl_categoria"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                style="@style/spinners_labels_style_direct" android:layout_marginRight="2dp"/>
         <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_categoria"
-                />
+                style="@style/main_spinners_style"/>
     </LinearLayout>
 
     <TabHost
