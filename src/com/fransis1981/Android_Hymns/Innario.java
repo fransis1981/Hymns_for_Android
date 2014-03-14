@@ -3,6 +3,8 @@ package com.fransis1981.Android_Hymns;
 import android.util.SparseArray;
 import org.jsoup.nodes.Element;
 
+import java.util.ArrayList;
+
 /**
  * Created by Fransis on 23/02/14 20.07.
  */
@@ -85,5 +87,13 @@ public class Innario {
    @Override
    public String toString() {
       return getTitolo();
+   }
+
+   public ArrayList<Inno> hymnsToArrayList() {
+      int ss = inni.size();
+      ArrayList<Inno> ret = new ArrayList<Inno>(ss);
+      for (int i = 0; i < ss; i++)
+         ret.add(inni.valueAt(i));
+      return ret;
    }
 }

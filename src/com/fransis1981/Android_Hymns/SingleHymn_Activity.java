@@ -2,6 +2,7 @@ package com.fransis1981.Android_Hymns;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
@@ -42,5 +43,7 @@ public class SingleHymn_Activity extends ListActivity {
       });
 
       setListAdapter(new StrofeAdapter(this, hymnToDisplay.getListStrofe()));
+
+      Log.i(MyConstants.LogTag_STR, "Creata istanza di singlehymn Activity!!!!");
    }
 }

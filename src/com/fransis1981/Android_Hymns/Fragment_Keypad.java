@@ -42,6 +42,7 @@ public class Fragment_Keypad extends Fragment {
                   txtComposedNumber.setText(curr + String.valueOf(number));
                   keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getSubDialerList(number)).getObscureList());
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();
+                  else keypad.cancelOkButtonTimeout();
                   break;
 
                case NumKeyPadView.KEYPAD_CANCEL:
@@ -49,14 +50,17 @@ public class Fragment_Keypad extends Fragment {
                   txtComposedNumber.setText(curr.subSequence(0, curr.length() - 1));
                   keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getParentDialerList()).getObscureList());
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();
+                  else keypad.cancelOkButtonTimeout();
                   break;
 
                case NumKeyPadView.KEYPAD_OK:
+                  //Log.i(MyConstants.LogTag_STR, "EVENTO KEYPAD OK!!!!");
                   Bundle newextra = new Bundle();
                   newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
                   singleHymn_intent.replaceExtras(newextra);
                   startActivity(singleHymn_intent);
                   resetComposedNumber();
+                  break;
             }
          }
       });
