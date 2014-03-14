@@ -13,7 +13,7 @@ import android.util.Log;
  */
 public class DialerList {
    DialerList numberPresence[];
-   DialerList mParent;           //This is the object itseld for the root dialer, found in the Innario class definition.
+   DialerList mParent;           //This is the object itself for the root dialer, found in the Innario class definition.
 
    private void init(DialerList _parent) {
       //Upon construction, no digit is reachable (each array element is null).
@@ -24,7 +24,6 @@ public class DialerList {
    public DialerList() {
       init(this);
    }
-
    public DialerList(DialerList _parent) {
       init(_parent);
    }
@@ -56,7 +55,7 @@ public class DialerList {
       return numberPresence[digit];
    }
 
-   //Return an array of 10 booleans (true if that digit should be obscured at this level.
+   //Return an array of 10 booleans (true if that digit should be obscured at this level).
    public boolean[] getObscureList() {
       boolean[] ret = new boolean[10];
       for (int i = 0; i < 10; i++)

@@ -5,18 +5,32 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 /**
  * Created by Fransis on 05/03/14 11.38.
  */
 public class Fragment_RecentsList extends Fragment {
+   private ListView _recentslist;
+   private MRUManager _recentsManager;
+
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View rooView = inflater.inflate(R.layout.mainscreen_fragment_recentslist, container, false);
-      return rooView;
+      View rootView = inflater.inflate(R.layout.mainscreen_fragment_recentslist, container, false);
+      _recentsManager = HymnsApplication.getRecentsManager();
+      _recentslist = (ListView) rootView.findViewById(R.id.list_recent_hymns);
+      _recentslist.setAdapter(new
+            Inni2RowsAdapter(getActivity(), R.layout.mainscreen_fragment_recentslist, _recentsManager.getMRUList()));
+      _recentsManager.setMruStateChangedListener(new MRUManager.MRUStateChangedListener() {
+         @Override
+         public void OnMRUStateChanged() {
+            updateContent();
+         }
+      });
+      return rootView;
    }
 
-   public void resetOnCurrentInnario() {
-
+   public void updateContent() {
+      _recentslist.invalidate();
    }
 }

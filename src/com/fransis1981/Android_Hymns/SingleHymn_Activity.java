@@ -2,7 +2,6 @@ package com.fransis1981.Android_Hymns;
 
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
@@ -13,6 +12,7 @@ import android.widget.TextView;
  */
 public class SingleHymn_Activity extends ListActivity {
    public static final String NUMERO_INNO_BUNDLEARG = "NumeroInno";
+   public static final String INNARIO_BUNDLEARG = "InnarioScelto";
 
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
@@ -21,7 +21,11 @@ public class SingleHymn_Activity extends ListActivity {
 
       Bundle extras = getIntent().getExtras();
       int hymnNumber = extras.getInt(NUMERO_INNO_BUNDLEARG);
-      final Inno hymnToDisplay =  HymnsApplication.getCurrentInnario().getInno(hymnNumber);
+      String innarioTitle = extras.getString(INNARIO_BUNDLEARG);
+      final Inno hymnToDisplay =  HymnsApplication.getInnarioByTitle(innarioTitle).getInno(hymnNumber);
+
+      //Adding selected hymn to recents list.
+      HymnsApplication.getRecentsManager().pushHymn(hymnToDisplay);
 
       //Treating hymn number
       TextView txt_number = (TextView) findViewById(R.id.singleHymn_number);
@@ -44,6 +48,6 @@ public class SingleHymn_Activity extends ListActivity {
 
       setListAdapter(new StrofeAdapter(this, hymnToDisplay.getListStrofe()));
 
-      Log.i(MyConstants.LogTag_STR, "Creata istanza di singlehymn Activity!!!!");
+      //Log.i(MyConstants.LogTag_STR, "Creata istanza di singlehymn Activity!!!!");
    }
 }

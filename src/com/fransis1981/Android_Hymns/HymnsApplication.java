@@ -40,6 +40,7 @@ public class HymnsApplication extends Application {
    }
 
 
+   private static MRUManager recentsManager;
    private static StarManager starManager;
 
    private static int currentSpinnerLevel = 0;
@@ -82,9 +83,17 @@ public class HymnsApplication extends Application {
        //Si imposta l'innario corrente al primo innario disponibile
        setCurrentInnario(innari.get(0));
 
+       //Si crea il gestore dai cantici recenti
+       recentsManager = new MRUManager();
+
        //Si crea il gestore dei preferiti (starred)
        starManager = new StarManager();
     }
+
+   @Override
+   public void onTerminate() {
+      super.onTerminate();
+   }
 
    public static void setCurrentInnario(Innario _innario) {
       if (currentInnario == _innario) return;
@@ -104,15 +113,10 @@ public class HymnsApplication extends Application {
       return currentInnario;
    }
 
-   @Override
-    public void onTerminate() {
-        super.onTerminate();
-    }
-
    /*
     * Questo metodo restituisce l'oggetto Innario opportuno conoscendone il titolo.
     */
-   private static Innario getInnarioByTitle(String _title) {
+   public static Innario getInnarioByTitle(String _title) {
       for (Innario i: innari) {
          if (i.getTitolo().equals(_title)) return i;
       }
@@ -164,4 +168,5 @@ public class HymnsApplication extends Application {
 
 
    public static StarManager getStarManager() { return starManager; }
+   public static MRUManager getRecentsManager() { return recentsManager; }
 }
