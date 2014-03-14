@@ -1,17 +1,30 @@
 package com.fransis1981.Android_Hymns;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Fransis on 10/03/14 15.12.
  * Class to keep track of starred hymns.
  */
 public class StarManager {
+   public interface StarredItemsChangedListener {
+      public void OnStarredItemsChanged();
+   }
+   private StarredItemsChangedListener starredItemsChangedListener;
 
    private ArrayList<Inno> mStarredList;
 
    public StarManager() {
       mStarredList = new ArrayList<Inno>();
+   }
+
+   public void setStarredItemsChangedListener(StarredItemsChangedListener listener) {
+      starredItemsChangedListener = listener;
+   }
+   private void raiseStarredItemsChangedEvent() {
+      if (starredItemsChangedListener != null)
+         starredItemsChangedListener.OnStarredItemsChanged();
    }
 
 /*
@@ -31,11 +44,14 @@ public class StarManager {
    //Already passing in the pointer to the starred hymn.
    public void addStarred(Inno inno) {
       mStarredList.add(inno);
+      Collections.sort(mStarredList, new Inno.InnoComparator());
+      raiseStarredItemsChangedEvent();
       //Log.i(MyConstants.LogTag_STR, "Added new starred hymn ... " + inno.getNumero());
    }
 
    public void removeStarred(Inno inno) {
       mStarredList.remove(inno);
+      raiseStarredItemsChangedEvent();
       //Log.i(MyConstants.LogTag_STR, "!!Removed previously starred hymn ... " + inno.getNumero());
    }
 

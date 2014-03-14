@@ -12,12 +12,11 @@ import android.widget.ListView;
  */
 public class Fragment_RecentsList extends Fragment {
    private ListView _recentslist;
-   private MRUManager _recentsManager;
 
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.mainscreen_fragment_recentslist, container, false);
-      _recentsManager = HymnsApplication.getRecentsManager();
+      MRUManager _recentsManager = HymnsApplication.getRecentsManager();
       _recentslist = (ListView) rootView.findViewById(R.id.list_recent_hymns);
       _recentslist.setAdapter(new
             Inni2RowsAdapter(getActivity(), R.layout.mainscreen_fragment_recentslist, _recentsManager.getMRUList()));
