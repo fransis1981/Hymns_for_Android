@@ -14,6 +14,7 @@ public class MRUManager {
    private MRUStateChangedListener mruStateChangedListener;
 
    private LinkedList<Inno> fifo;
+   ArrayList<Inno> fifo_arrlist;
    private int capacity;
 
    public MRUManager() {
@@ -23,6 +24,7 @@ public class MRUManager {
 
    public void setMruStateChangedListener(MRUStateChangedListener listener) {
       mruStateChangedListener = listener;
+      fifo_arrlist = new ArrayList<Inno>();
    }
    private void raiseMruStateChangedEvent() {
       if (mruStateChangedListener != null)
@@ -39,20 +41,27 @@ public class MRUManager {
       else if (fifo.size() == capacity)
          fifo.removeLast();
       fifo.addFirst(inno);
+      cacheArrayList();
       raiseMruStateChangedEvent();
+      //Log.i(MyConstants.LogTag_STR, "Pushed hymn " + inno.getNumero() + " into recents lsit.");
    }
 
    //Drops all MRU content.
    public void clearMRU() {
       fifo.clear();
+      fifo_arrlist.clear();
       raiseMruStateChangedEvent();
+   }
+
+
+   private void cacheArrayList() {
+      fifo_arrlist.clear();
+      for (int i = 0; i < fifo.size(); i++)
+         fifo_arrlist.add(fifo.get(i));
    }
 
    //Convenience method for usage with List Adapters.
    public ArrayList<Inno> getMRUList() {
-      ArrayList<Inno> ret = new ArrayList<Inno>();
-      for (int i = 0; i < fifo.size(); i++)
-         ret.add(fifo.get(i));
-      return ret;
+      return fifo_arrlist;
    }
 }

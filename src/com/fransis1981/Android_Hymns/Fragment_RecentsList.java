@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 /**
@@ -20,10 +23,29 @@ public class Fragment_RecentsList extends Fragment {
       _recentslist = (ListView) rootView.findViewById(R.id.list_recent_hymns);
       _recentslist.setAdapter(new
             Inni2RowsAdapter(getActivity(), R.layout.mainscreen_fragment_recentslist, _recentsManager.getMRUList()));
+      _recentslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+         @Override
+         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Inno clicked_inno = (Inno) parent.getAdapter().getItem(position);
+            SingleHymn_Activity.startIntentWithHymn(getActivity(), clicked_inno);
+         }
+      });
+
+      //Treating button for clearing history
+      Button btn_clear = (Button) rootView.findViewById(R.id.btn_clear_history);
+      btn_clear.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            HymnsApplication.getRecentsManager().clearMRU();
+            updateContent();
+         }
+      });
+
       return rootView;
    }
 
    public void updateContent() {
+      ((ArrayAdapter<Inno>) _recentslist.getAdapter()).notifyDataSetChanged();
       _recentslist.invalidate();
    }
 }

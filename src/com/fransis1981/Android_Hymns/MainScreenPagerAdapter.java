@@ -3,6 +3,7 @@ package com.fransis1981.Android_Hymns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 /**
  * Created by Fransis on 05/03/14 11.56.
@@ -30,11 +31,12 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
          }
       });
 
-      MRUManager _recentsManager = HymnsApplication.getRecentsManager();
+      final MRUManager _recentsManager = HymnsApplication.getRecentsManager();
       _recentsManager.setMruStateChangedListener(new MRUManager.MRUStateChangedListener() {
          @Override
          public void OnMRUStateChanged() {
             if (_fragment_recent != null) _fragment_recent.updateContent();
+            Log.i(MyConstants.LogTag_STR, "Forcing update of recents fragment; MRU queue is: " + _recentsManager.getMRUList().size());
          }
       });
 
@@ -44,6 +46,7 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
          public void OnStarredItemsChanged() {
             // if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
             // if (_fragment_recent != null) _fragment_recent.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
+
             // if (_fragment_starred != null) _fragment_starred.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
          }
       });

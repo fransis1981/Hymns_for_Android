@@ -1,6 +1,7 @@
 package com.fransis1981.Android_Hymns;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -57,5 +58,13 @@ public class SingleHymn_Activity extends ListActivity {
 
    static void setupIntent() {
       if (single_hymn_intent == null) single_hymn_intent = new Intent("com.fransis1981.action.SINGLEHYMNSHOW");
+   }
+
+   static void startIntentWithHymn(Context context, Inno hymn) {
+      Bundle newextra = new Bundle();
+      newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, hymn.getNumero());
+      newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG, hymn.getParentInnario().getTitolo());
+      SingleHymn_Activity.single_hymn_intent.replaceExtras(newextra);
+      context.startActivity(SingleHymn_Activity.single_hymn_intent);
    }
 }

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
@@ -20,8 +21,18 @@ public class Fragment_StarredList extends Fragment {
       _starredlist = (ListView) rootView.findViewById(R.id.list_starred_hymns);
       _starredlist.setAdapter(new
             Inni2RowsAdapter(getActivity(), R.layout.mainscreen_fragment_starredlist, _starManager.getStarredList()));
+      _starredlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+         @Override
+         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Inno clicked_inno = (Inno) parent.getAdapter().getItem(position);
+            SingleHymn_Activity.startIntentWithHymn(getActivity(), clicked_inno);
+         }
+      });
+
       return rootView;
    }
+
+
 
    public void updateContent() {
       _starredlist.invalidate();

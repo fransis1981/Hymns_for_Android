@@ -31,7 +31,7 @@ public class Inni2RowsAdapter extends ArrayAdapter<Inno> {
    }
 
    @Override
-   public View getView(int position, View convertView, ViewGroup parent) {
+   public View getView(final int position, View convertView, ViewGroup parent) {
       ViewHolder vh;
       View innoTemplate;
 
@@ -51,6 +51,15 @@ public class Inni2RowsAdapter extends ArrayAdapter<Inno> {
          vh.chk_starred = (CheckBox) innoTemplate.findViewById(R.id.item_Hymn_starcheck);
          innoTemplate.setTag(vh);
       }
+
+      //CANNOT RECYCLE THE EVENT LISTENER-> I GET A MISMATCH BETWEEN THE CLICK AND THE ACTUAL LOCATION
+      vh.chk_starred.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            _inni.get(position).setStarred(((CheckBox) v).isChecked());
+            notifyDataSetChanged();
+         }
+      });
 
       //Populating texts and customizing font properties
       Inno ii = _inni.get(position);

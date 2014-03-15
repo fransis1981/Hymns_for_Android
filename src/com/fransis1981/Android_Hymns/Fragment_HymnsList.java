@@ -23,11 +23,7 @@ public class Fragment_HymnsList extends Fragment {
          @Override
          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Inno clicked_inno = (Inno) parent.getAdapter().getItem(position);
-            Bundle newextra = new Bundle();
-            newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, clicked_inno.getNumero());
-            newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG, HymnsApplication.getCurrentInnario().getTitolo());
-            SingleHymn_Activity.single_hymn_intent.replaceExtras(newextra);
-            startActivity(SingleHymn_Activity.single_hymn_intent);
+            SingleHymn_Activity.startIntentWithHymn(getActivity(), clicked_inno);
          }
       });
 
