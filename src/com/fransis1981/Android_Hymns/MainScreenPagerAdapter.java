@@ -34,7 +34,7 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
       _recentsManager.setMruStateChangedListener(new MRUManager.MRUStateChangedListener() {
          @Override
          public void OnMRUStateChanged() {
-            _fragment_recent.updateContent();
+            if (_fragment_recent != null) _fragment_recent.updateContent();
          }
       });
 

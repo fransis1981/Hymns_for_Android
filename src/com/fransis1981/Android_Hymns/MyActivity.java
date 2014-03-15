@@ -107,6 +107,10 @@ public class MyActivity extends FragmentActivity
                     lblInnari.setTextAppearance(_context, R.style.spinners_labels_style_direct);
                     lblInnari.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
                  }
+                 else {
+                    if (spin_innariAdapter.getItem(0).length() == 0) mSpinnerInnari.setSelection(1);
+                    else mSpinnerInnari.setSelection(0);
+                 }
               }
 
               @Override

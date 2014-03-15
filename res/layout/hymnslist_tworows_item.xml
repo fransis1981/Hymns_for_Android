@@ -31,7 +31,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Titolo Cantico"
-                android:id="@+id/item_hymn_title" style="@style/HymnTitle_item_style"
+                android:id="@+id/item_hymn_title"
+                style="@style/HymnTitle_item_style"
                 />
         <TextView
                 android:layout_width="fill_parent"
@@ -46,7 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/starcheck_selector"
-            android:id="@+id/item_Hymn_starcheck" android:layout_centerVertical="true"
+            android:id="@+id/item_Hymn_starcheck"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="1dp"
             android:paddingLeft="2dp"
