@@ -1,6 +1,5 @@
 package com.fransis1981.Android_Hymns;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import android.widget.TextView;
  * Created by Fransis on 05/03/14 11.05.
  */
 public class Fragment_Keypad extends Fragment {
-   private Intent singleHymn_intent;
+   //private Intent singleHymn_intent;
    private TextView txtComposedNumber;
    private NumKeyPadView keypad;
    private DialerList mCurrentDialerList;
@@ -22,7 +21,6 @@ public class Fragment_Keypad extends Fragment {
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.mainscreen_fragment_keypad, container, false);
-      singleHymn_intent = new  Intent("com.fransis1981.action.SINGLEHYMNSHOW");
 
       //Getting and keeping the text view showing the composed number
       txtComposedNumber = (TextView) rootView.findViewById(R.id.txt_composed_number);
@@ -59,8 +57,8 @@ public class Fragment_Keypad extends Fragment {
                   newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
                   newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG,
                         HymnsApplication.getCurrentInnario().getInno(mLastValidComposedNumber).getParentInnario().getTitolo());
-                  singleHymn_intent.replaceExtras(newextra);
-                  startActivity(singleHymn_intent);
+                  SingleHymn_Activity.single_hymn_intent.replaceExtras(newextra);
+                  startActivity(SingleHymn_Activity.single_hymn_intent);
                   resetComposedNumber();
                   break;
             }

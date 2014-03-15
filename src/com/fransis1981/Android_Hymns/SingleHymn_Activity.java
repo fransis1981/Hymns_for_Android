@@ -1,6 +1,7 @@
 package com.fransis1981.Android_Hymns;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -11,11 +12,14 @@ import android.widget.TextView;
  * Created by Fransis on 27/02/14 15.08.
  */
 public class SingleHymn_Activity extends ListActivity {
+   static Intent single_hymn_intent;
+
    public static final String NUMERO_INNO_BUNDLEARG = "NumeroInno";
    public static final String INNARIO_BUNDLEARG = "InnarioScelto";
 
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+
       requestWindowFeature(Window.FEATURE_NO_TITLE);
       setContentView(R.layout.single_hymn_view);
 
@@ -49,5 +53,9 @@ public class SingleHymn_Activity extends ListActivity {
       setListAdapter(new StrofeAdapter(this, hymnToDisplay.getListStrofe()));
 
       //Log.i(MyConstants.LogTag_STR, "Creata istanza di singlehymn Activity!!!!");
+   }
+
+   static void setupIntent() {
+      if (single_hymn_intent == null) single_hymn_intent = new Intent("com.fransis1981.action.SINGLEHYMNSHOW");
    }
 }

@@ -71,6 +71,9 @@ public class HymnsApplication extends Application {
        //fontContenutoStrofa = Typeface.createFromAsset(assets, "Century_modern_italic2.ttf");
        fontContenutoStrofa = Typeface.createFromAsset(assets, "Caudex_Italic.ttf");
 
+       //Si prepara l'intent per il single hymn (to avoid null pointer exceptinos at first invocation)
+       SingleHymn_Activity.setupIntent();
+
        //Si prepara la struttura per gli innari di categoria
        categoricalInnari = new HashMap<Inno.Categoria, Innario>();
        for (Inno.Categoria cat: Inno.Categoria.values())
