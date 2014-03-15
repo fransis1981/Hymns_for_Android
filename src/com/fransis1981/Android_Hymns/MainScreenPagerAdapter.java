@@ -3,7 +3,6 @@ package com.fransis1981.Android_Hymns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 /**
  * Created by Fransis on 05/03/14 11.56.
@@ -36,7 +35,7 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
          @Override
          public void OnMRUStateChanged() {
             if (_fragment_recent != null) _fragment_recent.updateContent();
-            Log.i(MyConstants.LogTag_STR, "Forcing update of recents fragment; MRU queue is: " + _recentsManager.getMRUList().size());
+            //Log.i(MyConstants.LogTag_STR, "Forcing update of recents fragment; MRU queue is: " + _recentsManager.getMRUList().size());
          }
       });
 
