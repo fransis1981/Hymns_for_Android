@@ -57,7 +57,8 @@ public class Fragment_Keypad extends Fragment {
                   //Log.i(MyConstants.LogTag_STR, "EVENTO KEYPAD OK!!!!");
                   Bundle newextra = new Bundle();
                   newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
-                  newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG, HymnsApplication.getCurrentInnario().getTitolo());
+                  newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG,
+                        HymnsApplication.getCurrentInnario().getInno(mLastValidComposedNumber).getParentInnario().getTitolo());
                   singleHymn_intent.replaceExtras(newextra);
                   startActivity(singleHymn_intent);
                   resetComposedNumber();

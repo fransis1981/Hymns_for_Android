@@ -24,6 +24,10 @@ public class Fragment_HymnsList extends Fragment {
 
    public void resetOnCurrentInnario() {
       _list.setAdapter(new Inni1RowAdapter(getActivity(), HymnsApplication.getCurrentInnario().hymnsToArrayList()));
+      updateContent();
+   }
+
+   public void updateContent() {
       _list.invalidate();
    }
 }

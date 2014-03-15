@@ -20,12 +20,6 @@ public class Fragment_RecentsList extends Fragment {
       _recentslist = (ListView) rootView.findViewById(R.id.list_recent_hymns);
       _recentslist.setAdapter(new
             Inni2RowsAdapter(getActivity(), R.layout.mainscreen_fragment_recentslist, _recentsManager.getMRUList()));
-      _recentsManager.setMruStateChangedListener(new MRUManager.MRUStateChangedListener() {
-         @Override
-         public void OnMRUStateChanged() {
-            updateContent();
-         }
-      });
       return rootView;
    }
 

@@ -1,5 +1,7 @@
 package com.fransis1981.Android_Hymns;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -46,13 +48,13 @@ public class StarManager {
       mStarredList.add(inno);
       Collections.sort(mStarredList, new Inno.InnoComparator());
       raiseStarredItemsChangedEvent();
-      //Log.i(MyConstants.LogTag_STR, "Added new starred hymn ... " + inno.getNumero());
+      Log.i(MyConstants.LogTag_STR, "Added new starred hymn ... " + inno.getNumero());
    }
 
    public void removeStarred(Inno inno) {
       mStarredList.remove(inno);
       raiseStarredItemsChangedEvent();
-      //Log.i(MyConstants.LogTag_STR, "!!Removed previously starred hymn ... " + inno.getNumero());
+      Log.i(MyConstants.LogTag_STR, "!!Removed previously starred hymn ... " + inno.getNumero());
    }
 
    public ArrayList<Inno> getStarredList() { return mStarredList; }

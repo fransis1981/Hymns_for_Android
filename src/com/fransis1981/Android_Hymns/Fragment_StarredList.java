@@ -20,12 +20,6 @@ public class Fragment_StarredList extends Fragment {
       _starredlist = (ListView) rootView.findViewById(R.id.list_starred_hymns);
       _starredlist.setAdapter(new
             Inni2RowsAdapter(getActivity(), R.layout.mainscreen_fragment_starredlist, _starManager.getStarredList()));
-      _starManager.setStarredItemsChangedListener(new StarManager.StarredItemsChangedListener() {
-         @Override
-         public void OnStarredItemsChanged() {
-            updateContent();
-         }
-      });
       return rootView;
    }
 

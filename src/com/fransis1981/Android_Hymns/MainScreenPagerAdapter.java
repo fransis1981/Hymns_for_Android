@@ -21,6 +21,7 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
       //_fragment_recent = new Fragment_RecentsList();
       //_fragment_starred = new Fragment_StarredList();
 
+      //Listening to events for triggering fragment updates.
       HymnsApplication.setOnCurrentInnarioChangedListener(new HymnsApplication.OnCurrentInnarioChangedListener() {
          @Override
          public void onCurrentInnarioChanged() {
@@ -28,6 +29,25 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
             if (_fragment_hymnslist != null) _fragment_hymnslist.resetOnCurrentInnario();
          }
       });
+
+      MRUManager _recentsManager = HymnsApplication.getRecentsManager();
+      _recentsManager.setMruStateChangedListener(new MRUManager.MRUStateChangedListener() {
+         @Override
+         public void OnMRUStateChanged() {
+            _fragment_recent.updateContent();
+         }
+      });
+
+      StarManager _starManager = HymnsApplication.getStarManager();
+      _starManager.setStarredItemsChangedListener(new StarManager.StarredItemsChangedListener() {
+         @Override
+         public void OnStarredItemsChanged() {
+            // if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
+            // if (_fragment_recent != null) _fragment_recent.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
+            // if (_fragment_starred != null) _fragment_starred.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
+         }
+      });
+
    }
 
    @Override
