@@ -1,7 +1,7 @@
 package com.fransis1981.Android_Hymns;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +37,7 @@ public class Fragment_HymnsList extends Fragment {
    }
 
    public void updateContent() {
+      //((ArrayAdapter<Inno>) _list.getAdapter()).notifyDataSetChanged();
       _list.invalidate();
    }
 }

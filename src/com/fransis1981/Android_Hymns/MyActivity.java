@@ -177,11 +177,14 @@ public class MyActivity extends FragmentActivity
    @Override
    public void onPageSelected(int i) {
       mTabHost.setCurrentTab(i);
+      mPagerAdapter.setCurrentFragmentContext(i);
    }
 
    @Override
    public void onTabChanged(String tabId) {
-      mViewPager.setCurrentItem(mTabHost.getCurrentTab(), true);
+      int i = mTabHost.getCurrentTab();
+      mViewPager.setCurrentItem(i, true);
+      mPagerAdapter.setCurrentFragmentContext(i);
    }
 
    @Override

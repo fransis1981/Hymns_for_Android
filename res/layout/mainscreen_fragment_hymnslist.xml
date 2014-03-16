@@ -9,6 +9,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/list_hymns"
-            android:dividerHeight="2dp"/>
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical" />
 
 </LinearLayout>

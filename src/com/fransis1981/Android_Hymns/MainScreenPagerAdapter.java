@@ -8,11 +8,30 @@ import android.support.v4.app.FragmentPagerAdapter;
  * Created by Fransis on 05/03/14 11.56.
  */
 public class MainScreenPagerAdapter extends FragmentPagerAdapter {
+   public static enum FragmentContextEnum {
+      KEYPAD,
+      LIST,
+      RECENTS,
+      STARRED;
+
+      public static FragmentContextEnum parseInt(int i) {
+         switch (i) {
+            case 0: return KEYPAD;
+            case 1: return LIST;
+            case 2: return RECENTS;
+            case 3: return STARRED;
+         }
+         return KEYPAD;
+      }
+   }
+
    //Preallocating main fragments, each having its own layout and features
    Fragment_Keypad _fragment_keypad;
    Fragment_HymnsList _fragment_hymnslist;
    Fragment_RecentsList _fragment_recent;
    Fragment_StarredList _fragment_starred;
+
+   FragmentContextEnum fragmentContext;     //Used to identify currently shown fragment.
 
    public MainScreenPagerAdapter(FragmentManager fm) {
       super(fm);
@@ -43,13 +62,30 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
       _starManager.setStarredItemsChangedListener(new StarManager.StarredItemsChangedListener() {
          @Override
          public void OnStarredItemsChanged() {
-            // if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
-            // if (_fragment_recent != null) _fragment_recent.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
-
-            // if (_fragment_starred != null) _fragment_starred.updateContent(); //THIS STATEMENT KILLS PERFORMANCE
+            switch (fragmentContext) {
+               //TODO: if performance is getting slow, then we may add a flag to trigger update content only when
+               //TODO: a star change is actually made.
+               case LIST:
+                  if (_fragment_recent != null) _fragment_recent.updateContent();
+                  if (_fragment_starred != null) _fragment_starred.updateContent();
+                  break;
+               case RECENTS:
+                  if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
+                  if (_fragment_starred != null) _fragment_starred.updateContent();
+                  break;
+               case STARRED:
+                  if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
+                  if (_fragment_recent != null) _fragment_recent.updateContent();
+                  break;
+            }
          }
       });
 
+   }
+
+
+   public void setCurrentFragmentContext(int i) {
+      fragmentContext = FragmentContextEnum.parseInt(i);
    }
 
    @Override

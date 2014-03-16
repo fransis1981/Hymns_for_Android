@@ -65,7 +65,8 @@ public class HymnsApplication extends Application {
        singleton = this;
        assets = getAssets();
        myResources = getResources();
-       fontTitolo1 = Typeface.createFromAsset(assets , "Century_modern_italic2.ttf");
+       fontTitolo1 = Typeface.createFromAsset(assets , "Caudex_Italic.ttf");
+       //fontTitolo1 = Typeface.createFromAsset(assets , "Century_modern_italic2.ttf");
        //fontTitolo1 = Typeface.createFromAsset(assets , "partridg_TITOLO1.ttf");
        fontLabelStrofa = Typeface.createFromAsset(assets, "WetinCaroWant.ttf");
        //fontContenutoStrofa = Typeface.createFromAsset(assets, "Century_modern_italic2.ttf");
