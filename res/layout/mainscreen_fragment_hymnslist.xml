@@ -5,9 +5,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-            android:layout_width="wrap_content"
+    <ListView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView"/>
+            android:id="@+id/list_hymns"
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical" />
+
 </LinearLayout>

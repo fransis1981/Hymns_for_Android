@@ -38,6 +38,18 @@ public class Inno {
             default: return NESSUNA;
          }
       }
+      public static ArrayList<String> getCategoriesStringList() {
+         ArrayList<String> ret = new ArrayList<String>();
+         for (Categoria val: values())
+            ret.add(val.toString());
+         return ret;
+      }
+
+      //Cannot simply use valueOf because of the SANTA CENA enum which cointains a white space
+      public static Categoria parseString(String str) {
+         if (str.equals(SANTACENA.toString())) return SANTACENA;
+         return valueOf(str);
+      }
    }
 
    public static class InnoComparator implements Comparator<Inno> {
@@ -45,7 +57,7 @@ public class Inno {
       public int compare(Inno lhs, Inno rhs) {
          return ((Integer) lhs.numero).compareTo((Integer) rhs.numero);
       }
-   };
+   }
 
    private Innario parentInnario;
    private int numero;
@@ -54,6 +66,7 @@ public class Inno {
    private int numCori;                    //Numero di strofe definite come cori
    private Categoria categoria;
    private ArrayList<Strofa> strofe_cori;      //Lista ordinata delle strofe e dei cori
+   private boolean mStarred;
 
    public String getTitolo() {
       return titolo;
@@ -90,4 +103,20 @@ public class Inno {
    public ArrayList<Strofa> getListStrofe() {
       return strofe_cori;
    }
+
+   public Inno setStarred(boolean starred) {
+      if (mStarred != starred) {
+         if (starred) {
+            HymnsApplication.getStarManager().addStarred(this);
+         }
+         else {
+            HymnsApplication.getStarManager().removeStarred(this);
+         }
+         mStarred = starred;
+      }
+      return this;                //Implementing chaining
+   }
+
+   public boolean isStarred() { return mStarred; }
+
 }

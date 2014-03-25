@@ -1,6 +1,7 @@
 package com.fransis1981.Android_Hymns;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,8 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TabHost;
+import android.widget.*;
 
 
 public class MyActivity extends FragmentActivity
@@ -35,12 +35,18 @@ public class MyActivity extends FragmentActivity
 
    //Using symbolic constants for menu items, as by convention.
    private static final int MENU_PREFERENCES = Menu.FIRST;
+
+   //Constants for bundle arguments
    private static final String TAB_BUNDLESTATE = "SelectedTab";
 
+   Context _context;
    MainScreenPagerAdapter mPagerAdapter;
    ViewPager mViewPager;
    TabHost mTabHost;
 
+   TextView lblCategorie, lblInnari;
+   Spinner mSpinnerInnari, mSpinnerCategoria;
+   ArrayAdapter<String> spin_innariAdapter, spin_catAdapter;
 
     /** Called when the activity is first created.  */
     @Override
@@ -49,26 +55,11 @@ public class MyActivity extends FragmentActivity
 
         try {
            setContentView(R.layout.main);
+           _context = this;
 
-           //Treating tabs
-           mTabHost = (TabHost) findViewById(android.R.id.tabhost);
-           mTabHost.setup();
-           addTabToTabHost(MyConstants.TAB_MAIN_KEYPAD, HymnsApplication.myResources.getDrawable(android.R.drawable.ic_dialog_dialer));
-           addTabToTabHost(MyConstants.TAB_MAIN_HYMNSLIST, null);
-           addTabToTabHost(MyConstants.TAB_MAIN_RECENT, null);
-           addTabToTabHost(MyConstants.TAB_MAIN_STARRED, null);
-           mTabHost.setOnTabChangedListener(this);
+           initUI();
 
-           //Treating ViewPager and related adapter
-           mPagerAdapter = new MainScreenPagerAdapter(getSupportFragmentManager());
-           mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
-           mViewPager.setAdapter(mPagerAdapter);
-           mViewPager.setOnPageChangeListener(this);
-
-           ImageView spinner1 = (ImageView) findViewById(R.id.imgvw_spinner);
-           HymnsApplication.setAvailableSpinner(spinner1);
-           HymnsApplication.setSpinnerLevel(2500);
-
+           mSpinnerInnari.setSelection(0);
 
         } catch (Exception e) {
             Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW...." + e.getMessage());
@@ -81,6 +72,102 @@ public class MyActivity extends FragmentActivity
        }
     }
 
+   private void initUI() throws Exception {
+      lblCategorie = (TextView) findViewById(R.id.lbl_categoria);
+      lblInnari = (TextView) findViewById(R.id.lbl_innari);
+
+      //Treating spinner innari
+      mSpinnerInnari = (Spinner) findViewById(R.id.spinner_innari);
+      spin_innariAdapter =
+            new ArrayAdapter<String>(this, R.layout.mainspinners_item, HymnsApplication.getInnariTitles());
+      spin_innariAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+      mSpinnerInnari.setAdapter(spin_innariAdapter);
+
+      //Treating spinner categoria
+      mSpinnerCategoria = (Spinner) findViewById(R.id.spinner_categoria);
+      spin_catAdapter =
+            new ArrayAdapter<String>(this, R.layout.mainspinners_item, Inno.Categoria.getCategoriesStringList());
+      spin_catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+      mSpinnerCategoria.setAdapter(spin_catAdapter);
+
+      //Managing selection events on spinners
+      mSpinnerInnari.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+         @Override
+         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String selected_str = (String) parent.getItemAtPosition(position);
+            if (selected_str.length() > 0) {
+               spin_innariAdapter.remove("");
+               spin_innariAdapter.notifyDataSetChanged();
+               mSpinnerCategoria.setSelection(0);
+               HymnsApplication.setCurrentInnario(selected_str);
+               highlightLabelInnari();
+            }
+         }
+
+         @Override
+         public void onNothingSelected(AdapterView<?> parent) {}
+      });
+
+      mSpinnerCategoria.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+         @Override
+         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Inno.Categoria cat = Inno.Categoria.parseString((String) mSpinnerCategoria.getItemAtPosition(position));
+            if (position != 0) {
+               HymnsApplication.setCurrentInnario(cat);
+               spin_innariAdapter.insert("", 0);
+               spin_innariAdapter.notifyDataSetChanged();
+               mSpinnerInnari.setSelection(0);
+               highlightLabelCategoria();
+            }
+            else {
+               if (spin_innariAdapter.getItem(0).length() == 0) mSpinnerInnari.setSelection(1);
+               else mSpinnerInnari.setSelection(0);
+            }
+         }
+
+         @Override
+         public void onNothingSelected(AdapterView<?> parent) {}
+      });
+
+      //Treating tabs
+      mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+      mTabHost.setup();
+      addTabToTabHost(MyConstants.TAB_MAIN_KEYPAD, HymnsApplication.myResources.getDrawable(android.R.drawable.ic_dialog_dialer));
+      addTabToTabHost(MyConstants.TAB_MAIN_HYMNSLIST, null);
+      addTabToTabHost(MyConstants.TAB_MAIN_RECENT, null);
+      addTabToTabHost(MyConstants.TAB_MAIN_STARRED, null);
+      mTabHost.setOnTabChangedListener(this);
+
+      //Treating ViewPager and related adapter
+      mPagerAdapter = new MainScreenPagerAdapter(getSupportFragmentManager());
+      mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
+      mViewPager.setAdapter(mPagerAdapter);
+      mViewPager.setOnPageChangeListener(this);
+
+   }
+
+   /*
+    * Call this method to make reverse color on the label innari; convenience method to save status between orientations.
+    * This method eventually also remove special formatting from the label categoria.
+    */
+   private void highlightLabelInnari() {
+      lblInnari.setTextAppearance(_context, R.style.spinners_labels_style_inverse);
+      lblInnari.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.white));
+      lblCategorie.setTextAppearance(_context, R.style.spinners_labels_style_direct);
+      lblCategorie.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
+   }
+
+   /*
+    * Call this method to make reverse color on the label categoria; convenience method to save status between orientations.
+    * This method eventually also remove special formatting from the label innari.
+    */
+   private void highlightLabelCategoria() {
+      lblCategorie.setTextAppearance(_context, R.style.spinners_labels_style_inverse);
+      lblCategorie.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.white));
+      lblInnari.setTextAppearance(_context, R.style.spinners_labels_style_direct);
+      lblInnari.setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
+   }
+
    @Override
    public boolean onCreateOptionsMenu(Menu menu) {
       //TODO: se mi conservo a livello di classe il puntatore al menu, posso cambiarne il contenuto a run-time
@@ -89,6 +176,14 @@ public class MyActivity extends FragmentActivity
       MenuItem mnu_pref = menu.add(0, MENU_PREFERENCES, Menu.NONE, R.string.mnu_options_str);
       mnu_pref.setIcon(android.R.drawable.ic_menu_preferences);
       return true;
+   }
+
+   @Override
+   public void onConfigurationChanged(Configuration newConfig) {
+      super.onConfigurationChanged(newConfig);
+      if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+         //Actually the problems is associated to fragments VS configuration change.
+      }
    }
 
    private void addTabToTabHost(String _tabName, Drawable _drawable) {
@@ -106,18 +201,21 @@ public class MyActivity extends FragmentActivity
    }
 
    @Override
-   public void onPageScrolled(int i, float v, int i2) {
-      //TODO: Da approfondire la semantica di questo listener.
+   public void onPageScrolled(int i, float v, int i2) {      //TODO: Da approfondire la semantica di questo listener.
+
    }
 
    @Override
    public void onPageSelected(int i) {
       mTabHost.setCurrentTab(i);
+      mPagerAdapter.setCurrentFragmentContext(i);
    }
 
    @Override
    public void onTabChanged(String tabId) {
-      mViewPager.setCurrentItem(mTabHost.getCurrentTab(), true);
+      int i = mTabHost.getCurrentTab();
+      mViewPager.setCurrentItem(i, true);
+      mPagerAdapter.setCurrentFragmentContext(i);
    }
 
    @Override

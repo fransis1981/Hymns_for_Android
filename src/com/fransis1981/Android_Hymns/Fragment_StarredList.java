@@ -5,18 +5,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 /**
  * Created by Fransis on 05/03/14 11.38.
  */
 public class Fragment_StarredList extends Fragment {
+   private ListView _starredlist;
+
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View rooView = inflater.inflate(R.layout.mainscreen_fragment_starredlist, container, false);
-      return rooView;
+      View rootView = inflater.inflate(R.layout.mainscreen_fragment_starredlist, container, false);
+      StarManager _starManager = HymnsApplication.getStarManager();
+      _starredlist = (ListView) rootView.findViewById(R.id.list_starred_hymns);
+      _starredlist.setAdapter(new
+            Inni2RowsAdapter(getActivity(), R.layout.mainscreen_fragment_starredlist, _starManager.getStarredList()));
+      _starredlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+         @Override
+         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Inno clicked_inno = (Inno) parent.getAdapter().getItem(position);
+            SingleHymn_Activity.startIntentWithHymn(getActivity(), clicked_inno);
+         }
+      });
+
+      return rootView;
    }
 
-   public void resetOnCurrentInnario() {
 
+
+   public void updateContent() {
+      _starredlist.invalidate();
    }
 }

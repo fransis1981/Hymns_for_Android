@@ -47,7 +47,7 @@ public class NumKeyPadView extends TableLayout {
    //Method for managing composed number when a new digit is composed
    void raiseKeyPressedEvent(int button) {
       mLastPressed = button;
-      okButton.clearAnimation();
+      if (mAnimationStarted && mLastPressed == KEYPAD_OK) okButton.clearAnimation();
 
       if (mOnKeyPressedListener != null)
          mOnKeyPressedListener.onKeyPressed(button);
@@ -83,6 +83,7 @@ public class NumKeyPadView extends TableLayout {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+               //Log.i(MyConstants.LogTag_STR, "Triggered onAnimationEnd with mLastPressed= " + mLastPressed);
                mAnimationStarted = false;
                if (mLastPressed == KEYPAD_OK) raiseKeyPressedEvent(KEYPAD_OK);
             }
@@ -131,12 +132,15 @@ public class NumKeyPadView extends TableLayout {
 
          okButton.setOnClickListener(new ImageButton.OnClickListener() {
             public void onClick(View v) {
-               if (mAnimationStarted) okButton.clearAnimation();
+               if (mAnimationStarted) {
+                  mAnimationStarted = false;
+                  okButton.clearAnimation();
+               }
             }
          });
 
          //Hooking up the functionality.... ?
-         //TODO: we might introduce a parameter for having this view optionally have a box or a series of button
+         //TODO: we might introduce a parameter for having this view optionally have a series of button
          //TODO: with hints of available hymns for the composed number.
 
          ///////addView(<view to add>, new LinearLayout.LayoutParams( , ));
@@ -148,8 +152,18 @@ public class NumKeyPadView extends TableLayout {
 
    //When the container checks that a proper hymn number has been reached, it may call this method to start the timeout
    public void startOkButtonTimeout() {
+      //Log.i(MyConstants.LogTag_STR, "Invoking startOKButtonTimeout in the keypad...");
+      cancelOkButtonTimeout();
       mLastPressed = KEYPAD_OK;
       okButton.startAnimation(okSprite);
+   }
+
+   public void cancelOkButtonTimeout() {
+      if (mAnimationStarted) {            //Preventing multiple timeouts.
+         mAnimationStarted = false;
+         mLastPressed = KEYPAD_CANCEL;    //Dummy assignemnt to prevent OK button event from being generated.
+         okButton.clearAnimation();
+      }
    }
 
    /*
