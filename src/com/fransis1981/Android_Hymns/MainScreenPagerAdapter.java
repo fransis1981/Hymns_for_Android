@@ -3,11 +3,15 @@ package com.fransis1981.Android_Hymns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 /**
  * Created by Fransis on 05/03/14 11.56.
  */
-public class MainScreenPagerAdapter extends FragmentPagerAdapter {
+public class MainScreenPagerAdapter extends FragmentPagerAdapter
+      implements HymnsApplication.OnCurrentInnarioChangedListener, StarManager.StarredItemsChangedListener,
+                 MRUManager.MRUStateChangedListener {
+
    public static enum FragmentContextEnum {
       KEYPAD,
       LIST,
@@ -33,57 +37,28 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
 
    FragmentContextEnum fragmentContext;     //Used to identify currently shown fragment.
 
-   public MainScreenPagerAdapter(FragmentManager fm) {
+   public MainScreenPagerAdapter(FragmentManager fm, Fragment_Keypad fk, Fragment_HymnsList fh, Fragment_RecentsList fr, Fragment_StarredList fs) {
       super(fm);
-      _fragment_keypad = new Fragment_Keypad();
-      //_fragment_hymnslist = new Fragment_HymnsList();
-      //_fragment_recent = new Fragment_RecentsList();
-      //_fragment_starred = new Fragment_StarredList();
+      _fragment_keypad = fk;
+      _fragment_hymnslist = fh;
+      _fragment_recent = fr;
+      _fragment_starred = fs;
 
-      //Listening to events for triggering fragment updates.
-      HymnsApplication.setOnCurrentInnarioChangedListener(new HymnsApplication.OnCurrentInnarioChangedListener() {
-         @Override
-         public void onCurrentInnarioChanged() {
-            if (_fragment_keypad != null) _fragment_keypad.resetOnCurrentInnario();
-            if (_fragment_hymnslist != null) _fragment_hymnslist.resetOnCurrentInnario();
-         }
-      });
-
-      final MRUManager _recentsManager = HymnsApplication.getRecentsManager();
-      _recentsManager.setMruStateChangedListener(new MRUManager.MRUStateChangedListener() {
-         @Override
-         public void OnMRUStateChanged() {
-            if (_fragment_recent != null) _fragment_recent.updateContent();
-            //Log.i(MyConstants.LogTag_STR, "Forcing update of recents fragment; MRU queue is: " + _recentsManager.getMRUList().size());
-         }
-      });
-
-      StarManager _starManager = HymnsApplication.getStarManager();
-      _starManager.setStarredItemsChangedListener(new StarManager.StarredItemsChangedListener() {
-         @Override
-         public void OnStarredItemsChanged() {
-            switch (fragmentContext) {
-               //TODO: if performance is getting slow, then we may add a flag to trigger update content only when
-               //TODO: a star change is actually made.
-               case LIST:
-                  if (_fragment_recent != null) _fragment_recent.updateContent();
-                  if (_fragment_starred != null) _fragment_starred.updateContent();
-                  break;
-               case RECENTS:
-                  if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
-                  if (_fragment_starred != null) _fragment_starred.updateContent();
-                  break;
-               case STARRED:
-                  if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
-                  if (_fragment_recent != null) _fragment_recent.updateContent();
-                  break;
-            }
-         }
-      });
-
+      bindEventListeners();
    }
 
 
+   void bindEventListeners() {
+      Log.i(MyConstants.LogTag_STR, "----------- bindEventListeners() --------------------");
+      //Listening to events for triggering fragment updates.
+      HymnsApplication.setOnCurrentInnarioChangedListener(this);
+
+      HymnsApplication.getRecentsManager().setMruStateChangedListener(this);
+
+      HymnsApplication.getStarManager().setStarredItemsChangedListener(this);
+   }
+
+   //TODO: is this method actually useful?
    public void setCurrentFragmentContext(int i) {
       fragmentContext = FragmentContextEnum.parseInt(i);
    }
@@ -118,5 +93,37 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
          case 3: return (_fragment_starred == null)?_fragment_starred = new Fragment_StarredList():_fragment_starred;
          default: return null;
       }
+   }
+
+   @Override
+   public void onCurrentInnarioChanged() {
+      //_fragment_keypad = ((Fragment_Keypad) getItem(0));
+      _fragment_keypad.resetOnCurrentInnario();
+      ((Fragment_HymnsList) getItem(1)).resetOnCurrentInnario();
+   }
+
+   @Override
+   public void OnStarredItemsChanged() {
+      switch (fragmentContext) {
+         //TODO: if performance is getting slow, then we may add a flag to trigger update content only when
+         //TODO: a star change is actually made.
+         case LIST:
+            if (_fragment_recent != null) _fragment_recent.updateContent();
+            if (_fragment_starred != null) _fragment_starred.updateContent();
+            break;
+         case RECENTS:
+            if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
+            if (_fragment_starred != null) _fragment_starred.updateContent();
+            break;
+         case STARRED:
+            if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
+            if (_fragment_recent != null) _fragment_recent.updateContent();
+            break;
+      }
+   }
+
+   @Override
+   public void OnMRUStateChanged() {
+      //TODO: implement this handler
    }
 }

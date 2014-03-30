@@ -60,7 +60,7 @@
             android:layout_height="0dp" android:layout_weight="0.5" android:gravity="center">
         <ImageButton android:layout_width="0dp"
                      android:layout_height="fill_parent"
-                     android:src="@drawable/keypad_cancel_64" android:id="@+id/keypad_cancel"
+                     android:src="@drawable/keypad_cancel" android:id="@+id/keypad_cancel"
                      android:layout_column="0" android:layout_weight="0.3"
                      android:background="@android:color/transparent" android:layout_gravity="center"/>
         <view android:layout_width="0dp"
@@ -70,7 +70,7 @@
               android:layout_gravity="center_horizontal"/>
         <ImageButton android:layout_width="0dp"
                      android:layout_height="fill_parent"
-                     android:src="@drawable/keypad_ok_64" android:id="@+id/keypad_ok"
+                     android:src="@drawable/keypad_ok" android:id="@+id/keypad_ok"
                      android:layout_column="2" android:layout_weight="0.30"
                      android:background="@android:color/transparent" android:gravity="bottom"
                      android:adjustViewBounds="false"/>

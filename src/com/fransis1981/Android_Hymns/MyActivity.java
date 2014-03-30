@@ -1,7 +1,6 @@
 package com.fransis1981.Android_Hymns;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -14,7 +13,8 @@ import android.widget.*;
 
 
 public class MyActivity extends FragmentActivity
-      implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
+      implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener,
+                 Spinner.OnItemSelectedListener {
 
    class MainTabFactory implements TabHost.TabContentFactory {
       private final Context mContext;
@@ -43,6 +43,11 @@ public class MyActivity extends FragmentActivity
    MainScreenPagerAdapter mPagerAdapter;
    ViewPager mViewPager;
    TabHost mTabHost;
+
+   Fragment_Keypad fragment_keypad;
+   Fragment_HymnsList fragment_hymnslist;
+   Fragment_RecentsList fragment_recent;
+   Fragment_StarredList fragment_starred;
 
    TextView lblCategorie, lblInnari;
    Spinner mSpinnerInnari, mSpinnerCategoria;
@@ -82,6 +87,7 @@ public class MyActivity extends FragmentActivity
             new ArrayAdapter<String>(this, R.layout.mainspinners_item, HymnsApplication.getInnariTitles());
       spin_innariAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       mSpinnerInnari.setAdapter(spin_innariAdapter);
+      mSpinnerInnari.setOnItemSelectedListener(this);
 
       //Treating spinner categoria
       mSpinnerCategoria = (Spinner) findViewById(R.id.spinner_categoria);
@@ -89,45 +95,7 @@ public class MyActivity extends FragmentActivity
             new ArrayAdapter<String>(this, R.layout.mainspinners_item, Inno.Categoria.getCategoriesStringList());
       spin_catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       mSpinnerCategoria.setAdapter(spin_catAdapter);
-
-      //Managing selection events on spinners
-      mSpinnerInnari.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-         @Override
-         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selected_str = (String) parent.getItemAtPosition(position);
-            if (selected_str.length() > 0) {
-               spin_innariAdapter.remove("");
-               spin_innariAdapter.notifyDataSetChanged();
-               mSpinnerCategoria.setSelection(0);
-               HymnsApplication.setCurrentInnario(selected_str);
-               highlightLabelInnari();
-            }
-         }
-
-         @Override
-         public void onNothingSelected(AdapterView<?> parent) {}
-      });
-
-      mSpinnerCategoria.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-         @Override
-         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Inno.Categoria cat = Inno.Categoria.parseString((String) mSpinnerCategoria.getItemAtPosition(position));
-            if (position != 0) {
-               HymnsApplication.setCurrentInnario(cat);
-               spin_innariAdapter.insert("", 0);
-               spin_innariAdapter.notifyDataSetChanged();
-               mSpinnerInnari.setSelection(0);
-               highlightLabelCategoria();
-            }
-            else {
-               if (spin_innariAdapter.getItem(0).length() == 0) mSpinnerInnari.setSelection(1);
-               else mSpinnerInnari.setSelection(0);
-            }
-         }
-
-         @Override
-         public void onNothingSelected(AdapterView<?> parent) {}
-      });
+      mSpinnerCategoria.setOnItemSelectedListener(this);
 
       //Treating tabs
       mTabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -138,12 +106,22 @@ public class MyActivity extends FragmentActivity
       addTabToTabHost(MyConstants.TAB_MAIN_STARRED, null);
       mTabHost.setOnTabChangedListener(this);
 
-      //Treating ViewPager and related adapter
-      mPagerAdapter = new MainScreenPagerAdapter(getSupportFragmentManager());
+      //Treating ViewPager, fragments and related adapter
+      if (fragment_keypad == null)
+         fragment_keypad = (Fragment_Keypad) Fragment_Keypad.instantiate(this, Fragment_Keypad.class.getName());
+
+      if (fragment_hymnslist == null)
+         fragment_hymnslist = (Fragment_HymnsList) Fragment_HymnsList.instantiate(this, Fragment_HymnsList.class.getName());
+      if (fragment_recent == null)
+         fragment_recent = (Fragment_RecentsList) Fragment_RecentsList.instantiate(this, Fragment_RecentsList.class.getName());
+      if (fragment_starred == null)
+         fragment_starred = (Fragment_StarredList) Fragment_StarredList.instantiate(this, Fragment_StarredList.class.getName());
+      mPagerAdapter = new MainScreenPagerAdapter(getSupportFragmentManager(), fragment_keypad, fragment_hymnslist,fragment_recent, fragment_starred);
       mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
       mViewPager.setAdapter(mPagerAdapter);
+      mViewPager.setAdapter(mPagerAdapter);
       mViewPager.setOnPageChangeListener(this);
-
+      mViewPager.setOffscreenPageLimit(4);
    }
 
    /*
@@ -179,11 +157,9 @@ public class MyActivity extends FragmentActivity
    }
 
    @Override
-   public void onConfigurationChanged(Configuration newConfig) {
-      super.onConfigurationChanged(newConfig);
-      if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-         //Actually the problems is associated to fragments VS configuration change.
-      }
+   protected void onResume() {
+      super.onResume();
+      mPagerAdapter.bindEventListeners();
    }
 
    private void addTabToTabHost(String _tabName, Drawable _drawable) {
@@ -193,6 +169,44 @@ public class MyActivity extends FragmentActivity
       //Managing exception: you must specify a way to create the tab content (even if producing here dummy views).
       ts.setContent(new MainTabFactory(this));
       mTabHost.addTab(ts);
+   }
+
+   @Override
+   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+      if (parent == mSpinnerInnari) {
+         //Handling selection on spinner Innari
+         String selected_str = (String) parent.getItemAtPosition(position);
+         if (selected_str.length() > 0) {
+            Log.i(MyConstants.LogTag_STR, "A selection happened in the spinner Innari!!!! [" + selected_str + "]");
+            spin_innariAdapter.remove("");
+            spin_innariAdapter.notifyDataSetChanged();
+            mSpinnerCategoria.setSelection(0);
+            HymnsApplication.setCurrentInnario(selected_str);
+            highlightLabelInnari();
+         }
+      }
+      else if (parent == mSpinnerCategoria) {
+         //Handling selection on spinner Categoria
+         Inno.Categoria cat = Inno.Categoria.parseString((String) mSpinnerCategoria.getItemAtPosition(position));
+         if (position != 0) {
+            HymnsApplication.setCurrentInnario(cat);
+            if (spin_innariAdapter.getItem(0).length() != 0) {
+               spin_innariAdapter.insert("", 0);
+               spin_innariAdapter.notifyDataSetChanged();
+            }
+            mSpinnerInnari.setSelection(0);
+            highlightLabelCategoria();
+         }
+         else {
+            if (spin_innariAdapter.getItem(0).length() == 0) mSpinnerInnari.setSelection(1);
+            else mSpinnerInnari.setSelection(0);
+         }
+      }
+   }
+
+   @Override
+   public void onNothingSelected(AdapterView<?> parent) {
+
    }
 
    @Override

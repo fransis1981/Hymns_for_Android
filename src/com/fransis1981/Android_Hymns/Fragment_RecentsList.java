@@ -2,6 +2,7 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,10 @@ public class Fragment_RecentsList extends Fragment {
 
    public void updateContent() {
       //((ArrayAdapter<Inno>) _recentslist.getAdapter()).notifyDataSetChanged();
-      _recentslist.invalidate();
+      try {
+         _recentslist.invalidate();
+      } catch (Exception e) {
+         Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Recents while in updateContent().");
+      }
    }
 }

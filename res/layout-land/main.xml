@@ -19,7 +19,7 @@
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
                 style="@style/spinners_labels_style_direct"
                 android:layout_marginRight="2dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="1dp"/>
         <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +34,8 @@
                 android:layout_gravity="center"
                 android:id="@+id/lbl_categoria"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                style="@style/spinners_labels_style_direct" android:layout_marginRight="2dp"/>
+                style="@style/spinners_labels_style_direct"
+                android:layout_marginRight="2dp"/>
         <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,10 @@ public class Fragment_StarredList extends Fragment {
 
 
    public void updateContent() {
-      _starredlist.invalidate();
+      try {
+         _starredlist.invalidate();
+      } catch (Exception e) {
+         Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Starred while in updateContent().");
+      }
    }
 }

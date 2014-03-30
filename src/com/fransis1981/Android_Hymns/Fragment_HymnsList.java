@@ -2,6 +2,7 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,12 @@ public class Fragment_HymnsList extends Fragment {
    }
 
    public void resetOnCurrentInnario() {
+      try {
       _list.setAdapter(new Inni1RowAdapter(getActivity(), HymnsApplication.getCurrentInnario().hymnsToArrayList()));
       updateContent();
+      } catch (Exception e) {
+         Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Hymns List while in resetOnCurrentInnario().");
+      }
    }
 
    public void updateContent() {
