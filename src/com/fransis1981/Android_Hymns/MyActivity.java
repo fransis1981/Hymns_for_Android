@@ -158,22 +158,13 @@ public class MyActivity extends FragmentActivity
       mPagerAdapter.bindEventListeners();
    }
 
-   private void addTabToTabHost(String _tabName, Drawable _drawable) {
-      TabHost.TabSpec ts = mTabHost.newTabSpec(_tabName);
-      if (_drawable != null) ts.setIndicator(_tabName, _drawable);
-      else ts.setIndicator(_tabName);
-      //Managing exception: you must specify a way to create the tab content (even if producing here dummy views).
-      ts.setContent(new MainTabFactory(this));
-      mTabHost.addTab(ts);
-   }
-
    @Override
    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
       if (parent == mSpinnerInnari) {
          //Handling selection on spinner Innari
          String selected_str = (String) parent.getItemAtPosition(position);
          if (selected_str.length() > 0) {
-            Log.i(MyConstants.LogTag_STR, "A selection happened in the spinner Innari!!!! [" + selected_str + "]");
+            //Log.i(MyConstants.LogTag_STR, "A selection happened in the spinner Innari!!!! [" + selected_str + "]");
             spin_innariAdapter.remove("");
             spin_innariAdapter.notifyDataSetChanged();
             mSpinnerCategoria.setSelection(0);
@@ -218,16 +209,15 @@ public class MyActivity extends FragmentActivity
    @Override
    public void onPageSelected(int i) {
       mTabHost.setCurrentTab(i);
-      mPagerAdapter.setCurrentFragmentContext(i);    //TODO: is this line of code really useful?
+      mPagerAdapter.setCurrentFragmentContext(i);
       //Log.i(MyConstants.LogTag_STR, "NEW PAGE SELECTED .... proceeding with content update..... [" + i + "]");
-      ((UpdateContentItf) mPagerAdapter.getItem(i)).updateContent();
+      mPagerAdapter.updateFragmentContent(i);
    }
 
    @Override
    public void onTabChanged(String tabId) {
       int i = mTabHost.getCurrentTab();
       mViewPager.setCurrentItem(i, true);
-      mPagerAdapter.setCurrentFragmentContext(i);
    }
 
    @Override
@@ -250,5 +240,14 @@ public class MyActivity extends FragmentActivity
       outState.putInt(CATEGORIASELECTION_BUNDLESTATE, mSpinnerCategoria.getSelectedItemPosition());
       outState.putInt(INNARIOSELECTION_BUNDLESTATE, mSpinnerInnari.getSelectedItemPosition());
       super.onSaveInstanceState(outState);
+   }
+
+   private void addTabToTabHost(String _tabName, Drawable _drawable) {
+      TabHost.TabSpec ts = mTabHost.newTabSpec(_tabName);
+      if (_drawable != null) ts.setIndicator(_tabName, _drawable);
+      else ts.setIndicator(_tabName);
+      //Managing exception: you must specify a way to create the tab content (even if producing here dummy views).
+      ts.setContent(new MainTabFactory(this));
+      mTabHost.addTab(ts);
    }
 }

@@ -59,7 +59,6 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
       HymnsApplication.getStarManager().setStarredItemsChangedListener(this);
    }
 
-   //TODO: really useful?
    public void setCurrentFragmentContext(int i) {
       fragmentContext = FragmentContextEnum.parseInt(i);
    }
@@ -98,28 +97,28 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
 
    @Override
    public void onCurrentInnarioChanged() {
-      //_fragment_keypad = ((Fragment_Keypad) getItem(0));
-      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(0))).updateContent();
-      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(1))).updateContent();
+      updateFragmentContent(0);
+      if (fragmentContext == FragmentContextEnum.LIST) updateFragmentContent(1);
    }
 
    @Override
    public void OnStarredItemsChanged() {
-         //TODO: if performance is getting slow, then we may add a flag to trigger update content only when
-         //TODO: a star change is actually made.
       //Log.i(MyConstants.LogTag_STR, "Updating fragments with fresh news STAR information!");
-      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(1))).updateContent();
-      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(2))).updateContent();
-      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(3))).updateContent();
+      if (fragmentContext == FragmentContextEnum.STARRED) updateFragmentContent(3);
    }
 
    @Override
    public void OnMRUStateChanged() {
       //Log.i(MyConstants.LogTag_STR, "Updating fragments with fresh news RECENT information!");
-      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(2))).updateContent();
+      if (fragmentContext == FragmentContextEnum.RECENTS) updateFragmentContent(2);
    }
 
    private String getFragmentTag(int pos) {
       return "android:switcher:" + R.id.main_viewpager + ":" + pos;
+   }
+
+   //This is a wrapper method for calling udpateContent on a given fragment. Useful for external callbacks.
+   void updateFragmentContent(int pos) {
+      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(pos))).updateContent();
    }
 }

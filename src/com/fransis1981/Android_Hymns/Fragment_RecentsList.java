@@ -37,7 +37,7 @@ public class Fragment_RecentsList extends Fragment implements UpdateContentItf {
          @Override
          public void onClick(View v) {
             HymnsApplication.getRecentsManager().clearMRU();
-            updateContent();
+            //updateContent();
          }
       });
 
