@@ -118,6 +118,8 @@ public class MyActivity extends FragmentActivity
       mViewPager.setAdapter(mPagerAdapter);
       mViewPager.setOnPageChangeListener(this);
       mViewPager.setOffscreenPageLimit(4);
+
+      mPagerAdapter.bindEventListeners();
    }
 
    /*
@@ -150,12 +152,6 @@ public class MyActivity extends FragmentActivity
       MenuItem mnu_pref = menu.add(0, MENU_PREFERENCES, Menu.NONE, R.string.mnu_options_str);
       mnu_pref.setIcon(android.R.drawable.ic_menu_preferences);
       return true;
-   }
-
-   @Override
-   protected void onResume() {
-      super.onResume();
-      mPagerAdapter.bindEventListeners();
    }
 
    @Override
@@ -209,9 +205,9 @@ public class MyActivity extends FragmentActivity
    @Override
    public void onPageSelected(int i) {
       mTabHost.setCurrentTab(i);
-      mPagerAdapter.setCurrentFragmentContext(i);
+      mPagerAdapter.setCurrentFragmentContext(i);        //TODO: ?
       //Log.i(MyConstants.LogTag_STR, "NEW PAGE SELECTED .... proceeding with content update..... [" + i + "]");
-      mPagerAdapter.updateFragmentContent(i);
+      //mPagerAdapter.updateFragmentContent(i);
    }
 
    @Override
@@ -224,14 +220,16 @@ public class MyActivity extends FragmentActivity
    protected void onRestoreInstanceState(Bundle savedInstanceState) {
       super.onRestoreInstanceState(savedInstanceState);
       //Restoring selected tab and spinners' selection.
-      if (savedInstanceState != null) {
-         int ttt = savedInstanceState.getInt(CATEGORIASELECTION_BUNDLESTATE);
-         if (ttt == 0) mSpinnerInnari.setSelection(savedInstanceState.getInt(INNARIOSELECTION_BUNDLESTATE));
-         else  mSpinnerCategoria.setSelection(ttt);
-         mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_BUNDLESTATE, MyConstants.TAB_MAIN_KEYPAD));
-      } else {
-         mSpinnerInnari.setSelection(0);
-      }
+//      if (savedInstanceState != null) {
+//         int ttt = savedInstanceState.getInt(CATEGORIASELECTION_BUNDLESTATE);
+//         if (ttt == 0)
+//            mSpinnerInnari.setSelection(savedInstanceState.getInt(INNARIOSELECTION_BUNDLESTATE));
+//         else
+//            mSpinnerCategoria.setSelection(ttt);
+//         mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_BUNDLESTATE, MyConstants.TAB_MAIN_KEYPAD));
+//      } else {
+//         mSpinnerInnari.setSelection(0);
+//      }
    }
 
    @Override

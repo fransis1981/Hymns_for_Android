@@ -98,19 +98,22 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
    @Override
    public void onCurrentInnarioChanged() {
       updateFragmentContent(0);
-      if (fragmentContext == FragmentContextEnum.LIST) updateFragmentContent(1);
+      //if (fragmentContext == FragmentContextEnum.LIST) updateFragmentContent(1);
+      updateFragmentContent(1);
    }
 
    @Override
    public void OnStarredItemsChanged() {
       //Log.i(MyConstants.LogTag_STR, "Updating fragments with fresh news STAR information!");
-      if (fragmentContext == FragmentContextEnum.STARRED) updateFragmentContent(3);
+      //if (fragmentContext == FragmentContextEnum.STARRED) updateFragmentContent(3);
+      updateFragmentContent(1); updateFragmentContent(2); updateFragmentContent(3);
    }
 
    @Override
    public void OnMRUStateChanged() {
       //Log.i(MyConstants.LogTag_STR, "Updating fragments with fresh news RECENT information!");
-      if (fragmentContext == FragmentContextEnum.RECENTS) updateFragmentContent(2);
+      //if (fragmentContext == FragmentContextEnum.RECENTS) updateFragmentContent(2);
+      updateFragmentContent(2);
    }
 
    private String getFragmentTag(int pos) {

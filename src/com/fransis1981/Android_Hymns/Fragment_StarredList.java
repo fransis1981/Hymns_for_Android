@@ -2,7 +2,6 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ public class Fragment_StarredList extends Fragment implements UpdateContentItf {
       try {
          if (_starredlist != null) ((ArrayAdapter<Inno>) _starredlist.getAdapter()).notifyDataSetChanged();
       } catch (Exception e) {
-         Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Starred while in updateContent().");
+         //Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Starred while in updateContent().");
       }
    }
 }
