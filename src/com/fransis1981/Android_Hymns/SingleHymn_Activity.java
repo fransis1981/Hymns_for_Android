@@ -53,7 +53,6 @@ public class SingleHymn_Activity extends ListActivity {
 
       setListAdapter(new StrofeAdapter(this, hymnToDisplay.getListStrofe()));
 
-      //Log.i(MyConstants.LogTag_STR, "Creata istanza di singlehymn Activity!!!!");
    }
 
    static void setupIntent() {

@@ -39,7 +39,7 @@ public class MRUManager {
          fifo_arrlist.remove(fifo_arrlist.size() - 1);
       fifo_arrlist.add(0, inno);
       raiseMruStateChangedEvent();
-      //Log.i(MyConstants.LogTag_STR, "Pushed hymn " + inno.getNumero() + " into recents lsit.");
+      //Log.i(MyConstants.LogTag_STR, "Pushed hymn " + inno.getNumero() + " into recents list.");
    }
 
    //Drops all MRU content.

@@ -3,7 +3,6 @@ package com.fransis1981.Android_Hymns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 /**
  * Created by Fransis on 05/03/14 11.56.
@@ -29,6 +28,8 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
       }
    }
 
+   FragmentManager _fm;
+
    //Preallocating main fragments, each having its own layout and features
    Fragment_Keypad _fragment_keypad;
    Fragment_HymnsList _fragment_hymnslist;
@@ -39,6 +40,7 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
 
    public MainScreenPagerAdapter(FragmentManager fm, Fragment_Keypad fk, Fragment_HymnsList fh, Fragment_RecentsList fr, Fragment_StarredList fs) {
       super(fm);
+      _fm = fm;
       _fragment_keypad = fk;
       _fragment_hymnslist = fh;
       _fragment_recent = fr;
@@ -49,7 +51,6 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
 
 
    void bindEventListeners() {
-      Log.i(MyConstants.LogTag_STR, "----------- bindEventListeners() --------------------");
       //Listening to events for triggering fragment updates.
       HymnsApplication.setOnCurrentInnarioChangedListener(this);
 
@@ -58,7 +59,7 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
       HymnsApplication.getStarManager().setStarredItemsChangedListener(this);
    }
 
-   //TODO: is this method actually useful?
+   //TODO: really useful?
    public void setCurrentFragmentContext(int i) {
       fragmentContext = FragmentContextEnum.parseInt(i);
    }
@@ -98,32 +99,27 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
    @Override
    public void onCurrentInnarioChanged() {
       //_fragment_keypad = ((Fragment_Keypad) getItem(0));
-      _fragment_keypad.resetOnCurrentInnario();
-      ((Fragment_HymnsList) getItem(1)).resetOnCurrentInnario();
+      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(0))).updateContent();
+      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(1))).updateContent();
    }
 
    @Override
    public void OnStarredItemsChanged() {
-      switch (fragmentContext) {
          //TODO: if performance is getting slow, then we may add a flag to trigger update content only when
          //TODO: a star change is actually made.
-         case LIST:
-            if (_fragment_recent != null) _fragment_recent.updateContent();
-            if (_fragment_starred != null) _fragment_starred.updateContent();
-            break;
-         case RECENTS:
-            if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
-            if (_fragment_starred != null) _fragment_starred.updateContent();
-            break;
-         case STARRED:
-            if (_fragment_hymnslist != null) _fragment_hymnslist.updateContent();
-            if (_fragment_recent != null) _fragment_recent.updateContent();
-            break;
-      }
+      //Log.i(MyConstants.LogTag_STR, "Updating fragments with fresh news STAR information!");
+      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(1))).updateContent();
+      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(2))).updateContent();
+      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(3))).updateContent();
    }
 
    @Override
    public void OnMRUStateChanged() {
-      //TODO: implement this handler
+      //Log.i(MyConstants.LogTag_STR, "Updating fragments with fresh news RECENT information!");
+      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(2))).updateContent();
+   }
+
+   private String getFragmentTag(int pos) {
+      return "android:switcher:" + R.id.main_viewpager + ":" + pos;
    }
 }

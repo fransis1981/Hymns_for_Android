@@ -7,12 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
  * Created by Fransis on 05/03/14 11.38.
  */
-public class Fragment_StarredList extends Fragment {
+public class Fragment_StarredList extends Fragment implements UpdateContentItf {
    private ListView _starredlist;
 
    @Override
@@ -37,7 +38,7 @@ public class Fragment_StarredList extends Fragment {
 
    public void updateContent() {
       try {
-         _starredlist.invalidate();
+         if (_starredlist != null) ((ArrayAdapter<Inno>) _starredlist.getAdapter()).notifyDataSetChanged();
       } catch (Exception e) {
          Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Starred while in updateContent().");
       }

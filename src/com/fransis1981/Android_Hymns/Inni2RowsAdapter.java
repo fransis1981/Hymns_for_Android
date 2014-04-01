@@ -57,7 +57,6 @@ public class Inni2RowsAdapter extends ArrayAdapter<Inno> {
          @Override
          public void onClick(View v) {
             _inni.get(position).setStarred(((CheckBox) v).isChecked());
-            notifyDataSetChanged();
          }
       });
 

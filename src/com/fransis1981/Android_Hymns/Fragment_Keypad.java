@@ -2,7 +2,6 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +10,11 @@ import android.widget.TextView;
 /**
  * Created by Fransis on 05/03/14 11.05.
  */
-public class Fragment_Keypad extends Fragment {
+public class Fragment_Keypad extends Fragment implements UpdateContentItf {
    //private Intent singleHymn_intent;
    private TextView txtComposedNumber;
    private NumKeyPadView keypad;
    private DialerList mCurrentDialerList;
-
-   int debug_current_config_change = 0;
 
    private int mLastValidComposedNumber;
 
@@ -74,8 +71,6 @@ public class Fragment_Keypad extends Fragment {
          }
       });
 
-      Log.i(MyConstants.LogTag_STR, "Creato il Fragment del KeyPad ************ this.debug config changes: " + debug_current_config_change);
-
       resetComposedNumber();
 
       return rootView;
@@ -98,7 +93,7 @@ public class Fragment_Keypad extends Fragment {
          mCurrentDialerList = HymnsApplication.getCurrentInnario().getDialerList();
          keypad.setObscureList(mCurrentDialerList.getObscureList());
       } catch (NullPointerException npe) {
-         Log.w(MyConstants.LogTag_STR, "Catched a NULL Pointer in Fragment Keypad while in resetComposedNumber().");
+         //Log.w(MyConstants.LogTag_STR, "Catched a NULL Pointer in Fragment Keypad while in resetComposedNumber().");
       }
    }
 
@@ -107,7 +102,7 @@ public class Fragment_Keypad extends Fragment {
    }
 
    @Override
-   public void onViewCreated(View view, Bundle savedInstanceState) {
-      super.onViewCreated(view, savedInstanceState);
+   public void updateContent() {
+      resetComposedNumber();
    }
 }

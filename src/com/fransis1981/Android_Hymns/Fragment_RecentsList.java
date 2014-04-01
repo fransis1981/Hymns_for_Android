@@ -2,18 +2,18 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 /**
  * Created by Fransis on 05/03/14 11.38.
  */
-public class Fragment_RecentsList extends Fragment {
+public class Fragment_RecentsList extends Fragment implements UpdateContentItf {
    private ListView _recentslist;
 
    @Override
@@ -45,11 +45,10 @@ public class Fragment_RecentsList extends Fragment {
    }
 
    public void updateContent() {
-      //((ArrayAdapter<Inno>) _recentslist.getAdapter()).notifyDataSetChanged();
       try {
-         _recentslist.invalidate();
+         if (_recentslist != null) ((ArrayAdapter<Inno>) _recentslist.getAdapter()).notifyDataSetChanged();
       } catch (Exception e) {
-         Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Recents while in updateContent().");
+         //Log.w(MyConstants.LogTag_STR, "Catched EXCEPTION in Fragment Recents while in updateContent().");
       }
    }
 }

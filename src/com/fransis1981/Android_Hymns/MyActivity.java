@@ -38,6 +38,8 @@ public class MyActivity extends FragmentActivity
 
    //Constants for bundle arguments
    private static final String TAB_BUNDLESTATE = "SelectedTab";
+   private static final String CATEGORIASELECTION_BUNDLESTATE = "SelectedCategory";
+   private static final String INNARIOSELECTION_BUNDLESTATE = "SelectedHymnBook";
 
    Context _context;
    MainScreenPagerAdapter mPagerAdapter;
@@ -64,17 +66,11 @@ public class MyActivity extends FragmentActivity
 
            initUI();
 
-           mSpinnerInnari.setSelection(0);
-
         } catch (Exception e) {
             Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW...." + e.getMessage());
             e.printStackTrace();
         }
 
-       //Restoring selected tab
-       if (savedInstanceState != null) {
-          mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_BUNDLESTATE, MyConstants.TAB_MAIN_KEYPAD));
-       }
     }
 
    private void initUI() throws Exception {
@@ -222,7 +218,9 @@ public class MyActivity extends FragmentActivity
    @Override
    public void onPageSelected(int i) {
       mTabHost.setCurrentTab(i);
-      mPagerAdapter.setCurrentFragmentContext(i);
+      mPagerAdapter.setCurrentFragmentContext(i);    //TODO: is this line of code really useful?
+      //Log.i(MyConstants.LogTag_STR, "NEW PAGE SELECTED .... proceeding with content update..... [" + i + "]");
+      ((UpdateContentItf) mPagerAdapter.getItem(i)).updateContent();
    }
 
    @Override
@@ -233,8 +231,24 @@ public class MyActivity extends FragmentActivity
    }
 
    @Override
+   protected void onRestoreInstanceState(Bundle savedInstanceState) {
+      super.onRestoreInstanceState(savedInstanceState);
+      //Restoring selected tab and spinners' selection.
+      if (savedInstanceState != null) {
+         int ttt = savedInstanceState.getInt(CATEGORIASELECTION_BUNDLESTATE);
+         if (ttt == 0) mSpinnerInnari.setSelection(savedInstanceState.getInt(INNARIOSELECTION_BUNDLESTATE));
+         else  mSpinnerCategoria.setSelection(ttt);
+         mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_BUNDLESTATE, MyConstants.TAB_MAIN_KEYPAD));
+      } else {
+         mSpinnerInnari.setSelection(0);
+      }
+   }
+
+   @Override
    protected void onSaveInstanceState(Bundle outState) {
       outState.putString(TAB_BUNDLESTATE, mTabHost.getCurrentTabTag());
+      outState.putInt(CATEGORIASELECTION_BUNDLESTATE, mSpinnerCategoria.getSelectedItemPosition());
+      outState.putInt(INNARIOSELECTION_BUNDLESTATE, mSpinnerInnari.getSelectedItemPosition());
       super.onSaveInstanceState(outState);
    }
 }
