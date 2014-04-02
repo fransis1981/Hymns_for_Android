@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Innario {
    private String titolo;
+   private String id;
    private int numeroInni;
    private SparseArray<Inno> inni;
    private DialerList mDialerList;
@@ -28,6 +29,7 @@ public class Innario {
       }
 
       titolo = _tagInnario.attr(MyConstants.INNARIO_TITOLO_ATTR);
+      id = _tagInnario.attr(MyConstants.ID_INNARIO_STR);
       numeroInni = Integer.parseInt(_tagInnario.attr(MyConstants.INNARIO_NUM_INNI_ATTR));
 
       for (Element inno: _tagInnario.children()) {
@@ -66,6 +68,8 @@ public class Innario {
       titolo = _titolo;
       return this;
    }
+
+   public String getId() { return id; }
 
    public int getNumeroInni() {
       return numeroInni;

@@ -11,6 +11,7 @@ public final class MyConstants {
    public static final String XML_ROOT_STR = "innari";
 
    public static final String TAG_INNARIO_STR = "innario";
+   public static final String ID_INNARIO_STR = "id_innario";
    public static final String INNARIO_TITOLO_ATTR = "titolo";
    public static final String INNARIO_NUM_INNI_ATTR = "numero_inni";
 

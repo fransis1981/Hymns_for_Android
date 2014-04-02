@@ -128,6 +128,16 @@ public class HymnsApplication extends Application {
    }
 
    /*
+    * Questo metodo restituisce l'oggetto Innario opportuno conoscendone l'ID.
+    */
+   public static Innario getInnarioByID(String _id) {
+      for (Innario i: innari) {
+         if (i.getId().equals(_id)) return i;
+      }
+      return null;
+   }
+
+   /*
     * Questo metodo popola l'array globale degli innari;
     * se è disponibile un file serializzato si carica da li, altrimenti si fa il parsing del file XML.
     * Se _forceXML è TRUE allora si obbliga l'algoritmo ad acquisire i dati da XML.
