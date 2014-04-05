@@ -66,6 +66,9 @@ public class MyActivity extends FragmentActivity
 
            initUI();
 
+           //Restoring saved preferences (recents and starred)
+           HymnsApplication.getRecentsManager().readFromPreferences(this);
+
         } catch (Exception e) {
             Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW...." + e.getMessage());
             e.printStackTrace();
@@ -205,9 +208,7 @@ public class MyActivity extends FragmentActivity
    @Override
    public void onPageSelected(int i) {
       mTabHost.setCurrentTab(i);
-      mPagerAdapter.setCurrentFragmentContext(i);        //TODO: ?
-      //Log.i(MyConstants.LogTag_STR, "NEW PAGE SELECTED .... proceeding with content update..... [" + i + "]");
-      //mPagerAdapter.updateFragmentContent(i);
+      mPagerAdapter.setCurrentFragmentContext(i);
    }
 
    @Override
@@ -238,6 +239,13 @@ public class MyActivity extends FragmentActivity
       outState.putInt(CATEGORIASELECTION_BUNDLESTATE, mSpinnerCategoria.getSelectedItemPosition());
       outState.putInt(INNARIOSELECTION_BUNDLESTATE, mSpinnerInnari.getSelectedItemPosition());
       super.onSaveInstanceState(outState);
+   }
+
+   @Override
+   protected void onDestroy() {
+      //Saving preferences (recents and starred) before the activity gets destroyed
+      HymnsApplication.getRecentsManager().saveToPreferences(this);
+      super.onDestroy();
    }
 
    private void addTabToTabHost(String _tabName, Drawable _drawable) {

@@ -1,5 +1,8 @@
 package com.fransis1981.Android_Hymns;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 
 /**
@@ -7,6 +10,10 @@ import java.util.ArrayList;
  * This class supports management of most recently used (sung) hymns according to a FIFO strategy.
  */
 public class MRUManager {
+   private static String RecentPreferences_STR = "Storage_Recents";
+   private static String PREF_RecentsNumber = "Num";
+   private static String PREF_HymnRef = "Ref";
+
    public interface MRUStateChangedListener {
       public void OnMRUStateChanged();
    }
@@ -51,5 +58,38 @@ public class MRUManager {
    //Convenience method for usage with List Adapters.
    public ArrayList<Inno> getMRUList() {
       return fifo_arrlist;
+   }
+
+   /*
+    * Structure of recent preferences:
+    * 1- Save the number or recent hymns
+    * 2- For each recent hymn save a string with the following format:
+    *             <ID_Innario>|<NumeroInno>
+    */
+   public void saveToPreferences(Context context) {
+      SharedPreferences sp = context.getSharedPreferences(RecentPreferences_STR, Context.MODE_PRIVATE);
+      SharedPreferences.Editor e = sp.edit();
+      e.clear().putInt(PREF_RecentsNumber, fifo_arrlist.size());
+      int n = 1;
+      for (Inno i: fifo_arrlist) {
+         e.putString(PREF_HymnRef + n++, i.getParentInnario().getId() + "|" + i.getNumero());
+      }
+      e.commit();
+   }
+
+   public void readFromPreferences(Context context) throws InnoNotFoundException {
+      SharedPreferences sp = context.getSharedPreferences(RecentPreferences_STR, Context.MODE_PRIVATE);
+      fifo_arrlist.clear();
+      int n = sp.getInt(PREF_RecentsNumber, 0);
+      for (int i = 1; i <= n; i++) {
+         String[] tokens = sp.getString(PREF_HymnRef + i, "").split("\\|");
+         Innario innario = HymnsApplication.getInnarioByID(tokens[0]);
+         if (innario == null) continue;            //Se l'innario non viene trovato si salta quest'inno
+         int num = Integer.parseInt(tokens[1]);
+         Inno inno = innario.getInno(num);
+         if (inno == null) throw new InnoNotFoundException(num);
+         fifo_arrlist.add(inno);
+      }
+      if (n > 0) raiseMruStateChangedEvent();
    }
 }
