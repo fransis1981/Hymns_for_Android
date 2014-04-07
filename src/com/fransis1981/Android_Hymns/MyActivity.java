@@ -66,13 +66,24 @@ public class MyActivity extends FragmentActivity
 
            initUI();
 
-           //Restoring saved preferences (recents and starred)
-           HymnsApplication.getRecentsManager().readFromPreferences(this);
-
         } catch (Exception e) {
-            Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW...." + e.getMessage());
+            Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE CREATNG MAIN ACTIVITY GUI...." + e.getMessage());
             e.printStackTrace();
         }
+
+       try {
+          //Restoring saved preferences (recents)
+          HymnsApplication.getRecentsManager().readFromPreferences(this);
+       }  catch (Exception e) {
+          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING RECENT HYMNS...." + e.getMessage());
+       }
+
+       try {
+          //Restoring saved preferences (starred)
+          HymnsApplication.getStarManager().readFromPreferences(this);
+       }  catch (Exception e) {
+          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
+       }
 
     }
 
@@ -245,6 +256,7 @@ public class MyActivity extends FragmentActivity
    protected void onDestroy() {
       //Saving preferences (recents and starred) before the activity gets destroyed
       HymnsApplication.getRecentsManager().saveToPreferences(this);
+      HymnsApplication.getStarManager().saveToPreferences(this);
       super.onDestroy();
    }
 

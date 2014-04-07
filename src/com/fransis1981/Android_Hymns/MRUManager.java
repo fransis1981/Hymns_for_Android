@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class MRUManager {
    private static String RecentPreferences_STR = "Storage_Recents";
-   private static String PREF_RecentsNumber = "Num";
+   private static String PREF_StarredNumber = "Num";
    private static String PREF_HymnRef = "Ref";
 
    public interface MRUStateChangedListener {
@@ -68,8 +68,8 @@ public class MRUManager {
     */
    public void saveToPreferences(Context context) {
       SharedPreferences sp = context.getSharedPreferences(RecentPreferences_STR, Context.MODE_PRIVATE);
-      SharedPreferences.Editor e = sp.edit();
-      e.clear().putInt(PREF_RecentsNumber, fifo_arrlist.size());
+      SharedPreferences.Editor e = sp.edit().clear();
+      e.putInt(PREF_StarredNumber, fifo_arrlist.size());
       int n = 1;
       for (Inno i: fifo_arrlist) {
          e.putString(PREF_HymnRef + n++, i.getParentInnario().getId() + "|" + i.getNumero());
@@ -80,7 +80,7 @@ public class MRUManager {
    public void readFromPreferences(Context context) throws InnoNotFoundException {
       SharedPreferences sp = context.getSharedPreferences(RecentPreferences_STR, Context.MODE_PRIVATE);
       fifo_arrlist.clear();
-      int n = sp.getInt(PREF_RecentsNumber, 0);
+      int n = sp.getInt(PREF_StarredNumber, 0);
       for (int i = 1; i <= n; i++) {
          String[] tokens = sp.getString(PREF_HymnRef + i, "").split("\\|");
          Innario innario = HymnsApplication.getInnarioByID(tokens[0]);
@@ -90,6 +90,7 @@ public class MRUManager {
          if (inno == null) throw new InnoNotFoundException(num);
          fifo_arrlist.add(inno);
       }
-      if (n > 0) raiseMruStateChangedEvent();
+      if (n > 0)
+         raiseMruStateChangedEvent();
    }
 }

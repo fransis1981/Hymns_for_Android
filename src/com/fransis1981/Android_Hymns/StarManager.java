@@ -1,5 +1,8 @@
 package com.fransis1981.Android_Hymns;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,6 +11,10 @@ import java.util.Collections;
  * Class to keep track of starred hymns.
  */
 public class StarManager {
+   private static String StarredPreferences_STR = "Storage_Starred";
+   private static String PREF_RecentsNumber = "NumS";
+   private static String PREF_HymnRef = "RefS";
+
    public interface StarredItemsChangedListener {
       public void OnStarredItemsChanged();
    }
@@ -56,4 +63,38 @@ public class StarManager {
    }
 
    public ArrayList<Inno> getStarredList() { return mStarredList; }
+
+   /*
+    * Structure of recent preferences:
+    * 1- Save the number or recent hymns
+    * 2- For each recent hymn save a string with the following format:
+    *             <ID_Innario>|<NumeroInno>
+    */
+   public void saveToPreferences(Context context) {
+      SharedPreferences sp = context.getSharedPreferences(StarredPreferences_STR, Context.MODE_PRIVATE);
+      SharedPreferences.Editor e = sp.edit().clear();
+      e.putInt(PREF_RecentsNumber, mStarredList.size());
+      int n = 1;
+      for (Inno i: mStarredList) {
+         e.putString(PREF_HymnRef + n++, i.getParentInnario().getId() + "|" + i.getNumero());
+      }
+      e.commit();
+   }
+
+   public void readFromPreferences(Context context) throws InnoNotFoundException {
+      SharedPreferences sp = context.getSharedPreferences(StarredPreferences_STR, Context.MODE_PRIVATE);
+      mStarredList.clear();
+      int n = sp.getInt(PREF_RecentsNumber, 0);
+      for (int i = 1; i <= n; i++) {
+         String[] tokens = sp.getString(PREF_HymnRef + i, "").split("\\|");
+         Innario innario = HymnsApplication.getInnarioByID(tokens[0]);
+         if (innario == null) continue;            //Se l'innario non viene trovato si salta quest'inno
+         int num = Integer.parseInt(tokens[1]);
+         Inno inno = innario.getInno(num);
+         if (inno == null) throw new InnoNotFoundException(num);
+         inno.mStarred = true;
+         mStarredList.add(inno);
+      }
+      if (n > 0) raiseStarredItemsChangedEvent();
+   }
 }

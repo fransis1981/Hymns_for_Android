@@ -66,7 +66,8 @@ public class Inno {
    private int numCori;                    //Numero di strofe definite come cori
    private Categoria categoria;
    private ArrayList<Strofa> strofe_cori;      //Lista ordinata delle strofe e dei cori
-   private boolean mStarred;
+
+   boolean mStarred;
 
    public String getTitolo() {
       return titolo;
