@@ -89,15 +89,24 @@ public class HymnsApplication extends Application {
 
        //Si crea il gestore dai cantici recenti
        recentsManager = new MRUManager();
+       try {
+          //Restoring saved preferences (recents)
+          recentsManager.readFromPreferences(getApplicationContext());
+       }
+       catch (Exception e) {
+          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING RECENT HYMNS...." + e.getMessage());
+       }
 
        //Si crea il gestore dei preferiti (starred)
        starManager = new StarManager();
+       try {
+          //Restoring saved preferences (starred)
+          starManager.readFromPreferences(getApplicationContext());
+       }
+       catch (Exception e) {
+          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
+       }
     }
-
-   @Override
-   public void onTerminate() {
-      super.onTerminate();
-   }
 
    public static void setCurrentInnario(Innario _innario) {
       if (currentInnario == _innario) return;

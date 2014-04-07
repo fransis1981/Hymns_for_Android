@@ -71,19 +71,19 @@ public class MyActivity extends FragmentActivity
             e.printStackTrace();
         }
 
-       try {
-          //Restoring saved preferences (recents)
-          HymnsApplication.getRecentsManager().readFromPreferences(this);
-       }  catch (Exception e) {
-          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING RECENT HYMNS...." + e.getMessage());
-       }
-
-       try {
-          //Restoring saved preferences (starred)
-          HymnsApplication.getStarManager().readFromPreferences(this);
-       }  catch (Exception e) {
-          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
-       }
+//       try {
+//          //Restoring saved preferences (recents)
+//          HymnsApplication.getRecentsManager().readFromPreferences(this);
+//       }  catch (Exception e) {
+//          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING RECENT HYMNS...." + e.getMessage());
+//       }
+//
+//       try {
+//          //Restoring saved preferences (starred)
+//          HymnsApplication.getStarManager().readFromPreferences(this);
+//       }  catch (Exception e) {
+//          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
+//       }
 
     }
 
