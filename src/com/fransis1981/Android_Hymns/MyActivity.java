@@ -55,6 +55,8 @@ public class MyActivity extends FragmentActivity
    Spinner mSpinnerInnari, mSpinnerCategoria;
    ArrayAdapter<String> spin_innariAdapter, spin_catAdapter;
 
+   int currentInnariSelection = -1, currentCategoriaSelection = -1;
+
     /** Called when the activity is first created.  */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,22 +72,7 @@ public class MyActivity extends FragmentActivity
             Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE CREATNG MAIN ACTIVITY GUI...." + e.getMessage());
             e.printStackTrace();
         }
-
-//       try {
-//          //Restoring saved preferences (recents)
-//          HymnsApplication.getRecentsManager().readFromPreferences(this);
-//       }  catch (Exception e) {
-//          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING RECENT HYMNS...." + e.getMessage());
-//       }
-//
-//       try {
-//          //Restoring saved preferences (starred)
-//          HymnsApplication.getStarManager().readFromPreferences(this);
-//       }  catch (Exception e) {
-//          Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
-//       }
-
-    }
+   }
 
    private void initUI() throws Exception {
       lblCategorie = (TextView) findViewById(R.id.lbl_categoria);
@@ -95,8 +82,10 @@ public class MyActivity extends FragmentActivity
       mSpinnerInnari = (Spinner) findViewById(R.id.spinner_innari);
       spin_innariAdapter =
             new ArrayAdapter<String>(this, R.layout.mainspinners_item, HymnsApplication.getInnariTitles());
+      spin_innariAdapter.insert(HymnsApplication.myResources.getString(R.string.generic_categoria_spinner_label), 0);
       spin_innariAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       mSpinnerInnari.setAdapter(spin_innariAdapter);
+      mSpinnerInnari.setSelection(1);
       mSpinnerInnari.setOnItemSelectedListener(this);
 
       //Treating spinner categoria
@@ -170,33 +159,31 @@ public class MyActivity extends FragmentActivity
 
    @Override
    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+      //TODO check at the time of breakpoint, which is the saved state of selection in the watches....
       if (parent == mSpinnerInnari) {
-         //Handling selection on spinner Innari
-         String selected_str = (String) parent.getItemAtPosition(position);
-         if (selected_str.length() > 0) {
-            //Log.i(MyConstants.LogTag_STR, "A selection happened in the spinner Innari!!!! [" + selected_str + "]");
-            spin_innariAdapter.remove("");
-            spin_innariAdapter.notifyDataSetChanged();
+         //Log.i(MyConstants.LogTag_STR, "A selection happened in the spinner Innari!!!! [" + selected_str + "]");
+         //Handling selection on spinner Innari; 1st useful element is at index 1.
+
+         //Se non si seleziona nessun innario, si seleziona almeno una categoria diversa da "NESSUNA"
+         if (position == 0) {
+            if (mSpinnerCategoria.getSelectedItemPosition() == 0) mSpinnerCategoria.setSelection(1);
+         } else {
+            String selected_str = (String) parent.getItemAtPosition(position);
             mSpinnerCategoria.setSelection(0);
             HymnsApplication.setCurrentInnario(selected_str);
             highlightLabelInnari();
          }
+         currentInnariSelection = position;
       }
       else if (parent == mSpinnerCategoria) {
          //Handling selection on spinner Categoria
-         Inno.Categoria cat = Inno.Categoria.parseString((String) mSpinnerCategoria.getItemAtPosition(position));
-         if (position != 0) {
-            HymnsApplication.setCurrentInnario(cat);
-            if (spin_innariAdapter.getItem(0).length() != 0) {
-               spin_innariAdapter.insert("", 0);
-               spin_innariAdapter.notifyDataSetChanged();
-            }
+         if (position == 0) {
+            if (mSpinnerInnari.getSelectedItemPosition() == 0) mSpinnerInnari.setSelection(1);
+         } else {
+            Inno.Categoria cat = Inno.Categoria.parseString((String) mSpinnerCategoria.getItemAtPosition(position));
             mSpinnerInnari.setSelection(0);
+            HymnsApplication.setCurrentInnario(cat);
             highlightLabelCategoria();
-         }
-         else {
-            if (spin_innariAdapter.getItem(0).length() == 0) mSpinnerInnari.setSelection(1);
-            else mSpinnerInnari.setSelection(0);
          }
       }
    }
@@ -231,24 +218,19 @@ public class MyActivity extends FragmentActivity
    @Override
    protected void onRestoreInstanceState(Bundle savedInstanceState) {
       super.onRestoreInstanceState(savedInstanceState);
-      //Restoring selected tab and spinners' selection.
-//      if (savedInstanceState != null) {
-//         int ttt = savedInstanceState.getInt(CATEGORIASELECTION_BUNDLESTATE);
-//         if (ttt == 0)
-//            mSpinnerInnari.setSelection(savedInstanceState.getInt(INNARIOSELECTION_BUNDLESTATE));
-//         else
-//            mSpinnerCategoria.setSelection(ttt);
-//         mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_BUNDLESTATE, MyConstants.TAB_MAIN_KEYPAD));
-//      } else {
-//         mSpinnerInnari.setSelection(0);
-//      }
+
+      if (savedInstanceState != null) {
+         currentCategoriaSelection = savedInstanceState.getInt(CATEGORIASELECTION_BUNDLESTATE);
+         currentInnariSelection = savedInstanceState.getInt(INNARIOSELECTION_BUNDLESTATE);
+         mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_BUNDLESTATE, MyConstants.TAB_MAIN_KEYPAD));
+      }
    }
 
    @Override
    protected void onSaveInstanceState(Bundle outState) {
       outState.putString(TAB_BUNDLESTATE, mTabHost.getCurrentTabTag());
-      outState.putInt(CATEGORIASELECTION_BUNDLESTATE, mSpinnerCategoria.getSelectedItemPosition());
-      outState.putInt(INNARIOSELECTION_BUNDLESTATE, mSpinnerInnari.getSelectedItemPosition());
+      outState.putInt(CATEGORIASELECTION_BUNDLESTATE, currentCategoriaSelection);
+      outState.putInt(INNARIOSELECTION_BUNDLESTATE, currentInnariSelection);
       super.onSaveInstanceState(outState);
    }
 
@@ -267,5 +249,23 @@ public class MyActivity extends FragmentActivity
       //Managing exception: you must specify a way to create the tab content (even if producing here dummy views).
       ts.setContent(new MainTabFactory(this));
       mTabHost.addTab(ts);
+   }
+
+   @Override
+   protected void onPause() {
+      currentInnariSelection = mSpinnerInnari.getSelectedItemPosition();
+      currentCategoriaSelection = mSpinnerCategoria.getSelectedItemPosition();
+      super.onPause();
+   }
+
+   //Using this callback to manage spinners' state.
+   @Override
+   protected void onResume() {
+      super.onResume();
+      if (currentInnariSelection == -1 && currentCategoriaSelection == -1) mSpinnerInnari.setSelection(1);
+      else {
+         if (currentInnariSelection > 0) mSpinnerInnari.setSelection(currentInnariSelection);
+         else if (currentCategoriaSelection > 0) mSpinnerCategoria.setSelection(currentCategoriaSelection);
+      }
    }
 }

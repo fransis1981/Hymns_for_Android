@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="apptheme_color">#ff954b08</color>
+
     <color name="circleButton_outerLine">#ff23ffa1</color>
     <color name="circleButton_bgPressed">#fff4f2f3</color>
     <color name="testo_strofe_color">#ff000d7c</color>

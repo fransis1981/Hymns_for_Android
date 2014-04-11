@@ -41,6 +41,9 @@ public class Inni2RowsAdapter extends ArrayAdapter<Inno> {
          vh = (ViewHolder) convertView.getTag();
       }
       else {
+
+         //TODO: memorizzare nel viewHolder il numero dell'inno e aggiungere lì un handler per il click sulla stella
+         //TODO: basato sul nuovo campo, popolato dinamicamente. Dovrebbe andare un po' meglio
          vh = new ViewHolder();
          LayoutInflater li = _context.getLayoutInflater();
          innoTemplate = li.inflate(R.layout.hymnslist_tworows_item, null, true);
