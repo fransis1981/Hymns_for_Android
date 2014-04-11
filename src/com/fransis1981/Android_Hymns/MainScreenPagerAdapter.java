@@ -45,7 +45,7 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
       _fragment_hymnslist = fh;
       _fragment_recent = fr;
       _fragment_starred = fs;
-
+      fragmentContext = FragmentContextEnum.KEYPAD;
       bindEventListeners();
    }
 
@@ -121,6 +121,10 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
 
    //This is a wrapper method for calling udpateContent on a given fragment. Useful for external callbacks.
    void updateFragmentContent(int pos) {
-      ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(pos))).updateContent();
+      try {
+         ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(pos))).updateContent();
+      } catch (Exception e) {
+         //Just to avoid app crashes on null fragments of the SingleHymn activity is active.
+      }
    }
 }
