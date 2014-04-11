@@ -10,7 +10,7 @@
     <style name="HymnTitle_style">
         <item name="android:textSize">26sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">#ffdada0a</item>
+        <item name="android:textColor">@color/HymnTitle_color</item>
     </style>
     <style name="HymnTitle_item_style" parent="HymnTitle_style">
         <item name="android:textSize">24sp</item>
@@ -31,7 +31,7 @@
 
     <style name="strofaLabel_Style">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#ffefe300</item>
+        <item name="android:textColor">@color/strofaLabel_color</item>
         <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingRight">15dp</item>
         <item name="android:gravity">top</item>
@@ -83,8 +83,30 @@
         <item name="android:background">@drawable/ab_transparent_hymns_actionbar_theme</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Hymns_actionbar_theme</item>
     </style>
+
     <style name="ProgressBar.Hymns_actionbar_theme" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_hymns_actionbar_theme</item>
+    </style>
+
+    <style name="TabHymnsAppMainStyle">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:background">@drawable/hymnsappmainstyle_tab_indicator_holo</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">80dip</item>
+    </style>
+
+    <style name="TabTextHymnsAppMainStyle">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <!-- v14 <item name="android:textAllCaps">true</item> -->
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:maxWidth">180dip</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
 </resources>

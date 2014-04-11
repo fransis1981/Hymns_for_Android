@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -244,8 +245,9 @@ public class MyActivity extends FragmentActivity
 
    private void addTabToTabHost(String _tabName, Drawable _drawable) {
       TabHost.TabSpec ts = mTabHost.newTabSpec(_tabName);
-      if (_drawable != null) ts.setIndicator(_tabName, _drawable);
-      else ts.setIndicator(_tabName);
+      View v = LayoutInflater.from(this).inflate(R.layout.tab_indicator_holo, mTabHost.getTabWidget(), false);
+      ((TextView) v.findViewById(android.R.id.title)).setText(_tabName);
+      ts.setIndicator(v);
       //Managing exception: you must specify a way to create the tab content (even if producing here dummy views).
       ts.setContent(new MainTabFactory(this));
       mTabHost.addTab(ts);

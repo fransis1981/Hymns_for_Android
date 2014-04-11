@@ -2,4 +2,6 @@
 <resources>
     <dimen name="circleButton_Margin">3dp</dimen>
     <dimen name="keypad_ExternalPadding">6dp</dimen>
+
+    <dimen name="tab_host_default_height">48dp</dimen>
 </resources>
