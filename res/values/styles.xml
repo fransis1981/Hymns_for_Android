@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="HymnsAppMainStyle" parent="android:Theme.Holo">
-
+    <style name="HymnsAppMainStyle" parent="android:style/Theme.Holo">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_hymns_actionbar_theme</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Transparent.Hymns_actionbar_theme</item>
+        <!-- <item name="android:actionModeBackground">@drawable/cab_background_top_hymns_actionbar_theme</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_hymns_actionbar_theme</item> -->
     </style>
 
     <style name="HymnTitle_style">
@@ -72,4 +75,16 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@color/main_spinners_bg</item>
     </style>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~~~ SUPPORT STYLES ~~~~~~~~~~ -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <style name="ActionBar.Transparent.Hymns_actionbar_theme" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_hymns_actionbar_theme</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Hymns_actionbar_theme</item>
+    </style>
+    <style name="ProgressBar.Hymns_actionbar_theme" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_hymns_actionbar_theme</item>
+    </style>
+
 </resources>
