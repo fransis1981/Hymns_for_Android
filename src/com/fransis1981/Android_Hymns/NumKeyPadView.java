@@ -125,17 +125,17 @@ public class NumKeyPadView extends TableLayout {
 
          cancelButton.setOnClickListener(new ImageButton.OnClickListener() {
             public void onClick(View v) {
-               cancelButton.startAnimation(cancelSprite);
-               raiseKeyPressedEvent(KEYPAD_CANCEL);
+              cancelButton.startAnimation(cancelSprite);
+              raiseKeyPressedEvent(KEYPAD_CANCEL);
             }
          });
 
          okButton.setOnClickListener(new ImageButton.OnClickListener() {
             public void onClick(View v) {
-               if (mAnimationStarted) {
-                  mAnimationStarted = false;
-                  okButton.clearAnimation();
-               }
+              if (mAnimationStarted) {
+                 mAnimationStarted = false;
+                 okButton.clearAnimation();
+              }
             }
          });
 

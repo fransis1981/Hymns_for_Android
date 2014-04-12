@@ -1,6 +1,7 @@
 package com.fransis1981.Android_Hymns;
 
 import android.content.Context;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -16,57 +17,80 @@ import android.widget.Button;
  * (similar to numeric keypad on iOS7 unlock screen).
  */
 public class DigitCircleButtonView extends Button {
-   private static Paint buttonPaint;
-   private static Paint textPaint;
-   private static Paint bgPaint;
-   private static Rect txtBounds = new Rect();         //Helper object for centering text; preallocated for efficiency.
+   private static Paint buttonPaint;               //Paint object for the outer line
+   private static Paint buttonPaint_blur;          //Paint object for the blurred outer line
+   private static Paint textPaint;                 //Paint object for text in enabled state
+   private static Paint textPaint_obscured;        //Paint object for text in obscured state
+   private static Paint bgIllumination;            //Paint object for background when button is touched
+
+   //Helper object for centering text; preallocated for efficiency.
+   private static Rect txtBounds = new Rect();
 
    int buttonX, buttonY, radius;
    boolean isPressed = false;
 
-   // Color used to paint this button
-   private int lineColor;
+   // Margin provided between button outer circle line and measured button's dimensions
+   private int _margin;
 
     //Shared init method for all constructors.
     private void init(int color) {
-        if (!isInEditMode()) {
-            try {
-               if (buttonPaint == null) {
-                   buttonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                   buttonPaint.setColor(HymnsApplication.myResources.getColor(R.color.circleButton_outerLine));
-                   buttonPaint.setStyle(Paint.Style.STROKE);
-                   buttonPaint.setStrokeWidth(2);      //TODO: externalize as dimension the stroke width
-               }
-
-               if (textPaint == null) {
-                   textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                   textPaint.setColor(HymnsApplication.myResources.getColor(android.R.color.darker_gray));
-                   textPaint.setStrokeWidth(2);
-                   textPaint.setStyle(Paint.Style.STROKE);
-                   textPaint.setTextAlign(Paint.Align.CENTER);
-               }
-
-               if (bgPaint == null) {
-                  bgPaint = new Paint();
-                  bgPaint.setColor(HymnsApplication.myResources.getColor(android.R.color.darker_gray));
-                  bgPaint.setStyle(Paint.Style.FILL);
-               }
-
-                lineColor = color;
-
-               setOnTouchListener(new OnTouchListener() {
-                  @Override
-                  public boolean onTouch(View v, MotionEvent event) {
-                     if (event.getActionMasked() == MotionEvent.ACTION_DOWN) { isPressed = true; }
-                     else if (event.getActionMasked() == MotionEvent.ACTION_UP) { isPressed = false; }
-                     invalidate();
-                     return false;           //IMPORTANT: Returns false so that we may continue further event processing
-                  }
-               });
-            } catch (Exception e) {
-                Log.e(MyConstants.LogTag_STR, e.getMessage());
+        if (isInEditMode()) return;
+        _margin = (int) HymnsApplication.myResources.getDimension(R.dimen.circleButton_Margin);
+         try {
+            if (buttonPaint == null) {
+               buttonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+               buttonPaint.setColor(color);
+               buttonPaint.setStyle(Paint.Style.STROKE);
+               buttonPaint.setStrokeWidth((int) HymnsApplication.myResources.getDimension(R.dimen.circleButton_LineWidth));
             }
-        }
+
+            if (buttonPaint_blur == null) {
+               buttonPaint_blur = new Paint(Paint.ANTI_ALIAS_FLAG);
+               buttonPaint_blur.setColor(color);
+               buttonPaint_blur.setStyle(Paint.Style.STROKE);
+               buttonPaint_blur.setStrokeWidth((int) HymnsApplication.myResources.getDimension(R.dimen.circleButton_LineWidth));
+               buttonPaint_blur.setMaskFilter(new BlurMaskFilter(R.integer.circleButton_BlurRadius, BlurMaskFilter.Blur.NORMAL));
+            }
+
+            if (textPaint == null) {
+               textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+               textPaint.setColor(HymnsApplication.myResources.getColor(R.color.strofaLabel_color));
+               textPaint.setStrokeWidth((int) HymnsApplication.myResources.getDimension(R.dimen.circleButton_TextStroke));
+               textPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+               textPaint.setTextAlign(Paint.Align.CENTER);
+               textPaint.setTypeface(HymnsApplication.fontLabelStrofa);
+            }
+
+            if (textPaint_obscured == null) {
+               textPaint_obscured = new Paint(Paint.ANTI_ALIAS_FLAG);
+               textPaint_obscured.setColor(HymnsApplication.myResources.getColor(R.color.strofaLabel_color_faded));
+               textPaint_obscured.setStrokeWidth((int) HymnsApplication.myResources.getDimension(R.dimen.circleButton_TextStroke));
+               textPaint_obscured.setStyle(Paint.Style.STROKE);
+               textPaint_obscured.setTextAlign(Paint.Align.CENTER);
+               textPaint_obscured.setTypeface(HymnsApplication.fontLabelStrofa);
+            }
+
+            if (bgIllumination == null) {
+               bgIllumination = new Paint();
+               bgIllumination.setColor(HymnsApplication.myResources.getColor(R.color.circleButton_Illumination));
+               bgIllumination.setStyle(Paint.Style.FILL);
+            }
+
+            setOnTouchListener(new OnTouchListener() {
+               @Override
+               public boolean onTouch(View v, MotionEvent event) {
+                  if (event.getActionMasked() == MotionEvent.ACTION_DOWN) { isPressed = true; }
+                  else if (event.getActionMasked() == MotionEvent.ACTION_UP
+                        || event.getActionMasked() == MotionEvent.ACTION_CANCEL
+                        || event.getActionMasked() == MotionEvent.ACTION_OUTSIDE)
+                     { isPressed = false; }
+                  invalidate();
+                  return false;           //IMPORTANT: Returns false so that we may continue further event processing
+               }
+            });
+         } catch (Exception e) {
+             Log.e(MyConstants.LogTag_STR, e.getMessage());
+         }
     }
 
 
@@ -78,17 +102,17 @@ public class DigitCircleButtonView extends Button {
 
     public DigitCircleButtonView(Context context) {
         super(context);
-        init(android.R.color.white);
+        init(HymnsApplication.myResources.getColor(R.color.circleButton_outerLine));
     }
 
     public DigitCircleButtonView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(android.R.color.white);
+        init(HymnsApplication.myResources.getColor(R.color.circleButton_outerLine));
     }
 
     public DigitCircleButtonView(Context context, AttributeSet attrs) {
        super(context, attrs);
-       init(android.R.color.white);
+       init(HymnsApplication.myResources.getColor(R.color.circleButton_outerLine));
     }
 
     @Override
@@ -97,21 +121,30 @@ public class DigitCircleButtonView extends Button {
         if (isInEditMode()) {
             super.onDraw(canvas);
         }
-        else if (!isEnabled()) {
-           setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
-        }
         else {
            // Just for Debug:  canvas.drawRect(0,0, getMeasuredWidth(), getMeasuredHeight(), textPaint);
            buttonX = getMeasuredWidth() / 2;
            buttonY = getMeasuredHeight() / 2;
-           radius = (Math.min(buttonX, buttonY)) - 3;   //TODO: externalize as dimension the text size
+           radius = (Math.min(buttonX, buttonY)) - _margin;
            setBackgroundColor(HymnsApplication.myResources.getColor(android.R.color.transparent));
-           if (isPressed) canvas.drawCircle(buttonX, buttonY, radius, bgPaint);
-           canvas.drawCircle(buttonX, buttonY, radius, buttonPaint);
-           textPaint.setTextSize(radius);          //TODO: externalize as dimension the text size
-           if (getText().length() > 0) {
-               textPaint.getTextBounds(getText().toString(), 0, 1, txtBounds);
-               canvas.drawText(getText().toString(), buttonX, buttonY - txtBounds.centerY(), textPaint);
+           if (!isEnabled()) {
+              textPaint_obscured.setTextSize(radius);
+              if (getText().length() > 0) {
+                 textPaint_obscured.getTextBounds(getText().toString(), 0, 1, txtBounds);
+                 canvas.drawText(getText().toString(), buttonX, buttonY - txtBounds.centerY(), textPaint_obscured);
+              }
+           }
+           else {
+              textPaint.setTextSize(radius);
+              if (getText().length() > 0) {
+                 textPaint.getTextBounds(getText().toString(), 0, 1, txtBounds);
+                 canvas.drawText(getText().toString(), buttonX, buttonY - txtBounds.centerY(), textPaint);
+              }
+              if (isPressed) {
+                 canvas.drawCircle(buttonX, buttonY, radius, bgIllumination);
+                 //canvas.drawCircle(buttonX, buttonY, radius, buttonPaint_blur);
+              }
+              canvas.drawCircle(buttonX, buttonY, radius, buttonPaint);
            }
         }
     }
@@ -127,7 +160,8 @@ public class DigitCircleButtonView extends Button {
       //Log.i(MyConstants.LogTag_STR, "PROPOSED MEASUREMENT:" + getText() + " (" + willX + ", " + willY + ")");
 
       //Willing to make the maximum possible square (some redundant assignments better than comparison and jump).
-      int defaultX = 150, defaultY = 150;       //TODO: default values; to externalize into XML such resource
+      int defaultX = (int) HymnsApplication.myResources.getDimension(R.dimen.circleButton_defaultWidth),
+            defaultY = (int) HymnsApplication.myResources.getDimension(R.dimen.circleButton_defaultHeight);
       if (modeX == MeasureSpec.UNSPECIFIED) willX = defaultX;
       if (modeY == MeasureSpec.UNSPECIFIED) willY = defaultY;
       if (willX < willY) { willY = willX; }
