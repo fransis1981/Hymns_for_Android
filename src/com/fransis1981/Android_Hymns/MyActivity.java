@@ -270,4 +270,9 @@ public class MyActivity extends FragmentActivity
          else if (currentCategoriaSelection > 0) mSpinnerCategoria.setSelection(currentCategoriaSelection);
       }
    }
+
+   //This method is used to discriminate between different kinds of layouts.
+   void callback_HymnSelected(Inno inno) {
+      Log.i(MyConstants.LogTag_STR, "CALLBACK INVOKED .,.,.,.,.,.,.,.,,,.,.,.,.,.,.,.");
+   }
 }

@@ -23,7 +23,7 @@ public class StrofeAdapter extends ArrayAdapter<Strofa> {
    }
 
    public StrofeAdapter(Activity context, ArrayList<Strofa> objects) {
-      super(context, R.layout.single_hymn_view, objects);
+      super(context, R.layout.single_hymn_fragment, objects);
       _context = context;
       _strofe = objects;
    }

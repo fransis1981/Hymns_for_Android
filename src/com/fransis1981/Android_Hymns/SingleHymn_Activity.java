@@ -1,18 +1,15 @@
 package com.fransis1981.Android_Hymns;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v4.app.FragmentActivity;
 import android.view.Window;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
 /**
- * Created by Fransis on 27/02/14 15.08.
+ * Created by Fransis on 12/04/14 21.19.
  */
-public class SingleHymn_Activity extends ListActivity {
+public class SingleHymn_Activity extends FragmentActivity {
    static Intent single_hymn_intent;
 
    public static final String NUMERO_INNO_BUNDLEARG = "NumeroInno";
@@ -22,37 +19,15 @@ public class SingleHymn_Activity extends ListActivity {
       super.onCreate(savedInstanceState);
 
       requestWindowFeature(Window.FEATURE_NO_TITLE);
-      setContentView(R.layout.single_hymn_view);
+      setContentView(R.layout.singlehymn_activity);
 
       Bundle extras = getIntent().getExtras();
       int hymnNumber = extras.getInt(NUMERO_INNO_BUNDLEARG);
       String innarioTitle = extras.getString(INNARIO_BUNDLEARG);
       final Inno hymnToDisplay =  HymnsApplication.getInnarioByTitle(innarioTitle).getInno(hymnNumber);
 
-      //Adding selected hymn to recents list.
-      HymnsApplication.getRecentsManager().pushHymn(hymnToDisplay);
-
-      //Treating hymn number
-      TextView txt_number = (TextView) findViewById(R.id.singleHymn_number);
-      txt_number.setText(String.valueOf(hymnNumber) + ".");
-
-      //Treating hymn title
-      TextView title = (TextView) findViewById(R.id.hymn_title);
-      title.setTypeface(HymnsApplication.fontTitolo1);
-      title.setText(hymnToDisplay.getTitolo());
-
-      //Treating star check box
-      final CheckBox chk_starred = (CheckBox) findViewById(R.id.singleHymn_starcheck);
-      chk_starred.setChecked(hymnToDisplay.isStarred());
-      chk_starred.setOnClickListener(new CheckBox.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-            hymnToDisplay.setStarred(chk_starred.isChecked());
-         }
-      });
-
-      setListAdapter(new StrofeAdapter(this, hymnToDisplay.getListStrofe()));
-
+      SingleHymn_Fragment frag = (SingleHymn_Fragment) getSupportFragmentManager().findFragmentById(R.id.singlehymn_fragment);
+      frag.showHymn(hymnToDisplay);
    }
 
    static void setupIntent() {
@@ -66,4 +41,5 @@ public class SingleHymn_Activity extends ListActivity {
       SingleHymn_Activity.single_hymn_intent.replaceExtras(newextra);
       context.startActivity(SingleHymn_Activity.single_hymn_intent);
    }
+
 }

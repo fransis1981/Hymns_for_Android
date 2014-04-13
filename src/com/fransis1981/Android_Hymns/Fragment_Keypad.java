@@ -59,6 +59,7 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
 
                case NumKeyPadView.KEYPAD_OK:
                   //Log.i(MyConstants.LogTag_STR, "EVENTO KEYPAD OK!!!!");
+                  //TODO: this piece of code must be generalized and reused to manage large landscape layout!!!
                   Bundle newextra = new Bundle();
                   newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
                   newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG,
