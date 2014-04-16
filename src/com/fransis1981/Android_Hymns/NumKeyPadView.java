@@ -23,9 +23,8 @@ public class NumKeyPadView extends TableLayout {
       mOnKeyPressedListener = listener;
    }
 
-   public static final int KEYPAD_OK = -1;
-   public static final int KEYPAD_CANCEL = -2;
-
+   static final int KEYPAD_OK = -1;
+   static final int KEYPAD_CANCEL = -2;
 
    DigitCircleButtonView numkeys[] = new DigitCircleButtonView[10];
    ImageButton okButton, cancelButton;   //ok button is a ghost one, actual event is reased upon timeout or forced confirmation.
@@ -45,13 +44,25 @@ public class NumKeyPadView extends TableLayout {
    }
 
    //Method for managing composed number when a new digit is composed
+   //Forcing the following behaviour: upon a new key pressed, the okButton animation is cleared a priori
+   //unless the pressed button is OK itself.
    void raiseKeyPressedEvent(int button) {
       mLastPressed = button;
-      if (mAnimationStarted && mLastPressed == KEYPAD_OK) okButton.clearAnimation();
+      if (mAnimationStarted && mLastPressed == KEYPAD_OK) {
+         okButton.clearAnimation();    //clearAnimation will trigger a key pressed
+         return;
+      }
+
 
       if (mOnKeyPressedListener != null)
          mOnKeyPressedListener.onKeyPressed(button);
    }
+
+//   //Method that can be invoked also from an external context (e.g., on tab change).
+//   void abortOkAnimation() {
+//      mLastPressed = KEYPAD_ABORT;
+//      okButton.clearAnimation();
+//   }
 
    //Centralized init method called by the constructors.
    void init(final Context context) {
@@ -162,12 +173,12 @@ public class NumKeyPadView extends TableLayout {
       if (mAnimationStarted) {            //Preventing multiple timeouts.
          mAnimationStarted = false;
          mLastPressed = KEYPAD_CANCEL;    //Dummy assignemnt to prevent OK button event from being generated.
-         okButton.clearAnimation();
+         okButton.getAnimation().reset();
       }
    }
 
    /*
-   A list of 10 booleans (one for each digit); when TRUE, the corresponding digit is disable in the keypad.
+   A list of 10 booleans (one for each digit); when FALSE, the corresponding digit is disabled in the keypad.
     */
    public void setObscureList(boolean[] _list) {
       for (int i = 0; i < 10; i++) {

@@ -127,7 +127,6 @@ public class MyMainFragment extends Fragment
 
    @Override
    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-      //TODO check at the time of breakpoint, which is the saved state of selection in the watches....
       if (parent == mSpinnerInnari) {
          //Log.i(MyConstants.LogTag_STR, "A selection happened in the spinner Innari!!!! [" + selected_str + "]");
          //Handling selection on spinner Innari; 1st useful element is at index 1.

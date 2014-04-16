@@ -2,7 +2,6 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,16 +45,16 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
                case 7: case 8: case 9:
                   txtComposedNumber.setText(curr + String.valueOf(number));
                   keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getSubDialerList(number)).getObscureList());
+                  keypad.cancelOkButtonTimeout();
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();
-                  else keypad.cancelOkButtonTimeout();
                   break;
 
                case NumKeyPadView.KEYPAD_CANCEL:
                   if (curr.length() == 0) break;
                   txtComposedNumber.setText(curr.subSequence(0, curr.length() - 1));
                   keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getParentDialerList()).getObscureList());
+                  keypad.cancelOkButtonTimeout();
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();
-                  else keypad.cancelOkButtonTimeout();
                   break;
 
                case NumKeyPadView.KEYPAD_OK:
@@ -107,17 +106,5 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
    @Override
    public void updateContent() {
       resetComposedNumber();
-   }
-
-   @Override
-   public void onPause() {
-      Log.i(MyConstants.LogTag_STR, "KEYPAD WENT             ----> PAUSED!");
-      super.onPause();
-   }
-
-   @Override
-   public void onStop() {
-      Log.i(MyConstants.LogTag_STR, "KEYPAD WENT             ----> STOPPED!");
-      super.onStop();
    }
 }
