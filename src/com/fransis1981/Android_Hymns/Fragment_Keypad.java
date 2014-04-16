@@ -2,6 +2,7 @@ package com.fransis1981.Android_Hymns;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +61,13 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
                case NumKeyPadView.KEYPAD_OK:
                   //Log.i(MyConstants.LogTag_STR, "EVENTO KEYPAD OK!!!!");
                   //TODO: this piece of code must be generalized and reused to manage large landscape layout!!!
-                  Bundle newextra = new Bundle();
-                  newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
-                  newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG,
-                        HymnsApplication.getCurrentInnario().getInno(mLastValidComposedNumber).getParentInnario().getTitolo());
-                  SingleHymn_Activity.single_hymn_intent.replaceExtras(newextra);
-                  startActivity(SingleHymn_Activity.single_hymn_intent);
+//                  Bundle newextra = new Bundle();
+//                  newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
+//                  newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG,
+//                        HymnsApplication.getCurrentInnario().getInno(mLastValidComposedNumber).getParentInnario().getTitolo());
+//                  SingleHymn_Activity.single_hymn_intent.replaceExtras(newextra);
+//                  startActivity(SingleHymn_Activity.single_hymn_intent);
+                  ((MyActivity) getActivity()).callback_HymnSelected(HymnsApplication.getCurrentInnario().getInno(mLastValidComposedNumber));
                   resetComposedNumber();
                   break;
             }
@@ -105,5 +107,17 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
    @Override
    public void updateContent() {
       resetComposedNumber();
+   }
+
+   @Override
+   public void onPause() {
+      Log.i(MyConstants.LogTag_STR, "KEYPAD WENT             ----> PAUSED!");
+      super.onPause();
+   }
+
+   @Override
+   public void onStop() {
+      Log.i(MyConstants.LogTag_STR, "KEYPAD WENT             ----> STOPPED!");
+      super.onStop();
    }
 }

@@ -25,7 +25,6 @@ public class Fragment_HymnsList extends Fragment implements UpdateContentItf {
          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Inno clicked_inno = (Inno) parent.getAdapter().getItem(position);
             ((MyActivity) getActivity()).callback_HymnSelected(clicked_inno);
-            SingleHymn_Activity.startIntentWithHymn(getActivity(), clicked_inno);
          }
       });
 
