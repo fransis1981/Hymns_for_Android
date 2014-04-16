@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Inni e Salmi Spirituali</string>
-    <string name="coro_label">CORO</string>
-    <string name="label_innari">Innari:</string>
-    <string name="label_categoria">Categoria:</string>
-    <string name="clear_history">Cancella cronologia</string>
-    <string name="generic_categoria_spinner_label">&lt;Categoria&gt;</string>
+
+    <string name="keypad_cancel_str">Cancel</string>
+    <string name="coro_label">CHORUS</string>
+    <string name="label_innari">Hymnbooks:</string>
+    <string name="label_categoria">Category:</string>
+    <string name="clear_history">Clear History</string>
+    <string name="generic_categoria_spinner_label">&lt;Category&gt;</string>
+
+    <string name="mnu_options_str">Settings…</string>
 </resources>
