@@ -60,6 +60,8 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
    }
 
    public void setCurrentFragmentContext(int i) {
+      if (fragmentContext == FragmentContextEnum.KEYPAD)
+         ((Fragment_Keypad) getFragmentByPos(FragmentContextEnum.KEYPAD.ordinal())).abortKeypadTimeout();
       fragmentContext = FragmentContextEnum.parseInt(i);
    }
 
@@ -119,10 +121,14 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter
       return "android:switcher:" + R.id.main_viewpager + ":" + pos;
    }
 
+   Fragment getFragmentByPos(int pos) {
+         return _fm.findFragmentByTag(getFragmentTag(pos));
+   }
+
    //This is a wrapper method for calling udpateContent on a given fragment. Useful for external callbacks.
    void updateFragmentContent(int pos) {
       try {
-         ((UpdateContentItf) _fm.findFragmentByTag(getFragmentTag(pos))).updateContent();
+         ((UpdateContentItf) getFragmentByPos(pos)).updateContent();
       } catch (Exception e) {
          //Just to avoid app crashes on null fragments of the SingleHymn activity is active.
       }

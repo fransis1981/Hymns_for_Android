@@ -2,6 +2,7 @@ package com.fransis1981.Android_Hymns;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -147,6 +148,7 @@ public class NumKeyPadView extends TableLayout {
                  mAnimationStarted = false;
                  okButton.clearAnimation();
               }
+              else raiseKeyPressedEvent(KEYPAD_OK);
             }
          });
 
@@ -170,10 +172,14 @@ public class NumKeyPadView extends TableLayout {
    }
 
    public void cancelOkButtonTimeout() {
+      try {
+         okButton.getAnimation().reset();
+      } catch (Exception e) {
+         Log.w(MyConstants.LogTag_STR, "It was impossible to reset OK button animation.");
+      }
       if (mAnimationStarted) {            //Preventing multiple timeouts.
          mAnimationStarted = false;
          mLastPressed = KEYPAD_CANCEL;    //Dummy assignemnt to prevent OK button event from being generated.
-         okButton.getAnimation().reset();
       }
    }
 

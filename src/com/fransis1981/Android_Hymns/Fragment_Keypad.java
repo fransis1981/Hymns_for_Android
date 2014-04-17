@@ -107,4 +107,8 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
    public void updateContent() {
       resetComposedNumber();
    }
+
+   void abortKeypadTimeout() {
+      keypad.cancelOkButtonTimeout();
+   }
 }
