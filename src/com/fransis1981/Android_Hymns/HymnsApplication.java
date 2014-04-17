@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.widget.ImageView;
 import org.jsoup.helper.DataUtil;
 import org.jsoup.nodes.Document;
@@ -62,6 +63,8 @@ public class HymnsApplication extends Application {
     @Override
     public void onCreate() {
        super.onCreate();
+       TimingLogger tl = new TimingLogger(MyConstants.LogTag_STR, "Application.onCreate");
+
        singleton = this;
        assets = getAssets();
        myResources = getResources();
@@ -71,9 +74,11 @@ public class HymnsApplication extends Application {
        fontLabelStrofa = Typeface.createFromAsset(assets, "WetinCaroWant.ttf");
        //fontContenutoStrofa = Typeface.createFromAsset(assets, "Century_modern_italic2.ttf");
        fontContenutoStrofa = Typeface.createFromAsset(assets, "Caudex_Italic.ttf");
+       tl.addSplit("Prepared resources and fonts.");
 
        //Si prepara l'intent per il single hymn (to avoid null pointer exceptinos at first invocation)
        SingleHymn_Activity.setupIntent();
+       tl.addSplit("Prepared intent.");
 
        //Si prepara la struttura per gli innari di categoria
        categoricalInnari = new HashMap<Inno.Categoria, Innario>();
@@ -82,7 +87,10 @@ public class HymnsApplication extends Application {
 
        //Qui si caricano gli innari veri e propri (da SD oppure file XML)
        innari = new ArrayList<Innario>();
+       tl.addSplit("Initialized hymnbooks data strcutures.");
+
        caricaInnari(false);
+       tl.addSplit("Loaded all hymnbooks.");
 
        //Si imposta l'innario corrente al primo innario disponibile
        setCurrentInnario(innari.get(0));
@@ -96,6 +104,7 @@ public class HymnsApplication extends Application {
        catch (Exception e) {
           Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING RECENT HYMNS...." + e.getMessage());
        }
+       tl.addSplit("Prepared recents manager with preferences.");
 
        //Si crea il gestore dei preferiti (starred)
        starManager = new StarManager();
@@ -106,6 +115,9 @@ public class HymnsApplication extends Application {
        catch (Exception e) {
           Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
        }
+       tl.addSplit("Prepared star manager with preferences.");
+
+       tl.dumpToLog();
     }
 
    public static void setCurrentInnario(Innario _innario) {

@@ -50,22 +50,14 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
                   break;
 
                case NumKeyPadView.KEYPAD_CANCEL:
+                  keypad.cancelOkButtonTimeout();
                   if (curr.length() == 0) break;
                   txtComposedNumber.setText(curr.subSequence(0, curr.length() - 1));
                   keypad.setObscureList((mCurrentDialerList = mCurrentDialerList.getParentDialerList()).getObscureList());
-                  keypad.cancelOkButtonTimeout();
                   if (isComposedNumberValid()) keypad.startOkButtonTimeout();
                   break;
 
                case NumKeyPadView.KEYPAD_OK:
-                  //Log.i(MyConstants.LogTag_STR, "EVENTO KEYPAD OK!!!!");
-                  //TODO: this piece of code must be generalized and reused to manage large landscape layout!!!
-//                  Bundle newextra = new Bundle();
-//                  newextra.putInt(SingleHymn_Activity.NUMERO_INNO_BUNDLEARG, mLastValidComposedNumber);
-//                  newextra.putString(SingleHymn_Activity.INNARIO_BUNDLEARG,
-//                        HymnsApplication.getCurrentInnario().getInno(mLastValidComposedNumber).getParentInnario().getTitolo());
-//                  SingleHymn_Activity.single_hymn_intent.replaceExtras(newextra);
-//                  startActivity(SingleHymn_Activity.single_hymn_intent);
                   ((MyActivity) getActivity()).callback_HymnSelected(HymnsApplication.getCurrentInnario().getInno(mLastValidComposedNumber));
                   resetComposedNumber();
                   break;
