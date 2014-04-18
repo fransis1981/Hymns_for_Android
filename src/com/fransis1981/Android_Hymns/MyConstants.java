@@ -9,6 +9,7 @@ public final class MyConstants {
 
    //XML tags naming
    public static final String XML_ROOT_STR = "innari";
+   public static final String INNARI_VERSION_ATTR = "version";
 
    public static final String TAG_INNARIO_STR = "innario";
    public static final String ID_INNARIO_STR = "id_innario";
@@ -25,8 +26,8 @@ public final class MyConstants {
    public static final String STROFA_ISCHORUS_ATTR = "is_chorus";
 
    //Titoli dei tab nella pagina principale
-   public static final String TAB_MAIN_KEYPAD = "Tastierino";
-   public static final String TAB_MAIN_HYMNSLIST = "Elenco";
-   public static final String TAB_MAIN_RECENT = "Recenti";
-   public static final String TAB_MAIN_STARRED = "Preferiti";
+   public static final String TAB_MAIN_KEYPAD = HymnsApplication.myResources.getString(R.string.tab_keypad);
+   public static final String TAB_MAIN_HYMNSLIST = HymnsApplication.myResources.getString(R.string.tab_list);
+   public static final String TAB_MAIN_RECENT = HymnsApplication.myResources.getString(R.string.tab_recents);
+   public static final String TAB_MAIN_STARRED = HymnsApplication.myResources.getString(R.string.tab_starred);
 }
