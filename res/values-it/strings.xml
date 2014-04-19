@@ -8,4 +8,11 @@
     <string name="generic_categoria_spinner_label">&lt;Categoria&gt;</string>
 
     <string name="mnu_options_str">Preferenze…</string>
+
+    <!-- Tab titles -->
+    <string name="tab_keypad">Tastierino</string>
+    <string name="tab_list">Elenco</string>
+    <string name="tab_recents">Recenti</string>
+    <string name="tab_starred">Preferiti</string>
+
 </resources>

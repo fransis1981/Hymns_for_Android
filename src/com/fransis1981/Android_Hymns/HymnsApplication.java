@@ -7,9 +7,6 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.util.TimingLogger;
 import android.widget.ImageView;
-import org.jsoup.helper.DataUtil;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +15,8 @@ import java.util.HashMap;
  * Created by francesco.vitullo on 27/01/14.
  */
 public class HymnsApplication extends Application {
-    private static HymnsApplication singleton;
+   private static HymnsApplication singleton;
+   static final String HelperPreferences_STR = "HelperPreferences";
 
    //Providing at application level a one-time instantiation of the Resources table (for efficiency).
    public static Resources myResources;
@@ -47,6 +45,7 @@ public class HymnsApplication extends Application {
    private static int currentSpinnerLevel = 0;
    private static ImageView availableSpinner;
 
+   static TimingLogger tl;
 
    public static HymnsApplication getInstance() {
         return singleton;
@@ -63,7 +62,7 @@ public class HymnsApplication extends Application {
     @Override
     public void onCreate() {
        super.onCreate();
-       TimingLogger tl = new TimingLogger(MyConstants.LogTag_STR, "Application.onCreate");
+       tl = new TimingLogger(MyConstants.LogTag_STR, "HymnsApplication.onCreate");
 
        singleton = this;
        assets = getAssets();
@@ -76,21 +75,17 @@ public class HymnsApplication extends Application {
        fontContenutoStrofa = Typeface.createFromAsset(assets, "Caudex_Italic.ttf");
        tl.addSplit("Prepared resources and fonts.");
 
-       //Si prepara l'intent per il single hymn (to avoid null pointer exceptinos at first invocation)
+       //Si prepara l'intent per il single hymn (to avoid null pointer exceptions at first invocation)
        SingleHymn_Activity.setupIntent();
        tl.addSplit("Prepared intent.");
 
-       //Si prepara la struttura per gli innari di categoria
-       categoricalInnari = new HashMap<Inno.Categoria, Innario>();
-       for (Inno.Categoria cat: Inno.Categoria.values())
-          categoricalInnari.put(cat, new Innario());
+       //Time logging continued within the helper class...
+       HymnBooksHelper hymnBooksHelper = new HymnBooksHelper(getApplicationContext());
+       HymnBooksHelper.me().caricaInnari(false);
+       innari = HymnBooksHelper.me().innari;
+       categoricalInnari = HymnBooksHelper.me().categoricalInnari;
 
-       //Qui si caricano gli innari veri e propri (da SD oppure file XML)
-       innari = new ArrayList<Innario>();
-       tl.addSplit("Initialized hymnbooks data strcutures.");
-
-       caricaInnari(false);
-       tl.addSplit("Loaded all hymnbooks.");
+       //TODO: here make a call to perform serialization, maybe in a separate task.
 
        //Si imposta l'innario corrente al primo innario disponibile
        setCurrentInnario(innari.get(0));
@@ -159,30 +154,6 @@ public class HymnsApplication extends Application {
    }
 
    /*
-    * Questo metodo popola l'array globale degli innari;
-    * se è disponibile un file serializzato si carica da li, altrimenti si fa il parsing del file XML.
-    * Se _forceXML è TRUE allora si obbliga l'algoritmo ad acquisire i dati da XML.
-    */
-   private static void caricaInnari(boolean _forceXML) {
-      //TODO: Gestire l'eventuale serializzazione
-      Document doc;
-      Element root;
-
-      try {
-         doc = DataUtil.load(assets.open(MyConstants.INNI_XML_FILE), "UTF-8", "");
-         root = doc.body().getElementsByTag(MyConstants.XML_ROOT_STR).first();
-         for (Element innario: root.children()) {
-            Innario ii = new Innario(innario);
-            innari.add(ii);
-         }
-
-      } catch (Exception e) {
-         Log.e(MyConstants.LogTag_STR, "[HymsnApplication] CATCHED SOMETHING I AM NOT GOING TO MANAGE NOW...." + e.getMessage());
-         e.printStackTrace();
-      }
-   }
-
-   /*
     * This is a convenience method to get an ArrayList of titles for use with spinner's adapter.
     * REMOVED:In first position an empty string is put to allow an empty item in the spinner when no innario is selected.
     */
@@ -197,10 +168,6 @@ public class HymnsApplication extends Application {
    /*
     * This method adds a hymn in the proper categorized Innario.
     */
-   public static void addCategoricalInno(Inno _inno) {
-      categoricalInnari.get(_inno.getCategoria()).addInno(_inno);
-   }
-
 
    public static StarManager getStarManager() { return starManager; }
    public static MRUManager getRecentsManager() { return recentsManager; }

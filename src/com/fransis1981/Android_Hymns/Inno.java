@@ -1,13 +1,15 @@
 package com.fransis1981.Android_Hymns;
 
 import org.jsoup.nodes.Element;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
  * Created by Fransis on 23/02/14 21.29.
  */
-public class Inno {
+public class Inno implements Serializable {
    public static enum Categoria {
       NESSUNA(0),
       BAMBINI(2),

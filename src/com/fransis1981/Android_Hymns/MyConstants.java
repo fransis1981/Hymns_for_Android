@@ -30,4 +30,7 @@ public final class MyConstants {
    public static final String TAB_MAIN_HYMNSLIST = HymnsApplication.myResources.getString(R.string.tab_list);
    public static final String TAB_MAIN_RECENT = HymnsApplication.myResources.getString(R.string.tab_recents);
    public static final String TAB_MAIN_STARRED = HymnsApplication.myResources.getString(R.string.tab_starred);
+
+   //File system related constants
+   public static final String Persistence_FILENAME = "PersistedHymns";
 }

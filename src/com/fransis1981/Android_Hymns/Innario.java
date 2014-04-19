@@ -3,12 +3,13 @@ package com.fransis1981.Android_Hymns;
 import android.util.SparseArray;
 import org.jsoup.nodes.Element;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Fransis on 23/02/14 20.07.
  */
-public class Innario {
+public class Innario implements Serializable {
    private String titolo;
    private String id;
    private int numeroInni;
@@ -39,7 +40,7 @@ public class Innario {
 
          //Se l'inno appartiene ad una categoria, lo si sistema nell'opportuna struttura dati
          if (iii.getCategoria() != Inno.Categoria.NESSUNA) {
-            HymnsApplication.addCategoricalInno(iii);
+            HymnBooksHelper.me().addCategoricalInno(iii);
          }
       }
 

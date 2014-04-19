@@ -3,10 +3,12 @@ package com.fransis1981.Android_Hymns;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
+import java.io.Serializable;
+
 /**
  * Created by Fransis on 24/02/14 0.42.
  */
-public class Strofa {
+public class Strofa implements Serializable {
    private Inno parentInno;
    private boolean isChorus;
    private String contenuto;
