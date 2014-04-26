@@ -25,7 +25,8 @@ public class HymnBooksHelper extends SQLiteAssetHelper {
    SQLiteDatabase db;
 
    HymnBooksHelper(Context context) {
-      super(context, MyConstants.DB_NAME, null, 1);
+      super(context, MyConstants.DB_NAME, null, MyConstants.DB_VERSION);
+      setForcedUpgrade();
       mContext = context;
       singleton = this;
 
@@ -36,12 +37,12 @@ public class HymnBooksHelper extends SQLiteAssetHelper {
 
    private void initDB() {
       if (db == null) db = getReadableDatabase();
-      Log.i(MyConstants.LogTag_STR, "APERTO IL DB...");
+      //Log.i(MyConstants.LogTag_STR, "APERTO IL DB...");
    }
 
    private void initDataStructures() {
       initDB();
-      HymnsApplication.tl.addSplit("Preliminary operations upon DB.");
+      //HymnsApplication.tl.addSplit("Preliminary operations upon DB.");
 
       //Si prepara la struttura per gli innari di categoria
       categoricalInnari = new HashMap<Inno.Categoria, Innario>();
@@ -59,7 +60,7 @@ public class HymnBooksHelper extends SQLiteAssetHelper {
          //Log.i(MyConstants.LogTag_STR, "LETTO DAL DB: " + c.getString(MyConstants.INDEX_INNARI_TITOLO));
       }
       c.close();
-      HymnsApplication.tl.addSplit("All hymnbooks acquired by means of the cursor (Dialer Lists and base Inno objects).");
+      //HymnsApplication.tl.addSplit("All hymnbooks acquired by means of the cursor (Dialer Lists and base Inno objects).");
 
    }
 

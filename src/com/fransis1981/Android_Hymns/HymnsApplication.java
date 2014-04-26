@@ -5,7 +5,6 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.util.Log;
-import android.util.TimingLogger;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class HymnsApplication extends Application {
    private static int currentSpinnerLevel = 0;
    private static ImageView availableSpinner;
 
-   static TimingLogger tl;
+   //static TimingLogger tl;
 
    public static HymnsApplication getInstance() {
         return singleton;
@@ -63,7 +62,7 @@ public class HymnsApplication extends Application {
     @Override
     public void onCreate() {
        super.onCreate();
-       tl = new TimingLogger(MyConstants.LogTag_STR, "HymnsApplication.onCreate");
+       //tl = new TimingLogger(MyConstants.LogTag_STR, "HymnsApplication.onCreate");
 
        singleton = this;
        assets = getAssets();
@@ -71,11 +70,11 @@ public class HymnsApplication extends Application {
        fontTitolo1 = Typeface.createFromAsset(assets , "Caudex_Italic.ttf");
        fontLabelStrofa = Typeface.createFromAsset(assets, "WetinCaroWant.ttf");
        fontContenutoStrofa = Typeface.createFromAsset(assets, "Caudex_Italic.ttf");
-       tl.addSplit("Prepared resources and fonts.");
+       //tl.addSplit("Prepared resources and fonts.");
 
        //Si prepara l'intent per il single hymn (to avoid null pointer exceptions at first invocation)
        SingleHymn_Activity.setupIntent();
-       tl.addSplit("Prepared intent.");
+       //tl.addSplit("Prepared intent.");
 
        //Time logging continued within the helper class...
        HymnBooksHelper hymnBooksHelper = new HymnBooksHelper(getApplicationContext());
@@ -95,7 +94,7 @@ public class HymnsApplication extends Application {
        catch (Exception e) {
           Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING RECENT HYMNS...." + e.getMessage());
        }
-       tl.addSplit("Prepared recents manager with preferences.");
+       //tl.addSplit("Prepared recents manager with preferences.");
 
        //Si crea il gestore dei preferiti (starred)
        starManager = new StarManager();
@@ -106,8 +105,8 @@ public class HymnsApplication extends Application {
        catch (Exception e) {
           Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
        }
-       tl.addSplit("Prepared star manager with preferences.");
-       tl.dumpToLog();
+       //tl.addSplit("Prepared star manager with preferences.");
+       //tl.dumpToLog();
     }
 
    public static void setCurrentInnario(Innario _innario) {
