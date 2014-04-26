@@ -28,6 +28,7 @@ public class HymnsApplication extends Application {
    public static ArrayList<Innario> innari;
    public static HashMap<Inno.Categoria, Innario> categoricalInnari;    //One separate Innario for each category.
    private static Innario currentInnario;
+   //////private static Cursor currentInnario;
 
    //Definizione evento per gestire il cambiamento di innario corrente
    public interface OnCurrentInnarioChangedListener {
@@ -81,7 +82,7 @@ public class HymnsApplication extends Application {
 
        //Time logging continued within the helper class...
        HymnBooksHelper hymnBooksHelper = new HymnBooksHelper(getApplicationContext());
-       HymnBooksHelper.me().caricaInnari(false);
+       HymnBooksHelper.me().caricaInnari(true);
        innari = HymnBooksHelper.me().innari;
        categoricalInnari = HymnBooksHelper.me().categoricalInnari;
 
@@ -111,7 +112,6 @@ public class HymnsApplication extends Application {
           Log.e(MyConstants.LogTag_STR, "CATCHED SOMETHING WHILE RESTORING STARRED HYMNS...." + e.getMessage());
        }
        tl.addSplit("Prepared star manager with preferences.");
-
        tl.dumpToLog();
     }
 
@@ -143,15 +143,6 @@ public class HymnsApplication extends Application {
       return null;
    }
 
-   /*
-    * Questo metodo restituisce l'oggetto Innario opportuno conoscendone l'ID.
-    */
-   public static Innario getInnarioByID(String _id) {
-      for (Innario i: innari) {
-         if (i.getId().equals(_id)) return i;
-      }
-      return null;
-   }
 
    /*
     * This is a convenience method to get an ArrayList of titles for use with spinner's adapter.
@@ -171,4 +162,5 @@ public class HymnsApplication extends Application {
 
    public static StarManager getStarManager() { return starManager; }
    public static MRUManager getRecentsManager() { return recentsManager; }
+
 }

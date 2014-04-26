@@ -101,6 +101,8 @@ public class Fragment_Keypad extends Fragment implements UpdateContentItf {
    }
 
    void abortKeypadTimeout() {
-      keypad.cancelOkButtonTimeout();
+      try {
+         keypad.cancelOkButtonTimeout();
+      } catch (Exception e) {}
    }
 }

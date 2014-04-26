@@ -2,12 +2,14 @@ package com.fransis1981.Android_Hymns;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import org.jsoup.helper.DataUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,7 +20,7 @@ import java.util.HashMap;
  * Current HymnBook XML version is stored in SharedPreferences and is checked to determine the
  * source for loading hymns (persistent storage or XML).
  */
-public class HymnBooksHelper implements Serializable {
+public class HymnBooksHelper extends SQLiteAssetHelper {
    private static final String PREF_XML_VERSION = "XMLVersion";
 
    private Context mContext;
@@ -26,23 +28,45 @@ public class HymnBooksHelper implements Serializable {
 
    ArrayList<Innario> innari;
    HashMap<Inno.Categoria, Innario> categoricalInnari;    //One separate Innario for each category.
+   SQLiteDatabase db;
 
    HymnBooksHelper(Context context) {
+      super(context, MyConstants.DB_NAME, null, 1);
       mContext = context;
       singleton = this;
+
    }
    public static HymnBooksHelper me() { return singleton; }
 
-   //TODO: implement possibly threads to improve performance.
+   //TODO: possibly implement threads to improve performance.
+
+   private void initDB() {
+      if (db == null) db = getReadableDatabase();
+      Log.i(MyConstants.LogTag_STR, "APERTO IL DB...");
+   }
 
    private void initDataStructures() {
+      initDB();
+      HymnsApplication.tl.addSplit("Preliminary operations upon DB.");
+
       //Si prepara la struttura per gli innari di categoria
       categoricalInnari = new HashMap<Inno.Categoria, Innario>();
       for (Inno.Categoria cat: Inno.Categoria.values())
-         categoricalInnari.put(cat, new Innario());
+         categoricalInnari.put(cat, new Innario(cat.toString()));
 
       //Qui si caricano gli innari veri e propri (da SD oppure file XML)
       innari = new ArrayList<Innario>();
+
+      Cursor c = db.rawQuery(MyConstants.QUERY_SELECT_INNARI, null);
+      while (c.moveToNext()) {
+         innari.add(new Innario(c.getInt(MyConstants.INDEX_INNARI_NUM_INNI),
+                                c.getString(MyConstants.INDEX_INNARI_TITOLO),
+                                c.getString(MyConstants.INDEX_INNARI_ID)));
+         Log.i(MyConstants.LogTag_STR, "LETTO DAL DB: " + c.getString(MyConstants.INDEX_INNARI_TITOLO));
+      }
+      c.close();
+      HymnsApplication.tl.addSplit("All hymnbooks read and created by means of the cursor (also populated Dialer Lists and base Inno objects).");
+
    }
 
    /*
@@ -54,6 +78,8 @@ public class HymnBooksHelper implements Serializable {
       Document doc;
       Element root;
       SharedPreferences sp;
+
+      _forceXML = true;
 
       initDataStructures();
 
@@ -74,15 +100,15 @@ public class HymnBooksHelper implements Serializable {
             }
             HymnsApplication.tl.addSplit("Loaded hymns from XML assets.");
 
-            serialize();
-            HymnsApplication.tl.addSplit("Serialized hymnbooks.");
+            //serialize();
+            //HymnsApplication.tl.addSplit("Serialized hymnbooks.");
 
-            sp.edit().putLong(PREF_XML_VERSION, xmlversion).commit();
+            //sp.edit().putLong(PREF_XML_VERSION, xmlversion).commit();
          }
          else {
             //Loading hymns from persistent storage
             //TODO: deserialize data structures
-            deserialize(this);
+            //deserialize(this);
             HymnsApplication.tl.addSplit("Loaded all hymnbooks from persistent storage (serialization).");
          }
 
@@ -91,8 +117,6 @@ public class HymnBooksHelper implements Serializable {
          e.printStackTrace();
       }
    }
-
-   //TODO: somewhere a method for serializing this object.
 
    static long getXMLVersionInAssets(Element xmlroot) {
       return Long.parseLong(xmlroot.attr(MyConstants.INNARI_VERSION_ATTR));
@@ -108,6 +132,18 @@ public class HymnBooksHelper implements Serializable {
       categoricalInnari.get(_inno.getCategoria()).addInno(_inno);
    }
 
+   /*
+    * Questo metodo restituisce l'oggetto Innario opportuno conoscendone l'ID.
+   */
+   public Innario getInnarioByID(String _id) {
+      for (Innario i: innari) {
+         if (i.getId().equals(_id)) return i;
+      }
+      return null;
+   }
+
+
+/*
    void serialize() {
       FileOutputStream fos;
       ObjectOutputStream oot;
@@ -145,4 +181,5 @@ public class HymnBooksHelper implements Serializable {
          sp.edit().remove(PREF_XML_VERSION).commit();
       }
    }
+*/
 }

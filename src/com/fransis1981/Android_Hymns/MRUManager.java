@@ -83,7 +83,7 @@ public class MRUManager {
       int n = sp.getInt(PREF_StarredNumber, 0);
       for (int i = 1; i <= n; i++) {
          String[] tokens = sp.getString(PREF_HymnRef + i, "").split("\\|");
-         Innario innario = HymnsApplication.getInnarioByID(tokens[0]);
+         Innario innario = HymnBooksHelper.me().getInnarioByID(tokens[0]);
          if (innario == null) continue;            //Se l'innario non viene trovato si salta quest'inno
          int num = Integer.parseInt(tokens[1]);
          Inno inno = innario.getInno(num);

@@ -1,5 +1,6 @@
 package com.fransis1981.Android_Hymns;
 
+import android.database.Cursor;
 import org.jsoup.nodes.Element;
 
 import java.io.Serializable;
@@ -63,6 +64,7 @@ public class Inno implements Serializable {
 
    private Innario parentInnario;
    private int numero;
+   private int id_inno;
    private String titolo;
    private Integer numStrofe;              //Numero di strofe non definite come cori
    private int numCori;                    //Numero di strofe definite come cori
@@ -79,6 +81,24 @@ public class Inno implements Serializable {
    public Categoria getCategoria() { return categoria; }
 
    public int getNumTotaleStrofe() { return numStrofe + numCori; }
+
+   public Inno() {
+      numStrofe = 0 ;
+      numCori = 0;
+      strofe_cori = null;
+   }
+
+   public Inno(Cursor cursor, Innario _parent) {
+      numStrofe = 0 ;
+      numCori = 0;
+      strofe_cori = null;
+
+      parentInnario = _parent;
+      id_inno = cursor.getInt(MyConstants.INDEX_INNI_ID);
+      numero = cursor.getInt(MyConstants.INDEX_INNI_NUMERO);
+      titolo = cursor.getString(MyConstants.INDEX_INNI_TITOLO);
+      categoria = Categoria.parseInt(cursor.getInt(MyConstants.INDEX_INNI_CATEGORIA));
+   }
 
    public Inno (Element _tagInno, Innario _parent) throws Exception {
       if (!(_tagInno.tagName().equals(MyConstants.TAG_INNO_STR))) {
@@ -104,6 +124,8 @@ public class Inno implements Serializable {
    }
 
    public ArrayList<Strofa> getListStrofe() {
+      //Load strofe on demand by means of a cursor
+      loadStrofeFromDB();
       return strofe_cori;
    }
 
@@ -122,4 +144,20 @@ public class Inno implements Serializable {
 
    public boolean isStarred() { return mStarred; }
 
+   void loadStrofeFromDB() {
+      if (strofe_cori == null) {
+         strofe_cori = new ArrayList<Strofa>();
+         Cursor c = HymnBooksHelper.me().db.query(MyConstants.TABLE_STROFE, null,
+                               MyConstants.FIELD_STROFE_ID_INNO + "=?", new String[]{String.valueOf(id_inno)},
+                               null, null, MyConstants.FIELD_STROFE_ID_NUM_STROFA);
+         Strofa ss;
+         while (c.moveToNext()) {
+            ss = new Strofa(c, numStrofe, this);
+            if (ss.IsChorus()) numCori++;
+            else numStrofe++;
+            strofe_cori.add(ss);
+         }
+         c.close();
+      }
+   }
 }

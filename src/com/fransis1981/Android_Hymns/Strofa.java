@@ -1,5 +1,6 @@
 package com.fransis1981.Android_Hymns;
 
+import android.database.Cursor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
@@ -22,6 +23,16 @@ public class Strofa implements Serializable {
    public String getLabel() { return label; }
    public String getContenuto() { return contenuto; }
    public Inno getParent() { return parentInno; }
+
+   /*
+    * This constructior reads content from cursor passed by argument (which already points to the relevant strofa).
+    */
+   public Strofa(Cursor cursor, Integer _lastNumericLabel, Inno _parent) {
+      isChorus = cursor.getInt(MyConstants.INDEX_STROFE_ISCHORUS) != 0;
+      indiceStrofa = cursor.getShort(MyConstants.INDEX_STROFE_ID_NUM_STROFA);
+      contenuto = cursor.getString(MyConstants.INDEX_STROFE_TESTO).replaceAll("<br>", "\n");
+      label = isChorus?HymnsApplication.myResources.getString(R.string.coro_label):(++_lastNumericLabel).toString();
+   }
 
    /*
       First time constructor is invoked for a given hymn, lastNumericLabel is set to 0;
