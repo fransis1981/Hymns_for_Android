@@ -1,16 +1,14 @@
 package com.fransis1981.Android_Hymns;
 
 import android.database.Cursor;
-import org.jsoup.nodes.Element;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
  * Created by Fransis on 23/02/14 21.29.
  */
-public class Inno implements Serializable {
+public class Inno {
    public static enum Categoria {
       NESSUNA(0),
       BAMBINI(2),
@@ -98,29 +96,6 @@ public class Inno implements Serializable {
       numero = cursor.getInt(MyConstants.INDEX_INNI_NUMERO);
       titolo = cursor.getString(MyConstants.INDEX_INNI_TITOLO);
       categoria = Categoria.parseInt(cursor.getInt(MyConstants.INDEX_INNI_CATEGORIA));
-   }
-
-   public Inno (Element _tagInno, Innario _parent) throws Exception {
-      if (!(_tagInno.tagName().equals(MyConstants.TAG_INNO_STR))) {
-         throw new Exception("Costruttore Inno invocato su un tag di tipo non valido. [" + _tagInno.tagName() + "]");
-      }
-
-      numStrofe = 0 ;
-      numCori = 0;
-      strofe_cori = new ArrayList<Strofa>();
-
-      parentInnario = _parent;
-      numero = Integer.parseInt(_tagInno.attr(MyConstants.INNO_NUMERO_ATTR));
-      titolo = _tagInno.attr(MyConstants.INNO_TITOLO_ATTR);
-      categoria = Categoria.parseInt(Integer.parseInt(_tagInno.attr(MyConstants.INNO_CATEGORIA_ATTR)));
-
-      Strofa newstrofa;
-      for (Element strofa: _tagInno.children()) {
-         newstrofa = new Strofa(strofa, numStrofe, this);               //HERE: side-effect on parameter numStrofe
-         if (newstrofa.IsChorus()) numCori++;
-         else numStrofe++;
-         strofe_cori.add(newstrofa);
-      }
    }
 
    public ArrayList<Strofa> getListStrofe() {

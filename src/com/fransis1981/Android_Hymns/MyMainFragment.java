@@ -110,10 +110,13 @@ public class MyMainFragment extends Fragment
 
       if (fragment_hymnslist == null)
          fragment_hymnslist = (Fragment_HymnsList) Fragment_HymnsList.instantiate(_context, Fragment_HymnsList.class.getName());
+
       if (fragment_recent == null)
          fragment_recent = (Fragment_RecentsList) Fragment_RecentsList.instantiate(_context, Fragment_RecentsList.class.getName());
+
       if (fragment_starred == null)
          fragment_starred = (Fragment_StarredList) Fragment_StarredList.instantiate(_context, Fragment_StarredList.class.getName());
+
       mPagerAdapter = new MainScreenPagerAdapter(((FragmentActivity)getActivity()).getSupportFragmentManager(),
                                           fragment_keypad, fragment_hymnslist,fragment_recent, fragment_starred);
       mViewPager = (ViewPager) v.findViewById(R.id.main_viewpager);

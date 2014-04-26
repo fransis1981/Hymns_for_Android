@@ -2,7 +2,6 @@ package com.fransis1981.Android_Hymns;
 
 import android.database.Cursor;
 import android.util.SparseArray;
-import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 
@@ -35,26 +34,6 @@ public class Innario {
          int num = iii.getNumero();
          inni.append(num, iii);
          mDialerList.addAvailableNumber(num);
-         //TODO: Inizializzare gli inni senza la strofe, in modo da avere le informazioni di starred disponibili.
-      }
-
-      hymnsCursor.moveToFirst();
-   }
-
-   //This constructor initializes the Innarioo with the XML tag elemnt extracted from the XML hymns definition
-   public Innario(Element _tagInnario) throws Exception {
-      if (!(_tagInnario.tagName().equals(MyConstants.TAG_INNARIO_STR))) {
-         throw new Exception("Costruttore Innario invocato su un tag di tipo non valido. [" + _tagInnario.tagName() + "]");
-      }
-
-      init(Integer.parseInt(_tagInnario.attr(MyConstants.INNARIO_NUM_INNI_ATTR)),
-            _tagInnario.attr(MyConstants.INNARIO_TITOLO_ATTR),
-            _tagInnario.attr(MyConstants.ID_INNARIO_STR));
-
-      for (Element inno: _tagInnario.children()) {
-         Inno iii = new Inno(inno, this);
-         inni.append(iii.getNumero(), iii);
-         mDialerList.addAvailableNumber(iii.getNumero());
 
          //Se l'inno appartiene ad una categoria, lo si sistema nell'opportuna struttura dati
          if (iii.getCategoria() != Inno.Categoria.NESSUNA) {
@@ -62,6 +41,7 @@ public class Innario {
          }
       }
 
+      hymnsCursor.moveToFirst();
    }
 
    //This constructor is used if you want to extract fields from the cursor from an external class.
@@ -101,7 +81,6 @@ public class Innario {
    }
 
    public Inno getInno(int number) {
-      //TODO: qui implementare l'allocazione on demand.
       return inni.get(number);
    }
 
@@ -113,10 +92,8 @@ public class Innario {
       return hymnsCursor;
    }
 
-   //TODO: this method might not work as by future implementation (hymn is only allocated on demand)
    public boolean hasHymn(int number) {
       return inni.indexOfKey(number) >= 0;
-      //TODO: posso sfruttare il dialer list per reperire questa informazione oppure mi accollo una piccola query.
    }
 
    //toString returns the title
@@ -125,7 +102,6 @@ public class Innario {
       return getTitolo();
    }
 
-   //TODO: valutare se questa funzione può essere ancora utile e soprattutto se può ancora funzionare.
    public ArrayList<Inno> hymnsToArrayList() {
       int ss = inni.size();
       ArrayList<Inno> ret = new ArrayList<Inno>(ss);

@@ -1,15 +1,11 @@
 package com.fransis1981.Android_Hymns;
 
 import android.database.Cursor;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-
-import java.io.Serializable;
 
 /**
  * Created by Fransis on 24/02/14 0.42.
  */
-public class Strofa implements Serializable {
+public class Strofa {
    private Inno parentInno;
    private boolean isChorus;
    private String contenuto;
@@ -26,6 +22,8 @@ public class Strofa implements Serializable {
 
    /*
     * This constructior reads content from cursor passed by argument (which already points to the relevant strofa).
+    * First time constructor is invoked for a given hymn, lastNumericLabel is set to 0;
+    * if this is not a chorus, value is increased by 1 and its string representation is assigned to label.
     */
    public Strofa(Cursor cursor, Integer _lastNumericLabel, Inno _parent) {
       isChorus = cursor.getInt(MyConstants.INDEX_STROFE_ISCHORUS) != 0;
@@ -34,20 +32,4 @@ public class Strofa implements Serializable {
       label = isChorus?HymnsApplication.myResources.getString(R.string.coro_label):(++_lastNumericLabel).toString();
    }
 
-   /*
-      First time constructor is invoked for a given hymn, lastNumericLabel is set to 0;
-       if this is not a chorus, value is increased by 1 and its string representation is assigned to label.
-    */
-   public Strofa(Element _tagStrofa, Integer _lastNumericLabel, Inno _parent) throws Exception {
-      if (!(_tagStrofa.tagName().equals(MyConstants.TAG_STROFA_STR))) {
-         throw new Exception("Costruttore Strofa invocato su un tag di tipo non valido. [" + _tagStrofa.tagName() + "]");
-      }
-
-      parentInno = _parent;
-      isChorus = (Integer.parseInt(_tagStrofa.attr(MyConstants.STROFA_ISCHORUS_ATTR))) != 0;
-      indiceStrofa = Short.parseShort(_tagStrofa.attr(MyConstants.STROFA_NUMERO_ATTR));
-      contenuto = Jsoup.parse( _tagStrofa.html().replaceAll("(?i)<br[^>]*>[\\s]*", "br2n")).text();
-      contenuto = contenuto.replaceAll("br2n", "\n");
-      label = isChorus?HymnsApplication.myResources.getString(R.string.coro_label):(++_lastNumericLabel).toString();
-   }
 }

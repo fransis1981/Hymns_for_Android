@@ -5,7 +5,6 @@ package com.fransis1981.Android_Hymns;
  */
 public final class MyConstants {
    public static final String LogTag_STR = "HYMNS";
-   public static final String INNI_XML_FILE = "Inni_XML.xml";
    public static final String DB_NAME = "DB_Inni.s3db";
 
    //Database tables and fields naming and indexing
@@ -50,24 +49,4 @@ public final class MyConstants {
    //Queries
    public static final String QUERY_SELECT_INNARI = "SELECT * FROM Innari";
 
-   //XML tags naming
-   public static final String XML_ROOT_STR = "innari";
-   public static final String INNARI_VERSION_ATTR = "version";
-
-   public static final String TAG_INNARIO_STR = "innario";
-   public static final String ID_INNARIO_STR = "id_innario";
-   public static final String INNARIO_TITOLO_ATTR = "titolo";
-   public static final String INNARIO_NUM_INNI_ATTR = "numero_inni";
-
-   public static final String TAG_INNO_STR = "inno";
-   public static final String INNO_TITOLO_ATTR = "titolo";
-   public static final String INNO_NUMERO_ATTR = "numero";
-   public static final String INNO_CATEGORIA_ATTR = "categoria";
-
-   public static final String TAG_STROFA_STR = "strofa";
-   public static final String STROFA_NUMERO_ATTR = "num_strofa";     //Numero cumulativo di strofe e cori
-   public static final String STROFA_ISCHORUS_ATTR = "is_chorus";
-
-   //File system related constants
-   //public static final String Persistence_FILENAME = "PersistedHymns";
 }

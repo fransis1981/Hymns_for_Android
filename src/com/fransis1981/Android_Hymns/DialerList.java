@@ -2,8 +2,6 @@ package com.fransis1981.Android_Hymns;
 
 import android.util.Log;
 
-import java.io.Serializable;
-
 /**
  * Created by Fransis on 06/03/14 17.07.
  * This recursive class is created is to support numbers obscuration on keypad.
@@ -13,7 +11,7 @@ import java.io.Serializable;
  * Each instance has an array of 10 elements of this same class.
  * NULL means that the number is not reached and could be oscured.
  */
-public class DialerList implements Serializable {
+public class DialerList {
    DialerList numberPresence[];
    DialerList mParent;           //This is the object itself for the root dialer, found in the Innario class definition.
 

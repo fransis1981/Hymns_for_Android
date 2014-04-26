@@ -69,10 +69,7 @@ public class HymnsApplication extends Application {
        assets = getAssets();
        myResources = getResources();
        fontTitolo1 = Typeface.createFromAsset(assets , "Caudex_Italic.ttf");
-       //fontTitolo1 = Typeface.createFromAsset(assets , "Century_modern_italic2.ttf");
-       //fontTitolo1 = Typeface.createFromAsset(assets , "partridg_TITOLO1.ttf");
        fontLabelStrofa = Typeface.createFromAsset(assets, "WetinCaroWant.ttf");
-       //fontContenutoStrofa = Typeface.createFromAsset(assets, "Century_modern_italic2.ttf");
        fontContenutoStrofa = Typeface.createFromAsset(assets, "Caudex_Italic.ttf");
        tl.addSplit("Prepared resources and fonts.");
 
@@ -85,8 +82,6 @@ public class HymnsApplication extends Application {
        HymnBooksHelper.me().caricaInnari(true);
        innari = HymnBooksHelper.me().innari;
        categoricalInnari = HymnBooksHelper.me().categoricalInnari;
-
-       //TODO: here make a call to perform serialization, maybe in a separate task.
 
        //Si imposta l'innario corrente al primo innario disponibile
        setCurrentInnario(innari.get(0));
