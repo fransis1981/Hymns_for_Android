@@ -37,7 +37,6 @@ public class HymnBooksHelper extends SQLiteAssetHelper {
 
    private void initDB() {
       if (db == null) db = getReadableDatabase();
-      //Log.i(MyConstants.LogTag_STR, "APERTO IL DB...");
    }
 
    private void initDataStructures() {
